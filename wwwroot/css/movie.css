@@ -1,0 +1,151 @@
+.movie-container {
+    background-color: var(--main-color);
+    width: 900px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.movie-subcontainer {
+    display: flex;
+}
+
+.preview-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 25px 0 25px;
+}
+
+.preview-panel__poster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 320px;
+    background-color: var(--background-color);
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+
+.preview-panel__button {
+    font-size: 16px;
+    font-weight: bold;
+    height: 30px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    line-height: 30px;
+}
+
+.preview-panel__label {
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.data-panel {
+    padding: 25px 25px 0 0;
+    width: 100%;
+}
+
+.data-panel__section {
+    margin-bottom: 10px;
+}
+
+.data-panel__section:nth-last-child(1) {
+    margin-bottom: unset;
+}
+
+.data-panel__title {
+    margin-bottom: 5px;
+}
+
+.data-value_inverted {
+    background-color: var(--background-color) !important;
+}
+
+.data-value__input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.data-value__input_small {
+    width: 200px;
+}
+
+.data-panel__data-value {
+    width: auto;
+}
+
+.data-panel__textarea {
+    resize: none;
+    height: 90px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.left-buttons-section {
+    display: flex;
+}
+
+.right-buttons-section {
+    display: flex;
+    gap: 10px;
+}
+
+.buttons-container__button {
+    color: var(--main-text);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.buttons-container__ico {
+    height: 30px;
+    padding: 5px;
+}
+
+.ico {
+    height: 20px;
+}
+
+.data-section {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.data-panel__score {
+    height: 30px;
+}
+
+.data-panel__score-value {
+    float: left;
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--secondary-text);
+    line-height: 34px;
+    margin-left: 10px;
+    vertical-align: center;
+}
+
+.data-panel__star {
+    height: 30px;
+    float: left;
+}
+
+.data-value__interactive-component {
+    display: inline;
+}
+
+.button__interactive-component {
+    width: 18px;
+    height: 18px;
+    margin-left: 5px;
+}
+
+input[type="file"] {
+    display: none;
+}

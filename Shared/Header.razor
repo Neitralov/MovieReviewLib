@@ -1,0 +1,22 @@
+@using Microsoft.AspNetCore.Components.Forms
+@inject NavigationManager NavigationManager
+
+<header class="header">
+    <h1 class="header__logo">MovieReviewLib</h1>
+    <input class="header__search-field" type="text" placeholder="Введите название фильма..." @bind="Name" @bind:event="oninput" @onkeydown="FindMovie"/>
+    <button class="apply-button header__add-movie-button" @onclick="OpenMovieEditor">Добавить</button>
+</header>
+
+@code {
+    private string? Name { get; set; }
+
+    private void FindMovie(KeyboardEventArgs args)
+    {
+        if (args.Code is not "Enter")
+            return;
+
+        NavigationManager.NavigateTo(string.IsNullOrWhiteSpace(Name) ? "/" : $"/Viewed/?Name={Name}");
+    } 
+    
+    private void OpenMovieEditor() => NavigationManager.NavigateTo("/Movie");
+}

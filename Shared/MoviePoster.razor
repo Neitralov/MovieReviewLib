@@ -1,0 +1,40 @@
+<div class="grid__item" style="background: url('@PosterPath'); background-size: 180px 320px;" @onclick="() => OpenInMovieEditor.InvokeAsync(Id)">
+    <h1 class="grid__title">@Name</h1>
+    <div class="grid__container">
+        <h2 class="grid__year">@ReleaseYear</h2>
+        @if (IsWatchLater is false)
+        {
+            <div class="grid__score">
+                @for (var i = 0; i < Score; i++)
+                {
+                    <img class="grid__star" src="icons/star.svg" alt="Тут звезда"/>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public string PosterPath { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Name { get; set; } = string.Empty;
+
+    [Parameter]
+    public int ReleaseYear { get; set; }
+
+    [Parameter]
+    public int Score { get; set; }
+
+    [Parameter]
+    public bool IsWatchLater { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OpenInMovieEditor { get; set; }
+
+}

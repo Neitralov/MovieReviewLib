@@ -1,0 +1,13 @@
+<div class="data-value data-value_inverted data-value__interactive-component">
+    @Data 
+    <button class="button button__interactive-component" @onclick="() => RemoveData.InvokeAsync(Data)">
+        &Cross;
+    </button>
+</div>
+
+@code {
+    [Parameter]
+    public string Data { get; set; }
+    [Parameter]
+    public EventCallback<string> RemoveData { get; set; }
+}

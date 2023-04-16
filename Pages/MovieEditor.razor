@@ -1,0 +1,417 @@
+@page "/Movie/{Id:int?}"
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.EntityFrameworkCore
+@using MovieReviewLib.Data
+@layout EmptyLayout
+@inject NavigationManager NavigationManager
+@inject DatabaseContext DatabaseContext
+
+<PageTitle>Редактирование фильма</PageTitle>
+
+<div class="movie-container">
+    <div class="movie-subcontainer">
+        <div class="preview-panel">
+            @if (PosterPath is not null)
+            {
+                <div class="grid__item" style="background: url('@PosterPath'); background-size: 180px 320px; margin-bottom: 10px">
+                    <h1 class="grid__title">@Name</h1>
+                    <div class="grid__container">
+                        <h2 class="grid__year">@ReleaseYear</h2>
+                        <div class="grid__score">
+                            @for (var i = 0; i < Score; i++)
+                            {
+                                <img class="grid__star" src="icons/star.svg" alt="Тут звезда"/>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="preview-panel__poster data-title">Превью обложки</div>
+            }
+            <InputFile class="button preview-panel__button" id="file" OnChange="@LoadPoster">Загрузить обложку</InputFile>
+            <label class="button preview-panel__button preview-panel__label" for="file" style="display: flex; align-items: center">
+                Загрузить обложку
+            </label>
+            <a class="button preview-panel__button" href="https://www.moviemania.io/phone" target="_blank">Искать обложку</a>
+        </div>
+        <div class="data-panel">
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Тип произведения:</h2>
+                <InputSelect class="data-value data-value_inverted data-value__input" @bind-Value="Type">
+                    <option value="@MovieType.Film">Фильм</option>
+                    <option value="@MovieType.Series">Сериал</option>
+                    <option value="@MovieType.Cartoon">Мультфильм</option>
+                </InputSelect>
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Название фильма:</h2>
+                <input class="data-value data-value_inverted data-value__input" type="text" placeholder="Введите название..." @bind="Name" @bind:event="oninput"/>
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Год выхода:</h2>
+                <input class="data-value data-value_inverted data-value__input" type="number" placeholder="Введите год..." @bind="ReleaseYear" @bind:event="oninput"/>
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Длительность:</h2>
+                <input class="data-value data-value_inverted data-value__input" type="number" placeholder="Введите длительность..." @bind="Duration" @bind:event="oninput"/>
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Жанр:</h2>
+                <div class="data-section">
+                    @foreach (var genre in Genres)
+                    {
+                        <InteractiveDataValue Data="@genre" RemoveData="RemoveGenre"/>
+                    }
+                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите жанр..." @onkeydown="AddGenre" @bind="Genre" @bind:event="oninput"/>
+                </div>
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Режиссер:</h2>
+                <div class="data-section">
+                    @foreach (var director in Directors)
+                    {
+                        <InteractiveDataValue Data="@director" RemoveData="RemoveDirector"/>
+                    }
+                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind="Director" @bind:event="oninput"/>
+                </div>
+
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Сценарист:</h2>
+                <div class="data-section">
+                    @foreach (var writer in Writers)
+                    {
+                        <InteractiveDataValue Data="@writer" RemoveData="RemoveWriter"/>
+                    }
+                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind="Writer" @bind:event="oninput"/>
+                </div>
+
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Композитор:</h2>
+                <div class="data-section">
+                    @foreach (var compositor in Compositors)
+                    {
+                        <InteractiveDataValue Data="@compositor" RemoveData="RemoveCompositor"/>
+                    }
+                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
+                </div>
+
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">В главных ролях:</h2>
+                <div class="data-section">
+                    @foreach (var actor in Actors)
+                    {
+                        <InteractiveDataValue Data="@actor" RemoveData="RemoveActor"/>
+                    }
+                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите актера..." @onkeydown="AddActor" @bind="Actor" @bind:event="oninput"/>
+                </div>
+
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Оценка:</h2>
+                <MovieScore @bind-Score="Score"/>
+            </div>
+            <div class="data-panel__section">
+                <h2 class="data-title data-panel__title">Заметка:</h2>
+                <textarea class="data-value data-value_inverted data-value__input data-panel__textarea" placeholder="Введите текст заметки..." resize="none" @bind="Note" @bind:event="oninput"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="buttons-container">
+        <div class="left-buttons-section">
+            <button class="button buttons-container__button" @onclick="Back">Назад</button>
+        </div>
+        <div class="right-buttons-section">
+            <button class="danger-button buttons-container__ico" @onclick="Delete">
+                <img class="ico" src="icons/delete.svg" alt="Иконка удаления"/>
+            </button>
+            <button class="button buttons-container__button" @onclick="AddToWatchLater">Смотреть позже</button>
+            <button class="apply-button buttons-container__button" @onclick="Publish">Опубликовать</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private Movie? Movie { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int Id { get; set; }
+
+    private string? PosterPath { get; set; }
+    private MovieType Type { get; set; }
+    private string Name { get; set; } = string.Empty;
+    private int? ReleaseYear { get; set; }
+    private int? Duration { get; set; }
+
+    private List<string> Genres { get; set; } = new();
+    private string Genre { get; set; } = string.Empty;
+
+    private List<string> Directors { get; set; } = new();
+    private string Director { get; set; } = string.Empty;
+
+    private List<string> Writers { get; set; } = new();
+    private string Writer { get; set; } = string.Empty;
+
+    private List<string> Compositors { get; set; } = new();
+    private string Compositor { get; set; } = string.Empty;
+
+    private List<string> Actors { get; set; } = new();
+    private string Actor { get; set; } = string.Empty;
+
+    private int Score { get; set; }
+    private string Note { get; set; } = string.Empty;
+
+    protected override void OnParametersSet()
+    {
+        if (Id == 0) return;
+
+        LoadMovieData();
+    }
+
+    private void LoadMovieData()
+    {
+        Movie = DatabaseContext.Movies
+            .Include(x => x.Genres)
+            .Include(x => x.Directors)
+            .Include(x => x.Writers)
+            .Include(x => x.Compositors)
+            .Include(x => x.Actors)
+            .First(x => x.Id == Id);
+
+        PosterPath = Movie.PosterPath;
+        Type = Movie.Type;
+        Name = Movie.Name;
+        ReleaseYear = Movie.ReleaseYear;
+        Duration = Movie.Duration;
+        Genres = Movie.Genres.Select(genre => genre.Value).ToList();
+        Directors = Movie.Directors.Select(director => director.Value).ToList();
+        Writers = Movie.Writers.Select(writer => writer.Value).ToList();
+        Compositors = Movie.Compositors.Select(compositor => compositor.Value).ToList();
+        Actors = Movie.Actors.Select(actor => actor.Value).ToList();
+        Score = Movie.Score;
+        Note = Movie.Note;
+    }
+
+    private void AddGenre(KeyboardEventArgs args)
+    {
+        if (args.Code is not "Enter")
+            return;
+
+        if (string.IsNullOrWhiteSpace(Genre))
+            return;
+
+        Genres.Add(Genre.Trim());
+        Genre = string.Empty;
+    }
+
+    private void RemoveGenre(string genre) => Genres.Remove(genre);
+
+    private void AddDirector(KeyboardEventArgs args)
+    {
+        if (args.Code is not "Enter")
+            return;
+
+        if (string.IsNullOrWhiteSpace(Director))
+            return;
+
+        Directors.Add(Director.Trim());
+        Director = string.Empty;
+    }
+
+    private void RemoveDirector(string director) => Directors.Remove(director);
+
+    private void AddWriter(KeyboardEventArgs args)
+    {
+        if (args.Code is not "Enter")
+            return;
+
+        if (string.IsNullOrWhiteSpace(Writer))
+            return;
+
+        Writers.Add(Writer.Trim());
+        Writer = string.Empty;
+    }
+
+    private void RemoveWriter(string writer) => Writers.Remove(writer);
+
+    private void AddCompositor(KeyboardEventArgs args)
+    {
+        if (args.Code is not "Enter")
+            return;
+
+        if (string.IsNullOrWhiteSpace(Compositor))
+            return;
+
+        Compositors.Add(Compositor.Trim());
+        Compositor = string.Empty;
+    }
+
+    private void RemoveCompositor(string compositor) => Compositors.Remove(compositor);
+
+    private void AddActor(KeyboardEventArgs args)
+    {
+        if (args.Code is not "Enter")
+            return;
+
+        if (string.IsNullOrWhiteSpace(Actor))
+            return;
+
+        Actors.Add(Actor.Trim());
+        Actor = string.Empty;
+    }
+
+    private void RemoveActor(string actor) => Actors.Remove(actor);
+
+    private async Task LoadPoster(InputFileChangeEventArgs inputFile)
+    {
+        var filePath = "posters/" + inputFile.File.Name;
+        var fileUploadPath = "/app/wwwroot/posters/" + inputFile.File.Name;
+        const int maxAllowedFileSize = 1024 * 1024 * 5;
+
+        try
+        {
+            await using FileStream fileStream = new(fileUploadPath, FileMode.Create);
+            await inputFile.File.OpenReadStream(maxAllowedFileSize).CopyToAsync(fileStream);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        PosterPath = filePath;
+    }
+
+    private void Back() => NavigationManager.NavigateTo("/");
+
+    private void Delete()
+    {
+        if (Movie is not null)
+        {
+            DatabaseContext.Movies.Remove(Movie);
+            DatabaseContext.SaveChanges();
+        }
+            
+        NavigationManager.NavigateTo("/");    
+    }
+
+    private void AddToWatchLater()
+    {
+        if (PosterPath is null)
+            return;
+
+        if (ReleaseYear is null)
+            return;
+
+        if (Duration is null)
+            return;
+
+        if (Id == 0)
+        {
+            var movie = new Movie()
+            {
+                WatchLater = true,
+                PosterPath = PosterPath,
+                Type = Type,
+                Name = Name,
+                ReleaseYear = ReleaseYear.Value,
+                Duration = Duration.Value,
+                Genres = Genres.Select(genre => new Genre { Value = genre }).ToList(),
+                Directors = Directors.Select(director => new Director { Value = director }).ToList(),
+                Writers = Writers.Select(writer => new Writer { Value = writer }).ToList(),
+                Compositors = Compositors.Select(compositor => new Compositor { Value = compositor }).ToList(),
+                Actors = Actors.Select(actor => new Actor { Value = actor }).ToList(),
+                Score = Score,
+                Note = Note,
+                PublishDate = DateTime.Now
+            };
+
+            DatabaseContext.Movies.Add(movie);
+            DatabaseContext.SaveChanges();
+        }
+        else
+        {
+            Movie.WatchLater = true;
+            Movie.PosterPath = PosterPath;
+            Movie.Type = Type;
+            Movie.Name = Name;
+            Movie.ReleaseYear = ReleaseYear.Value;
+            Movie.Duration = Duration.Value;
+            Movie.Genres = Genres.Select(genre => new Genre { Value = genre }).ToList();
+            Movie.Directors = Directors.Select(director => new Director { Value = director }).ToList();
+            Movie.Writers = Writers.Select(writer => new Writer { Value = writer }).ToList();
+            Movie.Compositors = Compositors.Select(compositor => new Compositor { Value = compositor }).ToList();
+            Movie.Actors = Actors.Select(actor => new Actor { Value = actor }).ToList();
+            Movie.Score = Score;
+            Movie.Note = Note;
+            Movie.PublishDate = DateTime.Now;
+
+            DatabaseContext.Movies.Update(Movie);
+            DatabaseContext.SaveChanges();
+        }
+
+        NavigationManager.NavigateTo("WatchLater");
+    }
+
+    private void Publish()
+    {
+        if (PosterPath is null)
+            return;
+
+        if (ReleaseYear is null)
+            return;
+
+        if (Duration is null)
+            return;
+
+        if (Id == 0)
+        {
+            var movie = new Movie()
+            {
+                PosterPath = PosterPath,
+                Type = Type,
+                Name = Name,
+                ReleaseYear = ReleaseYear.Value,
+                Duration = Duration.Value,
+                Genres = Genres.Select(genre => new Genre { Value = genre }).ToList(),
+                Directors = Directors.Select(director => new Director { Value = director }).ToList(),
+                Writers = Writers.Select(writer => new Writer { Value = writer }).ToList(),
+                Compositors = Compositors.Select(compositor => new Compositor { Value = compositor }).ToList(),
+                Actors = Actors.Select(actor => new Actor { Value = actor }).ToList(),
+                Score = Score,
+                Note = Note,
+                PublishDate = DateTime.Now
+            };
+
+            DatabaseContext.Movies.Add(movie);
+            DatabaseContext.SaveChanges();
+        }
+        else
+        {
+            Movie.WatchLater = false;
+            Movie.PosterPath = PosterPath;
+            Movie.Type = Type;
+            Movie.Name = Name;
+            Movie.ReleaseYear = ReleaseYear.Value;
+            Movie.Duration = Duration.Value;
+            Movie.Genres = Genres.Select(genre => new Genre { Value = genre }).ToList();
+            Movie.Directors = Directors.Select(director => new Director { Value = director }).ToList();
+            Movie.Writers = Writers.Select(writer => new Writer { Value = writer }).ToList();
+            Movie.Compositors = Compositors.Select(compositor => new Compositor { Value = compositor }).ToList();
+            Movie.Actors = Actors.Select(actor => new Actor { Value = actor }).ToList();
+            Movie.Score = Score;
+            Movie.Note = Note;
+            Movie.PublishDate = DateTime.Now;
+
+            DatabaseContext.Movies.Update(Movie);
+            DatabaseContext.SaveChanges();
+        }
+
+        NavigationManager.NavigateTo("/");
+    }
+
+}

@@ -1,0 +1,62 @@
+.toolbar__sort-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--secondary-text);
+}
+
+.toolbar__sort-list {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--main-text);
+    background-color: var(--background-color);
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.grid {
+    margin: 20px 50px 0 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 30px;
+    justify-items: center;
+}
+
+.grid__item {
+    height: 320px;
+    width: 180px;
+    box-shadow: inset 0 -10px 48px 16px rgba(0, 0, 0, 60%);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.grid__title {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--main-text);
+    margin: 0 10px 5px 10px;
+}
+
+.grid__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px 10px 10px;
+}
+
+.grid__year {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--secondary-text);    
+}
+
+.grid__score {
+    max-width: 80px;
+}
+
+.grid__star {
+    height: 16px;
+    width: 16px;
+    float: left;
+}

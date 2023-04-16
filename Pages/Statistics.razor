@@ -1,0 +1,294 @@
+@page "/Statistics"
+@using MovieReviewLib.Data
+@inject DatabaseContext DatabaseContext
+
+<PageTitle>Статистика</PageTitle>
+
+<div class="statistic-group">
+    <h2 class="data-title statistic-group__title">Количество просмотренных произведений</h2>
+    <p class="data-value statistic-group__data">@NumberOfWatchedMovies</p>
+
+    <details class="details">
+        <summary class="data-title details__summary">Детализация количества просмотров по типам произведений</summary>
+        <div class="details__container">
+            <h2 class="data-title details__title">Из них фильмов</h2>
+            <p class="details__data">@NumberOfWatchedFilms</p>
+            <h2 class="data-title details__title">Из них сериалов</h2>
+            <p class="details__data">@NumberOfWatchedSeries</p>
+            <h2 class="data-title details__title">Из них мультфильмов</h2>
+            <p class="details__data">@NumberOfWatchedCartoons</p>
+        </div>
+    </details>
+</div>
+
+<div class="statistic-group">
+    <h2 class="data-title statistic-group__title">Количество произведений отложенных в “смотреть позже"</h2>
+    <p class="data-value statistic-group__data">@NumberOfPostponedMovies</p>
+
+    <details class="details">
+        <summary class="data-title details__summary">Детализация отложенных произведений по типам</summary>
+        <div class="details__container">
+            <h2 class="data-title details__title">Из них фильмов</h2>
+            <p class="details__data">@NumberOfPostponedFilms</p>
+            <h2 class="data-title details__title">Из них сериалов</h2>
+            <p class="details__data">@NumberOfPostponedSeries</p>
+            <h2 class="data-title details__title">Из них мультфильмов</h2>
+            <p class="details__data">@NumberOfPostponedCartoons</p>
+        </div>
+    </details>
+</div>
+
+<div class="statistic-group">
+    <h2 class="data-title statistic-group__title">Средний рейтинг произведений</h2>
+    <p class="data-value statistic-group__data">@AverageMovieRating.ToString("F")</p>
+
+    <details class="details">
+        <summary class="data-title details__summary">Детализация среднего рейтинга по типам произведений</summary>
+        <div class="details__container">
+            <h2 class="data-title details__title">Средний рейтинг фильмов</h2>
+            <p class="details__data">@AverageFilmRating</p>
+            <h2 class="data-title details__title">Средний рейтинг сериалов</h2>
+            <p class="details__data">@AverageSeriesRating</p>
+            <h2 class="data-title details__title">Средний рейтинг мультфильмов</h2>
+            <p class="details__data">@AverageCartoonRating</p>
+        </div>
+    </details>
+</div>
+
+<div class="statistic-group">
+    <details class="details">
+        <summary class="data-title details__summary">Топ-10 фильмов по рейтингу</summary>
+        <div class="details__container">
+            <ol class="details__list">
+                @for (var i = 0; i < 10; i++)
+                {
+                    @if (i < Top10MoviesByRaiting?.Length && Top10MoviesByRaiting?[i] is not null)
+                    {
+                        <li class="details__list-item">@Top10MoviesByRaiting?[i].Name (@Top10MoviesByRaiting?[i].ReleaseYear)</li>
+                    }
+                    else
+                    {
+                        <li class="details__list-item">N/A</li>
+                    }    
+                }
+                
+            </ol>
+        </div>
+    </details>
+</div>
+
+<div class="statistic-group">
+    <h2 class="data-title statistic-group__title">Самый современный просмотренный фильм</h2>
+    <p class="data-value statistic-group__data">
+        @(NewestWatchedFilm is not null ? NewestWatchedFilm.Name : "N/A")
+    </p>
+    <h2 class="data-title statistic-group__title">Самый современный просмотренный сериал</h2>
+    <p class="data-value statistic-group__data">
+        @(NewestWatchedSeries is not null ? NewestWatchedSeries.Name : "N/A")
+    </p>
+    <h2 class="data-title statistic-group__title">Самый современный просмотренный мультфильм</h2>
+    <p class="data-value statistic-group__data">
+        @(NewestWatchedCartoon is not null ? NewestWatchedCartoon.Name : "N/A")
+    </p>
+</div>
+
+<div class="statistic-group">
+    <h2 class="data-title statistic-group__title">Самый старый просмотренный фильм</h2>
+    <p class="data-value statistic-group__data">
+        @(OldestWatchedFilm is not null ? OldestWatchedFilm.Name : "N/A")
+    </p>
+    <h2 class="data-title statistic-group__title">Самый старый просмотренный сериал</h2>
+    <p class="data-value statistic-group__data">
+        @(OldestWatchedSeries is not null ? OldestWatchedSeries.Name : "N/A")
+    </p>
+    <h2 class="data-title statistic-group__title">Самый старый просмотренный мультфильм</h2>
+    <p class="data-value statistic-group__data">
+        @(OldestWatchedCartoon is not null ? OldestWatchedCartoon.Name : "N/A")
+    </p>
+</div>
+
+<div class="statistic-group">
+    <h2 class="data-title statistic-group__title">Суммарное количество часов просмотра</h2>
+    <p class="data-value statistic-group__data">@TotalViewingHours (@(TotalViewingHours / 24) дня)</p>
+
+    <details class="details">
+        <summary class="data-title details__summary">Детализация суммарного количества часов просмотров по типам произведений</summary>
+        <div class="details__container">
+            <h2 class="data-title details__title">Из них фильмов</h2>
+            <p class="details__data">@TotalFilmViewingHours</p>
+            <h2 class="data-title details__title">Из них сериалов</h2>
+            <p class="details__data">@TotalSeriesViewingHours</p>
+            <h2 class="data-title details__title">Из них мультфильмов</h2>
+            <p class="details__data">@TotalCartoonViewingHours</p>
+        </div>
+    </details>
+</div>
+
+<!--
+<div class="statistic-group">
+    <details class="details">
+        <summary class="data-title details__summary">Топ-3 жанра по среднему рейтингу произведений</summary>
+        <div class="details__container">
+            <ol class="details__list">
+                <li class="details__list-item">Название жанра - Рейтинг</li>
+                <li class="details__list-item">Название жанра - Рейтинг</li>
+                <li class="details__list-item">Название жанра - Рейтинг</li>
+            </ol>
+        </div>
+    </details>
+
+    <details class="details">
+        <summary class="data-title details__summary">Топ-3 жанра по количеству произведений</summary>
+        <div class="details__container">
+            <ol class="details__list">
+                <li class="details__list-item">Название жанра - Количество</li>
+                <li class="details__list-item">Название жанра - Количество</li>
+                <li class="details__list-item">Название жанра - Количество</li>
+            </ol>
+        </div>
+    </details>
+</div>
+
+<div class="statistic-group">
+    <details class="details">
+        <summary class="data-title details__summary">Топ-3 режиссера с самым высоким рейтингом оцененных работ</summary>
+        <div class="details__container">
+            <ol class="details__list">
+                <li class="details__list-item">ФИО Режиссера</li>
+                <li class="details__list-item">ФИО Режиссера</li>
+                <li class="details__list-item">ФИО Режиссера</li>
+            </ol>
+        </div>
+    </details>
+
+    <details class="details">
+        <summary class="data-title details__summary">Топ-3 сценариста с самым высоким рейтингом оцененных работ</summary>
+        <div class="details__container">
+            <ol class="details__list">
+                <li class="details__list-item">ФИО Сценариста</li>
+                <li class="details__list-item">ФИО Сценариста</li>
+                <li class="details__list-item">ФИО Сценариста</li>
+            </ol>
+        </div>
+    </details>
+
+    <details class="details">
+        <summary class="data-title details__summary">Топ-3 композитора с самым высоким рейтингом оцененных работ</summary>
+        <div class="details__container">
+            <ol class="details__list">
+                <li class="details__list-item">ФИО Композитора</li>
+                <li class="details__list-item">ФИО Композитора</li>
+                <li class="details__list-item">ФИО Композитора</li>
+            </ol>
+        </div>
+    </details>
+
+    <details class="details">
+        <summary class="data-title details__summary">Топ-10 актеров с самым высоким рейтингом оцененных работ</summary>
+        <div class="details__container">
+            <ol class="details__list">
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+                <li class="details__list-item">ФИО Актера</li>
+            </ol>
+        </div>
+    </details>
+</div>-->
+
+@code {
+
+    private int NumberOfWatchedMovies { get; set; }
+    private int NumberOfWatchedFilms { get; set; }
+    private int NumberOfWatchedSeries { get; set; }
+    private int NumberOfWatchedCartoons { get; set; }
+    
+    private int NumberOfPostponedMovies { get; set; }
+    private int NumberOfPostponedFilms { get; set; }
+    private int NumberOfPostponedSeries { get; set; }
+    private int NumberOfPostponedCartoons { get; set; }
+    
+    private double AverageMovieRating { get; set; }
+    private double AverageFilmRating { get; set; }
+    private double AverageSeriesRating { get; set; }
+    private double AverageCartoonRating { get; set; }
+
+    private Movie[]? Top10MoviesByRaiting { get; set; } 
+
+    private Movie? NewestWatchedFilm { get; set; }
+    private Movie? NewestWatchedSeries { get; set; }
+    private Movie? NewestWatchedCartoon { get; set; }
+    
+    private Movie? OldestWatchedFilm { get; set; }
+    private Movie? OldestWatchedSeries { get; set; }
+    private Movie? OldestWatchedCartoon { get; set; }
+
+    private int TotalViewingHours { get; set; }
+    private int TotalFilmViewingHours { get; set; }
+    private int TotalSeriesViewingHours { get; set; }
+    private int TotalCartoonViewingHours { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        NumberOfWatchedMovies = DatabaseContext.Movies.Count(movie => movie.WatchLater == false);
+        NumberOfWatchedFilms = DatabaseContext.Movies.Count(movie => movie.WatchLater == false && movie.Type == MovieType.Film);
+        NumberOfWatchedSeries = DatabaseContext.Movies.Count(movie => movie.WatchLater == false && movie.Type == MovieType.Series);
+        NumberOfWatchedCartoons = DatabaseContext.Movies.Count(movie => movie.WatchLater == false && movie.Type == MovieType.Cartoon);
+
+        NumberOfPostponedMovies = DatabaseContext.Movies.Count(movie => movie.WatchLater == true);
+        NumberOfPostponedFilms = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Film);
+        NumberOfPostponedSeries = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Series);
+        NumberOfPostponedCartoons = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Cartoon);
+
+        AverageMovieRating = DatabaseContext.Movies.Any() 
+            ? DatabaseContext.Movies.Average(movie => movie.Score) : 0;
+
+        AverageFilmRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).Average(movie => movie.Score) : 0;
+
+        AverageSeriesRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).Average(movie => movie.Score) : 0;
+
+        AverageCartoonRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Average(movie => movie.Score) : 0;
+        
+        Top10MoviesByRaiting = DatabaseContext.Movies.OrderBy(movie => movie.Score).Take(10).ToArray();
+
+        NewestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
+            : null;
+        
+        NewestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
+            : null;
+        
+        NewestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
+            : null;
+        
+        OldestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).AsEnumerable().MinBy(movie => movie.ReleaseYear)
+            : null;
+        
+        OldestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).AsEnumerable().MinBy(movie => movie.ReleaseYear)
+            : null;
+        
+        OldestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).AsEnumerable().MinBy(movie => movie.ReleaseYear)
+            : null;
+
+        const int minutesInHour = 60;
+        TotalViewingHours = DatabaseContext.Movies.Select(movie => movie.Duration).Sum() / minutesInHour;
+        TotalFilmViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).Select(movie => movie.Duration).Sum() / minutesInHour;
+        TotalSeriesViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).Select(movie => movie.Duration).Sum() / minutesInHour;
+        TotalCartoonViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Select(movie => movie.Duration).Sum() / minutesInHour;
+    }
+
+}

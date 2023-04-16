@@ -1,0 +1,61 @@
+@page "/WatchLater"
+@using MovieReviewLib.Data
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.Forms
+@inject DatabaseContext DatabaseContext
+@inject NavigationManager NavigationManager
+
+<PageTitle>Смотреть позже</PageTitle>
+
+<div class="toolbar">
+    <span class="toolbar__sort-label">Сортировка: </span>
+    <InputSelect class="toolbar__sort-list" @bind-Value="SortType" @onclick="SortMovies">
+        <option value="@SortType.AdditionOrder">сначала новые</option>
+        <option value="@SortType.ReverseAdditionOrder">сначала старые</option>
+        <option value="@SortType.AlphabeticalOrder">в алфавитном порядке</option>
+        <option value="@SortType.ReverseAlphabeticalOrder">в обратном алфавитном порядке</option>
+    </InputSelect>
+</div>
+<div class="grid">
+    @foreach (var movie in Movies)
+    {
+        <MoviePoster Id="@movie.Id" PosterPath="@movie.PosterPath" Name="@movie.Name" ReleaseYear="@movie.ReleaseYear" IsWatchLater="true" OpenInMovieEditor="OpenInMovieEditor"/>
+    }
+</div>
+
+@code {
+    private List<Movie> Movies { get; set; } = new();
+    private SortType SortType { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Movies = DatabaseContext.Movies
+            .Include(x => x.Genres)
+            .Include(x => x.Directors)
+            .Include(x => x.Writers)
+            .Include(x => x.Compositors)
+            .Include(x => x.Actors)
+            .Where(x => x.WatchLater == true)
+            .ToList();
+
+        SortMovies();
+    }
+
+    private void SortMovies()
+    {
+        Movies = SortType switch
+        {
+            SortType.AdditionOrder            => Movies.OrderByDescending(movie => movie.PublishDate).ToList(),
+            SortType.ReverseAdditionOrder     => Movies.OrderBy(movie => movie.PublishDate).ToList(),
+            SortType.AlphabeticalOrder        => Movies.OrderBy(movie => movie.Name).ToList(),
+            SortType.ReverseAlphabeticalOrder => Movies.OrderByDescending(movie => movie.Name).ToList(),
+            _                                 => throw new ArgumentOutOfRangeException()
+            };
+    }
+
+    private void OpenInMovieEditor(int id)
+    {
+        NavigationManager.NavigateTo($"/Movie/?Id={id}");
+    }
+
+}
