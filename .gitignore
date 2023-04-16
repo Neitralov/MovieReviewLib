@@ -1,8 +1,8 @@
 .idea
-MovieReviewLib/bin/
-MovieReviewLib/obj/
-MovieReviewLib/tmp/
-MovieReviewLib/Build-and-Run.sh
+bin/
+obj/
+tmp/
+Build-and-Run.sh
 MovieReviewLib.sln.DotSettings.user
 MovieReviewLib.csproj.DotSettings.user
 .env
