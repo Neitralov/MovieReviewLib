@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@font-face {
+    font-family: 'Inter';
+    src: url('Inter-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
 
 #blazor-error-ui {
     background: lightyellow;
@@ -30,7 +36,7 @@
     }
     
 * {
-    font-family: Inter, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: unset;
     border: unset;
     padding: unset;  
