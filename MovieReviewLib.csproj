@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Shared\MainLayout.razor" />
+      <AdditionalFiles Include="Shared\Layouts\MainLayout\MainLayout.razor" />
     </ItemGroup>
 
     <ItemGroup>
