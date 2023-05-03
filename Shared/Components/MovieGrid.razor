@@ -1,0 +1,38 @@
+@inject NavigationManager NavigationManager
+
+<div class="grid">
+    @foreach (var movie in Movies)
+    {
+        if (movie.WatchLater)
+        {
+            <MoviePoster
+                Id="@movie.Id"
+                PosterPath="@movie.PosterPath"
+                Name="@movie.Name"
+                ReleaseYear="@movie.ReleaseYear"
+                Score="@movie.Score"
+                OpenInMovieEditor="OpenInMovieEditor"
+                IsWatchLater="true"/>
+        }
+        else
+        {
+            <MoviePoster
+                Id="@movie.Id"
+                PosterPath="@movie.PosterPath"
+                Name="@movie.Name"
+                ReleaseYear="@movie.ReleaseYear"
+                Score="@movie.Score"
+                OpenInMovieEditor="OpenInMovieEditor"/>
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public List<Movie> Movies { get; set; } = new();    
+    
+    private void OpenInMovieEditor(int id)
+    {
+        NavigationManager.NavigateTo($"/Movie/?Id={id}");
+    }
+}
