@@ -46,11 +46,11 @@
         <summary class="data-title details__summary">Детализация среднего рейтинга по типам произведений</summary>
         <div class="details__container">
             <h2 class="data-title details__title">Средний рейтинг фильмов</h2>
-            <p class="details__data">@AverageFilmRating</p>
+            <p class="details__data">@AverageFilmRating.ToString("F")</p>
             <h2 class="data-title details__title">Средний рейтинг сериалов</h2>
-            <p class="details__data">@AverageSeriesRating</p>
+            <p class="details__data">@AverageSeriesRating.ToString("F")</p>
             <h2 class="data-title details__title">Средний рейтинг мультфильмов</h2>
-            <p class="details__data">@AverageCartoonRating</p>
+            <p class="details__data">@AverageCartoonRating.ToString("F")</p>
         </div>
     </details>
 </div>
@@ -258,30 +258,30 @@
         AverageCartoonRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Average(movie => movie.Score) : 0;
         
-        Top10MoviesByRaiting = DatabaseContext.Movies.OrderBy(movie => movie.Score).Take(10).ToArray();
+        Top10MoviesByRaiting = DatabaseContext.Movies.Where(movie => movie.WatchLater == false).OrderByDescending(movie => movie.Score).Take(10).ToArray();
 
-        NewestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
+        NewestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
         
-        NewestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
+        NewestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series  && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
         
-        NewestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
+        NewestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon  && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
         
-        OldestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).AsEnumerable().MinBy(movie => movie.ReleaseYear)
+        OldestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film  && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
         
-        OldestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).AsEnumerable().MinBy(movie => movie.ReleaseYear)
+        OldestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
         
-        OldestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).AsEnumerable().MinBy(movie => movie.ReleaseYear)
+        OldestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
 
         const int minutesInHour = 60;
