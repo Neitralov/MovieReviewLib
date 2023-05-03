@@ -1,12 +1,13 @@
 @page "/WatchLater"
 @inject DatabaseContext DatabaseContext
 
-<PageTitle>Смотреть позже</PageTitle>
+<PageTitle>Отложенные</PageTitle>
 
 <SortingDropDownList @bind-SortType="@SortType" IncludeSortByRating="false"/>
 <MovieGrid Movies="@SortedMovies"/>
 
 @code {
+    
     private SortType SortType { get; set; }
 
     protected override void OnParametersSet()
@@ -19,7 +20,7 @@
             .Include(x => x.Actors)
             .Load();
     }
-    
+
     private List<Movie> SortedMovies
     {
         get
@@ -36,4 +37,5 @@
                 };
         }
     }
+
 }
