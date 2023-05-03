@@ -1,0 +1,34 @@
+@page "/FoundMovies/{Name?}"
+@inject DatabaseContext DatabaseContext
+
+<PageTitle>Найденные фильмы</PageTitle>
+
+<MovieGrid Movies="@FoundMovie"/>
+
+@code {
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? Name { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        DatabaseContext.Movies
+            .Include(x => x.Genres)
+            .Include(x => x.Directors)
+            .Include(x => x.Writers)
+            .Include(x => x.Compositors)
+            .Include(x => x.Actors)
+            .Load();
+    }
+
+    private List<Movie> FoundMovie
+    {
+        get
+        {
+            var foundMovie = DatabaseContext.Movies.FirstOrDefault(movie => movie.Name == Name);
+            return foundMovie is null ? new List<Movie>() : new List<Movie> { foundMovie };
+        }
+    }
+
+}

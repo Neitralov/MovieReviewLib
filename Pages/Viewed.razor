@@ -1,5 +1,4 @@
 ﻿@page "/"
-@page "/Viewed/{Name?}"
 @inject DatabaseContext DatabaseContext
 
 <PageTitle>Просмотренные</PageTitle>
@@ -9,10 +8,6 @@
 
 @code {
 
-    [Parameter]
-    [SupplyParameterFromQuery]
-    public string? Name { get; set; }
-    
     private SortType SortType { get; set; }
 
     protected override void OnParametersSet()
@@ -24,12 +19,6 @@
             .Include(x => x.Compositors)
             .Include(x => x.Actors)
             .Load();
-
-        if (string.IsNullOrWhiteSpace(Name))
-            return;
-
-        //var movie = DatabaseContext.Movies.FirstOrDefault(movie => movie.Name == Name);
-        //Movies = movie is null ? new List<Movie>() : new List<Movie> { movie };
     }
 
     private List<Movie> SortedMovies
