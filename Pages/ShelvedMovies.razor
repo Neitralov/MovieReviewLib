@@ -4,7 +4,7 @@
 <PageTitle>Отложенные</PageTitle>
 
 <SortingDropDownList @bind-SortType="@SortType" IncludeSortByRating="false"/>
-<MovieGrid Movies="@SortedMovies"/>
+<MovieGrid Movies="SortedMovies()"/>
 
 @code {
     
@@ -21,21 +21,18 @@
             .Load();
     }
 
-    private List<Movie> SortedMovies
+    private List<Movie> SortedMovies()
     {
-        get
-        {
-            var shelvedMovies = DatabaseContext.Movies.Where(movie => movie.WatchLater == true);
+        var shelvedMovies = DatabaseContext.Movies.Where(movie => movie.WatchLater == true);
 
             return SortType switch
-            {
-                SortType.AdditionOrder            => shelvedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
-                SortType.ReverseAdditionOrder     => shelvedMovies.OrderBy(movie => movie.PublishDate).ToList(),
-                SortType.AlphabeticalOrder        => shelvedMovies.OrderBy(movie => movie.Name).ToList(),
-                SortType.ReverseAlphabeticalOrder => shelvedMovies.OrderByDescending(movie => movie.Name).ToList(),
-                _                                 => throw new ArgumentOutOfRangeException()
-                };
-        }
+        {
+            SortType.AdditionOrder            => shelvedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
+            SortType.ReverseAdditionOrder     => shelvedMovies.OrderBy(movie => movie.PublishDate).ToList(),
+            SortType.AlphabeticalOrder        => shelvedMovies.OrderBy(movie => movie.Name).ToList(),
+            SortType.ReverseAlphabeticalOrder => shelvedMovies.OrderByDescending(movie => movie.Name).ToList(),
+            _                                 => throw new ArgumentOutOfRangeException()
+    };
     }
 
 }

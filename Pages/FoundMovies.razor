@@ -3,7 +3,7 @@
 
 <PageTitle>Найденные фильмы</PageTitle>
 
-<MovieGrid Movies="@FoundMovie"/>
+<MovieGrid Movies="FoundMovie()"/>
 
 @code {
 
@@ -22,13 +22,10 @@
             .Load();
     }
 
-    private List<Movie> FoundMovie
+    private List<Movie> FoundMovie()
     {
-        get
-        {
-            var foundMovie = DatabaseContext.Movies.FirstOrDefault(movie => movie.Name == Name);
-            return foundMovie is null ? new List<Movie>() : new List<Movie> { foundMovie };
-        }
+        var foundMovie = DatabaseContext.Movies.FirstOrDefault(movie => movie.Name == Name);
+        return foundMovie is null ? new List<Movie>() : new List<Movie> { foundMovie };
     }
 
 }

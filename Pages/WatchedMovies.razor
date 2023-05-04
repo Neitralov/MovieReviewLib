@@ -4,7 +4,7 @@
 <PageTitle>Просмотренные</PageTitle>
 
 <SortingDropDownList @bind-SortType="@SortType"/>
-<MovieGrid Movies="@SortedMovies"/>
+<MovieGrid Movies="SortedMovies()"/>
 
 @code {
 
@@ -21,23 +21,20 @@
             .Load();
     }
 
-    private List<Movie> SortedMovies
+    private List<Movie> SortedMovies()
     {
-        get
-        {
-            var watchedMovies = DatabaseContext.Movies.Where(movie => movie.WatchLater == false);
+        var watchedMovies = DatabaseContext.Movies.Where(movie => movie.WatchLater == false);
 
-            return SortType switch
-            {
-                SortType.AdditionOrder            => watchedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
-                SortType.ReverseAdditionOrder     => watchedMovies.OrderBy(movie => movie.PublishDate).ToList(),
-                SortType.ByIncreasingRating       => watchedMovies.OrderByDescending(movie => movie.Score).ToList(),
-                SortType.ByDescendingRating       => watchedMovies.OrderBy(movie => movie.Score).ToList(),
-                SortType.AlphabeticalOrder        => watchedMovies.OrderBy(movie => movie.Name).ToList(),
-                SortType.ReverseAlphabeticalOrder => watchedMovies.OrderByDescending(movie => movie.Name).ToList(),
-                _                                 => throw new ArgumentOutOfRangeException()
-                };
-        }
+        return SortType switch
+        {
+            SortType.AdditionOrder            => watchedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
+            SortType.ReverseAdditionOrder     => watchedMovies.OrderBy(movie => movie.PublishDate).ToList(),
+            SortType.ByIncreasingRating       => watchedMovies.OrderByDescending(movie => movie.Score).ToList(),
+            SortType.ByDescendingRating       => watchedMovies.OrderBy(movie => movie.Score).ToList(),
+            SortType.AlphabeticalOrder        => watchedMovies.OrderBy(movie => movie.Name).ToList(),
+            SortType.ReverseAlphabeticalOrder => watchedMovies.OrderByDescending(movie => movie.Name).ToList(),
+            _                                 => throw new ArgumentOutOfRangeException()
+            };
     }
 
 }
