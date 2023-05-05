@@ -133,7 +133,7 @@
 </div>
 
 @code {
-    private Movie? Movie { get; set; }
+    private Movie? Movie { get; set; } 
 
     [Parameter]
     [SupplyParameterFromQuery]
@@ -165,13 +165,13 @@
 
     protected override void OnParametersSet()
     {
-        if (Id == 0) return;
-
-        LoadMovieData();
+        LoadMovieData(Id);
     }
 
-    private void LoadMovieData()
+    private void LoadMovieData(int id)
     {
+        if (id == 0) return;
+        
         Movie = DatabaseContext.Movies
             .Include(x => x.Genres)
             .Include(x => x.Directors)
@@ -196,10 +196,7 @@
 
     private void AddGenre(KeyboardEventArgs args)
     {
-        if (args.Code is not "Enter")
-            return;
-
-        if (string.IsNullOrWhiteSpace(Genre))
+        if (!IsEnterPressed(args) || IsInputFieldEmpty(Genre))
             return;
 
         var genre = new Genre { Value = Genre.Trim() };
@@ -211,10 +208,7 @@
 
     private void AddDirector(KeyboardEventArgs args)
     {
-        if (args.Code is not "Enter")
-            return;
-
-        if (string.IsNullOrWhiteSpace(Director))
+        if (!IsEnterPressed(args) || IsInputFieldEmpty(Director))
             return;
 
         var director = new Director { Value = Director.Trim() };
@@ -226,10 +220,7 @@
 
     private void AddWriter(KeyboardEventArgs args)
     {
-        if (args.Code is not "Enter")
-            return;
-
-        if (string.IsNullOrWhiteSpace(Writer))
+        if (!IsEnterPressed(args) || IsInputFieldEmpty(Writer))
             return;
 
         var writer = new Writer { Value = Writer.Trim() };
@@ -241,10 +232,7 @@
 
     private void AddCompositor(KeyboardEventArgs args)
     {
-        if (args.Code is not "Enter")
-            return;
-
-        if (string.IsNullOrWhiteSpace(Compositor))
+        if (!IsEnterPressed(args) || IsInputFieldEmpty(Compositor))
             return;
 
         var compositor = new Compositor { Value = Compositor.Trim() };
@@ -256,10 +244,7 @@
 
     private void AddActor(KeyboardEventArgs args)
     {
-        if (args.Code is not "Enter")
-            return;
-
-        if (string.IsNullOrWhiteSpace(Actor))
+        if (!IsEnterPressed(args) || IsInputFieldEmpty(Actor))
             return;
 
         var actor = new Actor { Value = Actor.Trim() };
@@ -312,7 +297,7 @@
         if (Duration is null)
             return;
 
-        if (Id == 0)
+        if (Movie is null)
         {
             var movie = new Movie()
             {
@@ -370,7 +355,7 @@
         if (Duration is null)
             return;
 
-        if (Id == 0)
+        if (Movie is null)
         {
             var movie = new Movie()
             {
@@ -415,5 +400,7 @@
 
         NavigationManager.NavigateTo("/");
     }
-
+    
+    private static bool IsEnterPressed(KeyboardEventArgs args) => args.Code is "Enter";
+    private static bool IsInputFieldEmpty(string inputValue) => string.IsNullOrWhiteSpace(inputValue);
 }

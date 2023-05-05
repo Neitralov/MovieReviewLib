@@ -28,11 +28,13 @@
 </div>
 
 @code {
+
     [Parameter]
-    public List<Movie> Movies { get; set; } = new();    
-    
+    public List<Movie> Movies { get; set; } = new();
+
     private void OpenInMovieEditor(int id)
     {
         NavigationManager.NavigateTo($"/Movie/?Id={id}");
     }
+
 }
