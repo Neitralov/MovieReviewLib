@@ -1,13 +1,18 @@
+@typeparam TItem
+
 <div class="data-value data-value_inverted data-value__interactive-component">
-    @Data 
+    @Data
     <button class="button button__interactive-component" @onclick="() => RemoveData.InvokeAsync(Data)">
         &Cross;
     </button>
 </div>
 
 @code {
+
     [Parameter]
-    public string Data { get; set; }
+    public TItem Data { get; set; }
+
     [Parameter]
-    public EventCallback<string> RemoveData { get; set; }
+    public EventCallback<TItem> RemoveData { get; set; }
+
 }

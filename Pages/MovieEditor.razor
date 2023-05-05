@@ -44,24 +44,24 @@
             </div>
             <div class="data-panel__section">
                 <h2 class="data-title data-panel__title">Название фильма:</h2>
-                <input class="data-value data-value_inverted data-value__input" type="text" placeholder="Введите название..." @bind="Name" @bind:event="oninput"/>
+                <InputText class="data-value data-value_inverted data-value__input" placeholder="Введите название..." @bind-Value="Name"/>
             </div>
             <div class="data-panel__section">
                 <h2 class="data-title data-panel__title">Год выхода:</h2>
-                <input class="data-value data-value_inverted data-value__input" type="number" placeholder="Введите год..." @bind="ReleaseYear" @bind:event="oninput"/>
+                <InputNumber class="data-value data-value_inverted data-value__input" placeholder="Введите год..." @bind-Value="ReleaseYear"/>
             </div>
             <div class="data-panel__section">
                 <h2 class="data-title data-panel__title">Длительность:</h2>
-                <input class="data-value data-value_inverted data-value__input" type="number" placeholder="Введите длительность..." @bind="Duration" @bind:event="oninput"/>
+                <InputNumber class="data-value data-value_inverted data-value__input" placeholder="Введите длительность..." @bind-Value="Duration"/>
             </div>
             <div class="data-panel__section">
                 <h2 class="data-title data-panel__title">Жанр:</h2>
                 <div class="data-section">
                     @foreach (var genre in Genres)
                     {
-                        <InteractiveDataValue Data="@genre" RemoveData="RemoveGenre"/>
+                        <InteractiveDataValue TItem="Genre" Data="@genre" RemoveData="RemoveGenre"/>
                     }
-                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите жанр..." @onkeydown="AddGenre" @bind="Genre" @bind:event="oninput"/>
+                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите жанр..." @onkeydown="AddGenre" @bind-Value="Genre"/>
                 </div>
             </div>
             <div class="data-panel__section">
@@ -69,9 +69,9 @@
                 <div class="data-section">
                     @foreach (var director in Directors)
                     {
-                        <InteractiveDataValue Data="@director" RemoveData="RemoveDirector"/>
+                        <InteractiveDataValue TItem="Director" Data="@director" RemoveData="RemoveDirector"/>
                     }
-                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind="Director" @bind:event="oninput"/>
+                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind-Value="Director"/>
                 </div>
 
             </div>
@@ -80,9 +80,9 @@
                 <div class="data-section">
                     @foreach (var writer in Writers)
                     {
-                        <InteractiveDataValue Data="@writer" RemoveData="RemoveWriter"/>
+                        <InteractiveDataValue TItem="Writer" Data="@writer" RemoveData="RemoveWriter"/>
                     }
-                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind="Writer" @bind:event="oninput"/>
+                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind-Value="Writer"/>
                 </div>
 
             </div>
@@ -91,9 +91,9 @@
                 <div class="data-section">
                     @foreach (var compositor in Compositors)
                     {
-                        <InteractiveDataValue Data="@compositor" RemoveData="RemoveCompositor"/>
+                        <InteractiveDataValue TItem="Compositor" Data="@compositor" RemoveData="RemoveCompositor"/>
                     }
-                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
+                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind-Value="Compositor"/>
                 </div>
 
             </div>
@@ -102,9 +102,9 @@
                 <div class="data-section">
                     @foreach (var actor in Actors)
                     {
-                        <InteractiveDataValue Data="@actor" RemoveData="RemoveActor"/>
+                        <InteractiveDataValue TItem="Actor" Data="@actor" RemoveData="RemoveActor"/>
                     }
-                    <input class="data-value data-value_inverted data-value__input_small" type="text" placeholder="Введите актера..." @onkeydown="AddActor" @bind="Actor" @bind:event="oninput"/>
+                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите актера..." @onkeydown="AddActor" @bind-Value="Actor"/>
                 </div>
 
             </div>
@@ -145,19 +145,19 @@
     private int? ReleaseYear { get; set; }
     private int? Duration { get; set; }
 
-    private List<string> Genres { get; set; } = new();
+    private List<Genre> Genres { get; set; } = new();
     private string Genre { get; set; } = string.Empty;
 
-    private List<string> Directors { get; set; } = new();
+    private List<Director> Directors { get; set; } = new();
     private string Director { get; set; } = string.Empty;
 
-    private List<string> Writers { get; set; } = new();
+    private List<Writer> Writers { get; set; } = new();
     private string Writer { get; set; } = string.Empty;
 
-    private List<string> Compositors { get; set; } = new();
+    private List<Compositor> Compositors { get; set; } = new();
     private string Compositor { get; set; } = string.Empty;
 
-    private List<string> Actors { get; set; } = new();
+    private List<Actor> Actors { get; set; } = new();
     private string Actor { get; set; } = string.Empty;
 
     private int Score { get; set; }
@@ -185,11 +185,11 @@
         Name = Movie.Name;
         ReleaseYear = Movie.ReleaseYear;
         Duration = Movie.Duration;
-        Genres = Movie.Genres.Select(genre => genre.Value).ToList();
-        Directors = Movie.Directors.Select(director => director.Value).ToList();
-        Writers = Movie.Writers.Select(writer => writer.Value).ToList();
-        Compositors = Movie.Compositors.Select(compositor => compositor.Value).ToList();
-        Actors = Movie.Actors.Select(actor => actor.Value).ToList();
+        Genres = Movie.Genres.ToList();
+        Directors = Movie.Directors.ToList();
+        Writers = Movie.Writers.ToList();
+        Compositors = Movie.Compositors.ToList();
+        Actors = Movie.Actors.ToList();
         Score = Movie.Score;
         Note = Movie.Note;
     }
@@ -202,11 +202,12 @@
         if (string.IsNullOrWhiteSpace(Genre))
             return;
 
-        Genres.Add(Genre.Trim());
+        var genre = new Genre { Value = Genre.Trim() };
+        Genres.Add(genre);
         Genre = string.Empty;
     }
 
-    private void RemoveGenre(string genre) => Genres.Remove(genre);
+    private void RemoveGenre(Genre genre) => Genres.Remove(genre);
 
     private void AddDirector(KeyboardEventArgs args)
     {
@@ -216,11 +217,12 @@
         if (string.IsNullOrWhiteSpace(Director))
             return;
 
-        Directors.Add(Director.Trim());
+        var director = new Director { Value = Director.Trim() };
+        Directors.Add(director);
         Director = string.Empty;
     }
 
-    private void RemoveDirector(string director) => Directors.Remove(director);
+    private void RemoveDirector(Director director) => Directors.Remove(director);
 
     private void AddWriter(KeyboardEventArgs args)
     {
@@ -230,11 +232,12 @@
         if (string.IsNullOrWhiteSpace(Writer))
             return;
 
-        Writers.Add(Writer.Trim());
+        var writer = new Writer { Value = Writer.Trim() };
+        Writers.Add(writer);
         Writer = string.Empty;
     }
 
-    private void RemoveWriter(string writer) => Writers.Remove(writer);
+    private void RemoveWriter(Writer writer) => Writers.Remove(writer);
 
     private void AddCompositor(KeyboardEventArgs args)
     {
@@ -244,11 +247,12 @@
         if (string.IsNullOrWhiteSpace(Compositor))
             return;
 
-        Compositors.Add(Compositor.Trim());
+        var compositor = new Compositor { Value = Compositor.Trim() };
+        Compositors.Add(compositor);
         Compositor = string.Empty;
     }
 
-    private void RemoveCompositor(string compositor) => Compositors.Remove(compositor);
+    private void RemoveCompositor(Compositor compositor) => Compositors.Remove(compositor);
 
     private void AddActor(KeyboardEventArgs args)
     {
@@ -258,11 +262,12 @@
         if (string.IsNullOrWhiteSpace(Actor))
             return;
 
-        Actors.Add(Actor.Trim());
+        var actor = new Actor { Value = Actor.Trim() };
+        Actors.Add(actor);
         Actor = string.Empty;
     }
 
-    private void RemoveActor(string actor) => Actors.Remove(actor);
+    private void RemoveActor(Actor actor) => Actors.Remove(actor);
 
     private async Task LoadPoster(InputFileChangeEventArgs inputFile)
     {
@@ -292,8 +297,8 @@
             DatabaseContext.Movies.Remove(Movie);
             DatabaseContext.SaveChanges();
         }
-            
-        NavigationManager.NavigateTo("/");    
+
+        NavigationManager.NavigateTo("/");
     }
 
     private void AddToWatchLater()
@@ -317,11 +322,11 @@
                 Name = Name,
                 ReleaseYear = ReleaseYear.Value,
                 Duration = Duration.Value,
-                Genres = Genres.Select(genre => new Genre { Value = genre }).ToList(),
-                Directors = Directors.Select(director => new Director { Value = director }).ToList(),
-                Writers = Writers.Select(writer => new Writer { Value = writer }).ToList(),
-                Compositors = Compositors.Select(compositor => new Compositor { Value = compositor }).ToList(),
-                Actors = Actors.Select(actor => new Actor { Value = actor }).ToList(),
+                Genres = Genres.ToList(),
+                Directors = Directors.ToList(),
+                Writers = Writers.ToList(),
+                Compositors = Compositors.ToList(),
+                Actors = Actors.ToList(),
                 Score = Score,
                 Note = Note,
                 PublishDate = DateTime.Now
@@ -338,11 +343,11 @@
             Movie.Name = Name;
             Movie.ReleaseYear = ReleaseYear.Value;
             Movie.Duration = Duration.Value;
-            Movie.Genres = Genres.Select(genre => new Genre { Value = genre }).ToList();
-            Movie.Directors = Directors.Select(director => new Director { Value = director }).ToList();
-            Movie.Writers = Writers.Select(writer => new Writer { Value = writer }).ToList();
-            Movie.Compositors = Compositors.Select(compositor => new Compositor { Value = compositor }).ToList();
-            Movie.Actors = Actors.Select(actor => new Actor { Value = actor }).ToList();
+            Movie.Genres = Genres.ToList();
+            Movie.Directors = Directors.ToList();
+            Movie.Writers = Writers.ToList();
+            Movie.Compositors = Compositors.ToList();
+            Movie.Actors = Actors.ToList();
             Movie.Score = Score;
             Movie.Note = Note;
             Movie.PublishDate = DateTime.Now;
@@ -374,11 +379,11 @@
                 Name = Name,
                 ReleaseYear = ReleaseYear.Value,
                 Duration = Duration.Value,
-                Genres = Genres.Select(genre => new Genre { Value = genre }).ToList(),
-                Directors = Directors.Select(director => new Director { Value = director }).ToList(),
-                Writers = Writers.Select(writer => new Writer { Value = writer }).ToList(),
-                Compositors = Compositors.Select(compositor => new Compositor { Value = compositor }).ToList(),
-                Actors = Actors.Select(actor => new Actor { Value = actor }).ToList(),
+                Genres = Genres.ToList(),
+                Directors = Directors.ToList(),
+                Writers = Writers.ToList(),
+                Compositors = Compositors.ToList(),
+                Actors = Actors.ToList(),
                 Score = Score,
                 Note = Note,
                 PublishDate = DateTime.Now
@@ -395,11 +400,11 @@
             Movie.Name = Name;
             Movie.ReleaseYear = ReleaseYear.Value;
             Movie.Duration = Duration.Value;
-            Movie.Genres = Genres.Select(genre => new Genre { Value = genre }).ToList();
-            Movie.Directors = Directors.Select(director => new Director { Value = director }).ToList();
-            Movie.Writers = Writers.Select(writer => new Writer { Value = writer }).ToList();
-            Movie.Compositors = Compositors.Select(compositor => new Compositor { Value = compositor }).ToList();
-            Movie.Actors = Actors.Select(actor => new Actor { Value = actor }).ToList();
+            Movie.Genres = Genres.ToList();
+            Movie.Directors = Directors.ToList();
+            Movie.Writers = Writers.ToList();
+            Movie.Compositors = Compositors.ToList();
+            Movie.Actors = Actors.ToList();
             Movie.Score = Score;
             Movie.Note = Note;
             Movie.PublishDate = DateTime.Now;
