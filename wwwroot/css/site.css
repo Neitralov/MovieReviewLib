@@ -149,6 +149,8 @@ html, body {
 
 .main__default-layout {
     padding: 0 50px 20px 50px;
+    display: flex;
+    flex-direction: column;
 }
 
 .footer {

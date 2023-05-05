@@ -4,10 +4,20 @@
 <PageTitle>Отложенные</PageTitle>
 
 <SortingDropDownList @bind-SortType="@SortType" IncludeSortByRating="false"/>
-<MovieGrid Movies="SortedMovies()"/>
+
+@if (SortedMovies() is { Count: not 0 } movies)
+{
+    <MovieGrid Movies="@movies"/>
+}
+else
+{
+    <div style="display: flex; justify-content: center; align-items: center; color: var(--secondary-text); font-weight: bold; font-size: 18px; flex-grow: 1">
+        У вас нет отложенных фильмов. Нажмите кнопку <span class="apply-button" style="background: var(--apply-button); margin: 0 5px; padding: 5px 10px">Добавить</span> в углу.
+    </div>
+}
 
 @code {
-    
+
     private SortType SortType { get; set; }
 
     protected override void OnParametersSet()
@@ -25,14 +35,14 @@
     {
         var shelvedMovies = DatabaseContext.Movies.Where(movie => movie.WatchLater == true);
 
-            return SortType switch
+        return SortType switch
         {
             SortType.AdditionOrder            => shelvedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
             SortType.ReverseAdditionOrder     => shelvedMovies.OrderBy(movie => movie.PublishDate).ToList(),
             SortType.AlphabeticalOrder        => shelvedMovies.OrderBy(movie => movie.Name).ToList(),
             SortType.ReverseAlphabeticalOrder => shelvedMovies.OrderByDescending(movie => movie.Name).ToList(),
             _                                 => throw new ArgumentOutOfRangeException()
-    };
+            };
     }
 
 }

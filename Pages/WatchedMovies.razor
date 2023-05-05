@@ -4,7 +4,17 @@
 <PageTitle>Просмотренные</PageTitle>
 
 <SortingDropDownList @bind-SortType="@SortType"/>
-<MovieGrid Movies="SortedMovies()"/>
+
+@if (SortedMovies() is {  } movies)
+{
+    <MovieGrid Movies="@movies"/>
+}
+else
+{
+    <div style="display: flex; justify-content: center; align-items: center; color: var(--secondary-text); font-weight: bold; font-size: 18px; flex-grow: 1">
+        У вас нет просмотренных фильмов. Нажмите кнопку <span class="apply-button" style="background: var(--apply-button); margin: 0 5px; padding: 5px 10px">Добавить</span> в углу.
+    </div>
+}
 
 @code {
 
