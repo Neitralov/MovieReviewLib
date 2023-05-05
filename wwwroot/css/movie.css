@@ -1,7 +1,6 @@
 .movie-container {
     background-color: var(--main-color);
-    width: 900px;
-    margin: auto;
+    width: 100%;
     border-radius: 5px;
 }
 
