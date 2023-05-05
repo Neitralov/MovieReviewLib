@@ -73,7 +73,6 @@
                     }
                     <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind-Value="Director"/>
                 </div>
-
             </div>
             <div class="data-panel__section">
                 <h2 class="data-title data-panel__title">Сценарист:</h2>
@@ -84,7 +83,6 @@
                     }
                     <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind-Value="Writer"/>
                 </div>
-
             </div>
             <div class="data-panel__section">
                 <h2 class="data-title data-panel__title">Композитор:</h2>
@@ -95,7 +93,6 @@
                     }
                     <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind-Value="Compositor"/>
                 </div>
-
             </div>
             <div class="data-panel__section">
                 <h2 class="data-title data-panel__title">В главных ролях:</h2>
@@ -106,7 +103,6 @@
                     }
                     <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите актера..." @onkeydown="AddActor" @bind-Value="Actor"/>
                 </div>
-
             </div>
             <div class="data-panel__section">
                 <h2 class="data-title data-panel__title">Оценка:</h2>
@@ -123,9 +119,12 @@
             <button class="button buttons-container__button" @onclick="Back">Назад</button>
         </div>
         <div class="right-buttons-section">
-            <button class="danger-button buttons-container__ico" @onclick="Delete">
-                <img class="ico" src="icons/delete.svg" alt="Иконка удаления"/>
-            </button>
+            @if (Movie is not null)
+            {
+                <button class="danger-button buttons-container__ico" @onclick="Delete">
+                    <img class="ico" src="icons/delete.svg" alt="Иконка удаления"/>
+                </button>
+            }
             <button class="button buttons-container__button" @onclick="AddToWatchLater">Смотреть позже</button>
             <button class="apply-button buttons-container__button" @onclick="Publish">Опубликовать</button>
         </div>
@@ -133,7 +132,7 @@
 </div>
 
 @code {
-    private Movie? Movie { get; set; } 
+    private Movie? Movie { get; set; }
 
     [Parameter]
     [SupplyParameterFromQuery]
@@ -171,7 +170,7 @@
     private void LoadMovieData(int id)
     {
         if (id == 0) return;
-        
+
         Movie = DatabaseContext.Movies
             .Include(x => x.Genres)
             .Include(x => x.Directors)
