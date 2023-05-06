@@ -15,15 +15,15 @@ public class Movie
     public int? ReleaseYear { get; set; }
     [Required(ErrorMessage = "Длительность фильма не может быть пустой!")]
     public int? Duration { get; set; }
-    [RequiredAtLeastOneItem(ErrorMessage = "У фильма не может отсутствовать жанр!")]
+    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать жанр!")]
     public List<Genre> Genres { get; set; } = new();
-    [RequiredAtLeastOneItem(ErrorMessage = "У фильма не может отсутствовать режиссер!")]
+    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать режиссер!")]
     public List<Director> Directors { get; set; } = new();
-    [RequiredAtLeastOneItem(ErrorMessage = "У фильма не может отсутствовать сценарист!")]
+    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать сценарист!")]
     public List<Writer> Writers { get; set; } = new();
-    [RequiredAtLeastOneItem(ErrorMessage = "У фильма не может отсутствовать композитор!")]
+    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать композитор!")]
     public List<Compositor> Compositors { get; set; } = new();
-    [RequiredAtLeastOneItem(ErrorMessage = "У фильма не может отсутствовать актер!")]
+    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать актер!")]
     public List<Actor> Actors { get; set; } = new();
     public int Score { get; set; }
     public string Note { get; set; } = string.Empty;
