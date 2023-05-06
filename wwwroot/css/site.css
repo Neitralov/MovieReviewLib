@@ -187,7 +187,8 @@ html, body {
 .button {
     background-color: var(--button);
     color: var(--main-text);
-    border-radius: 5px;    
+    border-radius: 5px;  
+    cursor: pointer;
 }
 
 .button:hover {
@@ -202,6 +203,7 @@ html, body {
     background-color: var(--apply-button);
     color: var(--main-text);
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .apply-button:hover {
@@ -215,7 +217,8 @@ html, body {
 .danger-button {
     background-color: var(--danger-button);
     color: var(--main-text);
-    border-radius: 5px;    
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .danger-button:hover {

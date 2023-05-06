@@ -129,6 +129,7 @@
 .data-panel__star {
     height: 30px;
     float: left;
+    cursor: pointer;
 }
 
 .data-value__interactive-component {
