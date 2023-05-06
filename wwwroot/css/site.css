@@ -83,6 +83,8 @@ html, body {
     background-color: var(--main-color); 
     height: 100px;
     display: flex;
+    position: sticky;
+    top: 0;
 }    
 
 .header__logo {
@@ -159,6 +161,8 @@ html, body {
     align-items: center;
     justify-content: space-between;
     height: 30px;
+    position: sticky;
+    bottom: 0;
 }
 
 .footer__version {
