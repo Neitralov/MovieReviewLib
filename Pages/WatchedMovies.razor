@@ -5,7 +5,7 @@
 
 <SortingDropDownList @bind-SortType="@SortType"/>
 
-@if (SortedMovies() is {  } movies)
+@if (SortedMovies() is { Count: not 0 } movies)
 {
     <MovieGrid Movies="@movies"/>
 }
