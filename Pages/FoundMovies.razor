@@ -3,7 +3,16 @@
 
 <PageTitle>Найденные фильмы</PageTitle>
 
-<MovieGrid Movies="FoundMovie()"/>
+@if (FoundMovie() is { Count: not 0 } movie)
+{
+    <MovieGrid Movies="@movie"/>
+}
+else
+{
+    <div style="display: flex; justify-content: center; align-items: center; color: var(--secondary-text); font-weight: bold; font-size: 18px; flex-grow: 1; margin-top: 20px">
+        По вашему запросу ничего не найдено :(
+    </div>
+}
 
 @code {
 
