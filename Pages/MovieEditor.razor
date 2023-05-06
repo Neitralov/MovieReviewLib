@@ -61,7 +61,7 @@
                     {
                         <InteractiveDataValue TItem="Genre" Data="@genre" RemoveData="RemoveGenre"/>
                     }
-                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите жанр..." @onkeydown="AddGenre" @bind-Value="Genre"/>
+                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите жанр..." @onkeydown="AddGenre" @bind="Genre" @bind:event="oninput"/>
                 </div>
             </div>
             <div class="data-panel__section">
@@ -71,7 +71,7 @@
                     {
                         <InteractiveDataValue TItem="Director" Data="@director" RemoveData="RemoveDirector"/>
                     }
-                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind-Value="Director"/>
+                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind="Director" @bind:event="oninput"/>
                 </div>
             </div>
             <div class="data-panel__section">
@@ -81,7 +81,7 @@
                     {
                         <InteractiveDataValue TItem="Writer" Data="@writer" RemoveData="RemoveWriter"/>
                     }
-                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind-Value="Writer"/>
+                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind="Writer" @bind:event="oninput"/>
                 </div>
             </div>
             <div class="data-panel__section">
@@ -91,7 +91,7 @@
                     {
                         <InteractiveDataValue TItem="Compositor" Data="@compositor" RemoveData="RemoveCompositor"/>
                     }
-                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind-Value="Compositor"/>
+                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
                 </div>
             </div>
             <div class="data-panel__section">
@@ -101,7 +101,7 @@
                     {
                         <InteractiveDataValue TItem="Actor" Data="@actor" RemoveData="RemoveActor"/>
                     }
-                    <InputText class="data-value data-value_inverted data-value__input_small" placeholder="Введите актера..." @onkeydown="AddActor" @bind-Value="Actor"/>
+                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите актера..." @onkeydown="AddActor" @bind="Actor" @bind:event="oninput"/>
                 </div>
             </div>
             <div class="data-panel__section">
