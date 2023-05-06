@@ -284,10 +284,10 @@
             : null;
 
         const int minutesInHour = 60;
-        TotalViewingHours = DatabaseContext.Movies.Select(movie => movie.Duration).Sum() / minutesInHour;
-        TotalFilmViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).Select(movie => movie.Duration).Sum() / minutesInHour;
-        TotalSeriesViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).Select(movie => movie.Duration).Sum() / minutesInHour;
-        TotalCartoonViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Select(movie => movie.Duration).Sum() / minutesInHour;
+        TotalViewingHours = DatabaseContext.Movies.Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
+        TotalFilmViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
+        TotalSeriesViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
+        TotalCartoonViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
     }
 
 }
