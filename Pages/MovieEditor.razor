@@ -5,130 +5,136 @@
 
 <PageTitle>Редактирование фильма</PageTitle>
 
-<div class="movie-container">
-    <div class="movie-subcontainer">
-        <div class="preview-panel">
-            @if (PosterPath is not null)
-            {
-                <div class="grid__item" style="background: url('@PosterPath'); background-size: 180px 320px; margin-bottom: 10px">
-                    <h1 class="grid__title">@Name</h1>
-                    <div class="grid__container">
-                        <h2 class="grid__year">@ReleaseYear</h2>
-                        <div class="grid__score">
-                            @for (var i = 0; i < Score; i++)
-                            {
-                                <img class="grid__star" src="icons/star.svg" alt="Тут звезда"/>
-                            }
+<div class="wrapper">
+    <div class="movie-container main">
+        <aside style="position: fixed">
+            <div class="preview-panel">
+                @if (PosterPath is not null)
+                {
+                    <div class="grid__item" style="background: url('@PosterPath'); background-size: 270px 480px; width: 270px; height: 480px; margin-bottom: 10px">
+                        <h1 class="grid__title" style="font-size: 24px; margin: 0 15px 8px 15px;">@Name</h1>
+                        <div class="grid__container" style="margin: 0 15px 15px 15px;">
+                            <h2 class="grid__year" style="font-size: 21px">@ReleaseYear</h2>
+                            <div class="grid__score">
+                                @for (var i = 0; i < Score; i++)
+                                {
+                                    <img class="grid__star" style="width: 24px; height: 24px;" src="icons/star.svg" alt="Тут звезда"/>
+                                }
+                            </div>
                         </div>
                     </div>
+                }
+                else
+                {
+                    <div class="preview-panel__poster data-title">Превью обложки</div>
+                }
+                <InputFile class="button preview-panel__button" id="file" OnChange="@LoadPoster">Загрузить обложку</InputFile>
+                <label class="button preview-panel__button preview-panel__label" for="file" style="display: flex; align-items: center">
+                    Загрузить обложку
+                </label>
+                <a class="button preview-panel__button" href="https://www.moviemania.io/phone" target="_blank">Искать обложку</a>
+            </div>
+        </aside>
+        <main style="width: 100%; margin-left: 320px">
+            <div class="data-panel">
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Тип произведения:</h2>
+                    <InputSelect class="data-value data-value_inverted data-value__input" @bind-Value="Type">
+                        <option value="@MovieType.Film">Фильм</option>
+                        <option value="@MovieType.Series">Сериал</option>
+                        <option value="@MovieType.Cartoon">Мультфильм</option>
+                    </InputSelect>
                 </div>
-            }
-            else
-            {
-                <div class="preview-panel__poster data-title">Превью обложки</div>
-            }
-            <InputFile class="button preview-panel__button" id="file" OnChange="@LoadPoster">Загрузить обложку</InputFile>
-            <label class="button preview-panel__button preview-panel__label" for="file" style="display: flex; align-items: center">
-                Загрузить обложку
-            </label>
-            <a class="button preview-panel__button" href="https://www.moviemania.io/phone" target="_blank">Искать обложку</a>
-        </div>
-        <div class="data-panel">
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Тип произведения:</h2>
-                <InputSelect class="data-value data-value_inverted data-value__input" @bind-Value="Type">
-                    <option value="@MovieType.Film">Фильм</option>
-                    <option value="@MovieType.Series">Сериал</option>
-                    <option value="@MovieType.Cartoon">Мультфильм</option>
-                </InputSelect>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Название фильма:</h2>
-                <InputText class="data-value data-value_inverted data-value__input" placeholder="Введите название..." @bind-Value="Name"/>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Год выхода:</h2>
-                <InputNumber class="data-value data-value_inverted data-value__input" placeholder="Введите год..." @bind-Value="ReleaseYear"/>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Длительность:</h2>
-                <InputNumber class="data-value data-value_inverted data-value__input" placeholder="Введите длительность..." @bind-Value="Duration"/>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Жанр:</h2>
-                <div class="data-section">
-                    @foreach (var genre in Genres)
-                    {
-                        <InteractiveDataValue TItem="Genre" Data="@genre" RemoveData="RemoveGenre"/>
-                    }
-                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите жанр..." @onkeydown="AddGenre" @bind="Genre" @bind:event="oninput"/>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Название фильма:</h2>
+                    <InputText class="data-value data-value_inverted data-value__input" placeholder="Введите название..." @bind-Value="Name"/>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Год выхода:</h2>
+                    <InputNumber class="data-value data-value_inverted data-value__input" placeholder="Введите год..." @bind-Value="ReleaseYear"/>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Длительность:</h2>
+                    <InputNumber class="data-value data-value_inverted data-value__input" placeholder="Введите длительность..." @bind-Value="Duration"/>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Жанр:</h2>
+                    <div class="data-section">
+                        @foreach (var genre in Genres)
+                        {
+                            <InteractiveDataValue TItem="Genre" Data="@genre" RemoveData="RemoveGenre"/>
+                        }
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите жанр..." @onkeydown="AddGenre" @bind="Genre" @bind:event="oninput"/>
+                    </div>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Режиссер:</h2>
+                    <div class="data-section">
+                        @foreach (var director in Directors)
+                        {
+                            <InteractiveDataValue TItem="Director" Data="@director" RemoveData="RemoveDirector"/>
+                        }
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind="Director" @bind:event="oninput"/>
+                    </div>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Сценарист:</h2>
+                    <div class="data-section">
+                        @foreach (var writer in Writers)
+                        {
+                            <InteractiveDataValue TItem="Writer" Data="@writer" RemoveData="RemoveWriter"/>
+                        }
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind="Writer" @bind:event="oninput"/>
+                    </div>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Композитор:</h2>
+                    <div class="data-section">
+                        @foreach (var compositor in Compositors)
+                        {
+                            <InteractiveDataValue TItem="Compositor" Data="@compositor" RemoveData="RemoveCompositor"/>
+                        }
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
+                    </div>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">В главных ролях:</h2>
+                    <div class="data-section">
+                        @foreach (var actor in Actors)
+                        {
+                            <InteractiveDataValue TItem="Actor" Data="@actor" RemoveData="RemoveActor"/>
+                        }
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите актера..." @onkeydown="AddActor" @bind="Actor" @bind:event="oninput"/>
+                    </div>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Оценка:</h2>
+                    <MovieScore @bind-Score="Score"/>
+                </div>
+                <div class="data-panel__section">
+                    <h2 class="data-title data-panel__title">Заметка:</h2>
+                    <textarea class="data-value data-value_inverted data-value__input data-panel__textarea" placeholder="Введите текст заметки..." resize="none" @bind="Note" @bind:event="oninput"></textarea>
                 </div>
             </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Режиссер:</h2>
-                <div class="data-section">
-                    @foreach (var director in Directors)
-                    {
-                        <InteractiveDataValue TItem="Director" Data="@director" RemoveData="RemoveDirector"/>
-                    }
-                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind="Director" @bind:event="oninput"/>
-                </div>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Сценарист:</h2>
-                <div class="data-section">
-                    @foreach (var writer in Writers)
-                    {
-                        <InteractiveDataValue TItem="Writer" Data="@writer" RemoveData="RemoveWriter"/>
-                    }
-                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind="Writer" @bind:event="oninput"/>
-                </div>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Композитор:</h2>
-                <div class="data-section">
-                    @foreach (var compositor in Compositors)
-                    {
-                        <InteractiveDataValue TItem="Compositor" Data="@compositor" RemoveData="RemoveCompositor"/>
-                    }
-                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
-                </div>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">В главных ролях:</h2>
-                <div class="data-section">
-                    @foreach (var actor in Actors)
-                    {
-                        <InteractiveDataValue TItem="Actor" Data="@actor" RemoveData="RemoveActor"/>
-                    }
-                    <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите актера..." @onkeydown="AddActor" @bind="Actor" @bind:event="oninput"/>
-                </div>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Оценка:</h2>
-                <MovieScore @bind-Score="Score"/>
-            </div>
-            <div class="data-panel__section">
-                <h2 class="data-title data-panel__title">Заметка:</h2>
-                <textarea class="data-value data-value_inverted data-value__input data-panel__textarea" placeholder="Введите текст заметки..." resize="none" @bind="Note" @bind:event="oninput"></textarea>
-            </div>
-        </div>
+        </main>
     </div>
-    <div class="buttons-container">
-        <div class="left-buttons-section">
-            <button class="button buttons-container__button" @onclick="Back">Назад</button>
+    <footer style="position: sticky; bottom: 0; background-color: var(--main-color)">
+        <div class="buttons-container">
+            <div class="left-buttons-section">
+                <button class="button buttons-container__button" @onclick="Back">Назад</button>
+            </div>
+            <div class="right-buttons-section">
+                @if (Movie is not null)
+                {
+                    <button class="danger-button buttons-container__ico" @onclick="Delete">
+                        <img class="ico" src="icons/delete.svg" alt="Иконка удаления"/>
+                    </button>
+                }
+                <button class="button buttons-container__button" @onclick="AddToWatchLater">Смотреть позже</button>
+                <button class="apply-button buttons-container__button" @onclick="Publish">Опубликовать</button>
+            </div>
         </div>
-        <div class="right-buttons-section">
-            @if (Movie is not null)
-            {
-                <button class="danger-button buttons-container__ico" @onclick="Delete">
-                    <img class="ico" src="icons/delete.svg" alt="Иконка удаления"/>
-                </button>
-            }
-            <button class="button buttons-container__button" @onclick="AddToWatchLater">Смотреть позже</button>
-            <button class="apply-button buttons-container__button" @onclick="Publish">Опубликовать</button>
-        </div>
-    </div>
+    </footer>
 </div>
 
 @code {
@@ -399,7 +405,7 @@
 
         NavigationManager.NavigateTo("/");
     }
-    
+
     private static bool IsEnterPressed(KeyboardEventArgs args) => args.Code is "Enter";
     private static bool IsInputFieldEmpty(string inputValue) => string.IsNullOrWhiteSpace(inputValue);
 }

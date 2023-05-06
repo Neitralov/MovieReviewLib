@@ -1,10 +1,6 @@
 .movie-container {
     background-color: var(--main-color);
     width: 100%;
-    border-radius: 5px;
-}
-
-.movie-subcontainer {
     display: flex;
 }
 
@@ -18,8 +14,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 180px;
-    height: 320px;
+    width: 270px;
+    height: 480px;
     background-color: var(--background-color);
     margin-bottom: 10px;
     border-radius: 15px;
@@ -38,11 +34,11 @@
 .preview-panel__label {
     padding: 0 10px;
     margin-bottom: 10px;
+    justify-content: center;
 }
 
 .data-panel {
     padding: 25px 25px 0 0;
-    width: 100%;
 }
 
 .data-panel__section {

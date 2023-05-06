@@ -51,10 +51,6 @@
     color: var(--secondary-text);    
 }
 
-.grid__score {
-    max-width: 80px;
-}
-
 .grid__star {
     height: 16px;
     width: 16px;
