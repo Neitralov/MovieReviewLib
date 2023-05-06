@@ -2,6 +2,7 @@
 @layout EmptyLayout
 @inject DatabaseContext DatabaseContext
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
 
 <PageTitle>Редактирование фильма</PageTitle>
 
@@ -64,7 +65,7 @@
                         {
                             <InteractiveDataValue TItem="Genre" Data="@genre" RemoveData="RemoveGenre"/>
                         }
-                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите жанр..." @onkeydown="AddGenre" @bind="Genre" @bind:event="oninput"/>
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="GenreInput" @onkeydown="AddGenre" @bind="Genre" @bind:event="oninput"/>
                     </div>
                 </div>
                 <div class="data-panel__section">
@@ -74,7 +75,7 @@
                         {
                             <InteractiveDataValue TItem="Director" Data="@director" RemoveData="RemoveDirector"/>
                         }
-                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите режиссера..." @onkeydown="AddDirector" @bind="Director" @bind:event="oninput"/>
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="DirectorInput" @onkeydown="AddDirector" @bind="Director" @bind:event="oninput"/>
                     </div>
                 </div>
                 <div class="data-panel__section">
@@ -84,7 +85,7 @@
                         {
                             <InteractiveDataValue TItem="Writer" Data="@writer" RemoveData="RemoveWriter"/>
                         }
-                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите сценариста..." @onkeydown="AddWriter" @bind="Writer" @bind:event="oninput"/>
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="WriterInput" @onkeydown="AddWriter" @bind="Writer" @bind:event="oninput"/>
                     </div>
                 </div>
                 <div class="data-panel__section">
@@ -94,7 +95,7 @@
                         {
                             <InteractiveDataValue TItem="Compositor" Data="@compositor" RemoveData="RemoveCompositor"/>
                         }
-                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите композитора..." @onkeydown="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="CompositorInput" @onkeydown="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
                     </div>
                 </div>
                 <div class="data-panel__section">
@@ -104,7 +105,7 @@
                         {
                             <InteractiveDataValue TItem="Actor" Data="@actor" RemoveData="RemoveActor"/>
                         }
-                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите актера..." @onkeydown="AddActor" @bind="Actor" @bind:event="oninput"/>
+                        <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="ActorInput" @onkeydown="AddActor" @bind="Actor" @bind:event="oninput"/>
                     </div>
                 </div>
                 <div class="data-panel__section">
@@ -167,6 +168,12 @@
 
     private int Score { get; set; }
     private string Note { get; set; } = string.Empty;
+
+    private ElementReference GenreInput { get; set; }
+    private ElementReference DirectorInput { get; set; }
+    private ElementReference WriterInput { get; set; }
+    private ElementReference CompositorInput { get; set; }
+    private ElementReference ActorInput { get; set; }
 
     protected override void OnParametersSet()
     {
@@ -408,4 +415,14 @@
 
     private static bool IsEnterPressed(KeyboardEventArgs args) => args.Code is "Enter";
     private static bool IsInputFieldEmpty(string inputValue) => string.IsNullOrWhiteSpace(inputValue);
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", GenreInput);
+        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", DirectorInput);
+        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", WriterInput);
+        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", CompositorInput);
+        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", ActorInput);
+    }
+
 }

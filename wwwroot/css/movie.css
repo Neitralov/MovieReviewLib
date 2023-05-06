@@ -63,7 +63,7 @@
 }
 
 .data-value__input_small {
-    width: 200px;
+    width: auto;
 }
 
 .data-panel__data-value {
