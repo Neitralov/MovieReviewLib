@@ -26,7 +26,7 @@
 .grid__item {
     height: 320px;
     width: 180px;
-    box-shadow: inset 0 -10px 48px 16px rgba(0, 0, 0, 60%);
+    box-shadow: inset 0 -70px 20px -10px rgba(0, 0, 0, 40%);
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -39,6 +39,7 @@
     color: var(--main-text);
     margin: 0 10px 5px 10px;
     overflow-wrap: break-word;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 75%);
 }
 
 .grid__container {
@@ -50,7 +51,8 @@
 .grid__year {
     font-size: 14px;
     font-weight: bold;
-    color: var(--secondary-text);    
+    color: var(--secondary-text);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 75%);
 }
 
 .grid__star {
