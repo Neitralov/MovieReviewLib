@@ -74,7 +74,7 @@
                             {
                                 <InteractiveDataValue TItem="Genre" Data="@genre" RemoveData="RemoveGenre"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="GenreInput" @onkeydown="AddGenre" @bind="Genre" @bind:event="oninput"/>
+                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="GenreInput" @onkeydown="AddGenreOnEnterDown" @onfocusout="AddGenre" @bind="Genre" @bind:event="oninput"/>
                         </div>
                     </div>
                     <div class="data-panel__section">
@@ -85,7 +85,7 @@
                             {
                                 <InteractiveDataValue TItem="Director" Data="@director" RemoveData="RemoveDirector"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="DirectorInput" @onkeydown="AddDirector" @bind="Director" @bind:event="oninput"/>
+                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="DirectorInput" @onkeydown="AddDirectorOnEnterDown" @onfocusout="AddDirector" @bind="Director" @bind:event="oninput"/>
                         </div>
                     </div>
                     <div class="data-panel__section">
@@ -96,7 +96,7 @@
                             {
                                 <InteractiveDataValue TItem="Writer" Data="@writer" RemoveData="RemoveWriter"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="WriterInput" @onkeydown="AddWriter" @bind="Writer" @bind:event="oninput"/>
+                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="WriterInput" @onkeydown="AddWriterOnEnterDown" @onfocusout="AddWriter" @bind="Writer" @bind:event="oninput"/>
                         </div>
                     </div>
                     <div class="data-panel__section">
@@ -107,7 +107,7 @@
                             {
                                 <InteractiveDataValue TItem="Compositor" Data="@compositor" RemoveData="RemoveCompositor"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="CompositorInput" @onkeydown="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
+                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="CompositorInput" @onkeydown="AddCompositorOnEnterDown" @onfocusout="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
                         </div>
                     </div>
                     <div class="data-panel__section">
@@ -118,7 +118,7 @@
                             {
                                 <InteractiveDataValue TItem="Actor" Data="@actor" RemoveData="RemoveActor"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="ActorInput" @onkeydown="AddActor" @bind="Actor" @bind:event="oninput"/>
+                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="ActorInput" @onkeydown="AddActorOnEnterDown" @onfocusout="AddActor" @bind="Actor" @bind:event="oninput"/>
                         </div>
                     </div>
                     <div class="data-panel__section">
@@ -195,9 +195,15 @@
             .First(x => x.Id == Id);
     }
 
-    private void AddGenre(KeyboardEventArgs args)
+    private void AddGenreOnEnterDown(KeyboardEventArgs args)
     {
-        if (!IsEnterPressed(args) || IsInputFieldEmpty(Genre))
+        if(IsEnterPressed(args)) 
+            AddGenre();    
+    }
+    
+    private void AddGenre()
+    {
+        if (IsInputFieldEmpty(Genre))
             return;
 
         var genre = new Genre { Value = Genre.Trim() };
@@ -207,11 +213,17 @@
 
     private void RemoveGenre(Genre genre) => Movie.Genres.Remove(genre);
 
-    private void AddDirector(KeyboardEventArgs args)
+    private void AddDirectorOnEnterDown(KeyboardEventArgs args)
     {
-        if (!IsEnterPressed(args) || IsInputFieldEmpty(Director))
-            return;
+        if (IsEnterPressed(args))
+           AddDirector();
+    }
 
+    private void AddDirector()
+    {
+        if (IsInputFieldEmpty(Director))  
+            return;
+        
         var director = new Director { Value = Director.Trim() };
         Movie.Directors.Add(director);
         Director = string.Empty;
@@ -219,38 +231,56 @@
 
     private void RemoveDirector(Director director) => Movie.Directors.Remove(director);
 
-    private void AddWriter(KeyboardEventArgs args)
+    private void AddWriterOnEnterDown(KeyboardEventArgs args)
     {
-        if (!IsEnterPressed(args) || IsInputFieldEmpty(Writer))
-            return;
+        if (IsEnterPressed(args))
+            AddWriter();
+    }
 
+    private void AddWriter()
+    {
+        if (IsInputFieldEmpty(Writer))
+            return;
+        
         var writer = new Writer { Value = Writer.Trim() };
         Movie.Writers.Add(writer);
-        Writer = string.Empty;
+        Writer = string.Empty;    
     }
 
     private void RemoveWriter(Writer writer) => Movie.Writers.Remove(writer);
 
-    private void AddCompositor(KeyboardEventArgs args)
+    private void AddCompositorOnEnterDown(KeyboardEventArgs args)
     {
-        if (!IsEnterPressed(args) || IsInputFieldEmpty(Compositor))
-            return;
+        if (IsEnterPressed(args))
+            AddCompositor();
+    }
 
+    private void AddCompositor()
+    {
+        if (IsInputFieldEmpty(Compositor))
+            return;
+        
         var compositor = new Compositor { Value = Compositor.Trim() };
         Movie.Compositors.Add(compositor);
-        Compositor = string.Empty;
+        Compositor = string.Empty;    
     }
 
     private void RemoveCompositor(Compositor compositor) => Movie.Compositors.Remove(compositor);
 
-    private void AddActor(KeyboardEventArgs args)
+    private void AddActorOnEnterDown(KeyboardEventArgs args)
     {
-        if (!IsEnterPressed(args) || IsInputFieldEmpty(Actor))
-            return;
+        if (IsEnterPressed(args))
+            AddActor();
+    }
 
+    private void AddActor()
+    {
+        if (IsInputFieldEmpty(Actor))
+            return;
+        
         var actor = new Actor { Value = Actor.Trim() };
         Movie.Actors.Add(actor);
-        Actor = string.Empty;
+        Actor = string.Empty;    
     }
 
     private void RemoveActor(Actor actor) => Movie.Actors.Remove(actor);
