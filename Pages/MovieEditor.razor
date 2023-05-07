@@ -182,8 +182,11 @@
     private void LoadMovieData(int id)
     {
         if (id == 0) return;
-
+        
+        DatabaseContext.ChangeTracker.Clear();
+        
         Movie = DatabaseContext.Movies
+            .AsNoTracking()
             .Include(x => x.Genres)
             .Include(x => x.Directors)
             .Include(x => x.Writers)
@@ -303,8 +306,8 @@
         Movie.WatchLater = true;
         Movie.Type = Type;
         Movie.PublishDate = DateTime.Now;
-
-        if (DatabaseContext.Movies.Contains(Movie) is false)
+        
+        if (DatabaseContext.Movies.Any(movie => movie.Id == Movie.Id) is false)
             DatabaseContext.Movies.Add(Movie);
         else
             DatabaseContext.Movies.Update(Movie);
@@ -322,12 +325,12 @@
         Movie.WatchLater = false;
         Movie.Type = Type;
         Movie.PublishDate = DateTime.Now;
-
-        if (DatabaseContext.Movies.Contains(Movie) is false)
+        
+        if (DatabaseContext.Movies.Any(movie => movie.Id == Movie.Id) is false)
             DatabaseContext.Movies.Add(Movie);
         else
             DatabaseContext.Movies.Update(Movie);
-
+        
         DatabaseContext.SaveChanges();
 
         NavigationManager.NavigateTo("/");
