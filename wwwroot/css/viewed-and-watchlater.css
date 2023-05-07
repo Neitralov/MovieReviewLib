@@ -38,6 +38,7 @@
     font-weight: bold;
     color: var(--main-text);
     margin: 0 10px 5px 10px;
+    overflow-wrap: break-word;
 }
 
 .grid__container {
