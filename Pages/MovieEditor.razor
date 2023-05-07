@@ -203,7 +203,6 @@
         var genre = new Genre { Value = Genre.Trim() };
         Movie.Genres.Add(genre);
         Genre = string.Empty;
-    //EditContext?.Validate();
     }
 
     private void RemoveGenre(Genre genre) => Movie.Genres.Remove(genre);
@@ -216,7 +215,6 @@
         var director = new Director { Value = Director.Trim() };
         Movie.Directors.Add(director);
         Director = string.Empty;
-    //EditContext?.Validate();
     }
 
     private void RemoveDirector(Director director) => Movie.Directors.Remove(director);
@@ -229,7 +227,6 @@
         var writer = new Writer { Value = Writer.Trim() };
         Movie.Writers.Add(writer);
         Writer = string.Empty;
-    //EditContext?.Validate();
     }
 
     private void RemoveWriter(Writer writer) => Movie.Writers.Remove(writer);
@@ -242,7 +239,6 @@
         var compositor = new Compositor { Value = Compositor.Trim() };
         Movie.Compositors.Add(compositor);
         Compositor = string.Empty;
-    //EditContext?.Validate();
     }
 
     private void RemoveCompositor(Compositor compositor) => Movie.Compositors.Remove(compositor);
@@ -255,7 +251,6 @@
         var actor = new Actor { Value = Actor.Trim() };
         Movie.Actors.Add(actor);
         Actor = string.Empty;
-    //EditContext?.Validate();
     }
 
     private void RemoveActor(Actor actor) => Movie.Actors.Remove(actor);
@@ -277,7 +272,6 @@
         }
 
         Movie.PosterPath = filePath;
-    //EditContext?.Validate();
     }
 
     private void Back()
