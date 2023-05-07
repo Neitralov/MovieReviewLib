@@ -43,10 +43,12 @@
                 <div class="data-panel">
                     <div class="data-panel__section">
                         <h2 class="data-title data-panel__title">Тип произведения:</h2>
-                        <InputSelect class="data-value data-value_inverted data-value__input" @bind-Value="Type">
-                            <option value="@MovieType.Film">Фильм</option>
-                            <option value="@MovieType.Series">Сериал</option>
-                            <option value="@MovieType.Cartoon">Мультфильм</option>
+                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Type)"/>
+                        <InputSelect class="data-value data-value_inverted data-value__input" style="@InputSelectStyle()" @bind-Value="Movie.Type">
+                            <option selected disabled hidden>Выберите тип</option>
+                            <option style="color: var(--main-text)" value="@MovieType.Film">Фильм</option>
+                            <option style="color: var(--main-text)" value="@MovieType.Series">Сериал</option>
+                            <option style="color: var(--main-text)" value="@MovieType.Cartoon">Мультфильм</option>
                         </InputSelect>
                     </div>
                     <div class="data-panel__section">
@@ -158,15 +160,13 @@
     [Parameter]
     [SupplyParameterFromQuery]
     public int Id { get; set; }
-    
-    private MovieType Type { get; set; }
-    
+
     private string Genre { get; set; } = string.Empty;
     private string Director { get; set; } = string.Empty;
     private string Writer { get; set; } = string.Empty;
     private string Compositor { get; set; } = string.Empty;
     private string Actor { get; set; } = string.Empty;
-    
+
     private ElementReference GenreInput { get; set; }
     private ElementReference DirectorInput { get; set; }
     private ElementReference WriterInput { get; set; }
@@ -182,9 +182,9 @@
     private void LoadMovieData(int id)
     {
         if (id == 0) return;
-        
+
         DatabaseContext.ChangeTracker.Clear();
-        
+
         Movie = DatabaseContext.Movies
             .AsNoTracking()
             .Include(x => x.Genres)
@@ -193,19 +193,17 @@
             .Include(x => x.Compositors)
             .Include(x => x.Actors)
             .First(x => x.Id == Id);
-        
-        Type = Movie.Type;
     }
 
     private void AddGenre(KeyboardEventArgs args)
     {
         if (!IsEnterPressed(args) || IsInputFieldEmpty(Genre))
             return;
-        
+
         var genre = new Genre { Value = Genre.Trim() };
         Movie.Genres.Add(genre);
         Genre = string.Empty;
-        //EditContext?.Validate();
+    //EditContext?.Validate();
     }
 
     private void RemoveGenre(Genre genre) => Movie.Genres.Remove(genre);
@@ -218,7 +216,7 @@
         var director = new Director { Value = Director.Trim() };
         Movie.Directors.Add(director);
         Director = string.Empty;
-        //EditContext?.Validate();
+    //EditContext?.Validate();
     }
 
     private void RemoveDirector(Director director) => Movie.Directors.Remove(director);
@@ -231,7 +229,7 @@
         var writer = new Writer { Value = Writer.Trim() };
         Movie.Writers.Add(writer);
         Writer = string.Empty;
-        //EditContext?.Validate();
+    //EditContext?.Validate();
     }
 
     private void RemoveWriter(Writer writer) => Movie.Writers.Remove(writer);
@@ -244,7 +242,7 @@
         var compositor = new Compositor { Value = Compositor.Trim() };
         Movie.Compositors.Add(compositor);
         Compositor = string.Empty;
-        //EditContext?.Validate();
+    //EditContext?.Validate();
     }
 
     private void RemoveCompositor(Compositor compositor) => Movie.Compositors.Remove(compositor);
@@ -257,7 +255,7 @@
         var actor = new Actor { Value = Actor.Trim() };
         Movie.Actors.Add(actor);
         Actor = string.Empty;
-        //EditContext?.Validate();
+    //EditContext?.Validate();
     }
 
     private void RemoveActor(Actor actor) => Movie.Actors.Remove(actor);
@@ -279,12 +277,12 @@
         }
 
         Movie.PosterPath = filePath;
-        //EditContext?.Validate();
+    //EditContext?.Validate();
     }
 
     private void Back()
     {
-        NavigationManager.NavigateTo("/");    
+        NavigationManager.NavigateTo("/");
     }
 
     private void Delete()
@@ -304,9 +302,8 @@
             return;
 
         Movie.WatchLater = true;
-        Movie.Type = Type;
         Movie.PublishDate = DateTime.Now;
-        
+
         if (DatabaseContext.Movies.Any(movie => movie.Id == Movie.Id) is false)
             DatabaseContext.Movies.Add(Movie);
         else
@@ -323,14 +320,13 @@
             return;
 
         Movie.WatchLater = false;
-        Movie.Type = Type;
         Movie.PublishDate = DateTime.Now;
-        
+
         if (DatabaseContext.Movies.Any(movie => movie.Id == Movie.Id) is false)
             DatabaseContext.Movies.Add(Movie);
         else
             DatabaseContext.Movies.Update(Movie);
-        
+
         DatabaseContext.SaveChanges();
 
         NavigationManager.NavigateTo("/");
@@ -338,6 +334,8 @@
 
     private static bool IsEnterPressed(KeyboardEventArgs args) => args.Code is "Enter";
     private static bool IsInputFieldEmpty(string inputValue) => string.IsNullOrWhiteSpace(inputValue);
+    
+    private string InputSelectStyle() => Movie.Type is null ? "color: var(--light-secondary-text)" : string.Empty;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
