@@ -14,7 +14,7 @@
                 <div class="preview-panel">
                     @if (Movie.PosterPath != string.Empty)
                     {
-                        <div class="grid__item" style="background: url('@Movie.PosterPath'); background-size: cover; width: 270px; height: 480px; margin-bottom: 10px; box-shadow: inset 0 -105px 30px -15px rgba(0, 0, 0, 40%);">
+                        <div class="grid__item" style="background: url('@Movie.PosterPath'); background-size: cover; background-position: center; width: 270px; height: 480px; margin-bottom: 10px; box-shadow: inset 0 -105px 30px -15px rgba(0, 0, 0, 40%);">
                             <h1 class="grid__title" style="font-size: 24px; margin: 0 15px 8px 15px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 75%);">@Movie.Name</h1>
                             <div class="grid__container" style="margin: 0 15px 15px 15px;">
                                 <h2 class="grid__year" style="font-size: 21px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 75%);">@Movie.ReleaseYear</h2>
