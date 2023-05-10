@@ -63,6 +63,10 @@
     box-sizing: border-box;
 }
 
+.data-value__score {
+    width: 188px;
+}
+
 .data-value__input_small {
     width: auto;
 }
@@ -111,10 +115,6 @@
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
-}
-
-.data-panel__score {
-    height: 30px;
 }
 
 .data-panel__score-value {
