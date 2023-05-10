@@ -44,7 +44,7 @@
                     <div class="data-panel__section">
                         <h2 class="data-title data-panel__title">Тип произведения:</h2>
                         <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Type)"/>
-                        <InputSelect class="data-value data-value_inverted data-value__input" style="@InputSelectStyle()" @bind-Value="Movie.Type">
+                        <InputSelect class="data-value data-value_inverted data-value__input" style="@InputSelectStyle(Movie.Type)" @bind-Value="Movie.Type">
                             <option selected disabled hidden>Выберите тип</option>
                             <option style="color: var(--main-text)" value="@MovieType.Film">Фильм</option>
                             <option style="color: var(--main-text)" value="@MovieType.Series">Сериал</option>
@@ -123,7 +123,14 @@
                     </div>
                     <div class="data-panel__section">
                         <h2 class="data-title data-panel__title">Оценка:</h2>
-                        <MovieScore @bind-Score="Movie.Score"/>
+                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Score)"/>
+                        <InputSelect class="data-value data-value_inverted data-value__input data-value__score" style="@InputSelectStyle(Movie.Score)" @bind-Value="Movie.Score">
+                            <option selected disabled hidden>Выберите оценку</option>
+                            @for (var index = 10; index >= 0; index--)
+                            {
+                                <option style="color: var(--main-text)" value="@index">@((float)index / 2)</option>    
+                            }
+                        </InputSelect>
                     </div>
                     <div class="data-panel__section">
                         <h2 class="data-title data-panel__title">Заметка:</h2>
@@ -358,8 +365,8 @@
 
     private static bool IsEnterPressed(KeyboardEventArgs args) => args.Code is "Enter";
     private static bool IsInputFieldEmpty(string inputValue) => string.IsNullOrWhiteSpace(inputValue);
-    
-    private string InputSelectStyle() => Movie.Type is null ? "color: var(--light-secondary-text)" : string.Empty;
+
+    private string InputSelectStyle(object? field) => field is null ? "color: var(--light-secondary-text)" : string.Empty;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
