@@ -18,12 +18,7 @@
                             <h1 class="grid__title" style="font-size: 24px; margin: 0 15px 8px 15px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 75%);">@Movie.Name</h1>
                             <div class="grid__container" style="margin: 0 15px 15px 15px;">
                                 <h2 class="grid__year" style="font-size: 21px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 75%);">@Movie.ReleaseYear</h2>
-                                <div class="grid__score">
-                                    @for (var i = 0; i < Movie.Score; i++)
-                                    {
-                                        <img class="grid__star" style="width: 24px; height: 24px;" src="icons/star.svg" alt="Тут звезда"/>
-                                    }
-                                </div>
+                                <StarRating Score="Movie.Score" Size="21" Spacing="3"/>
                             </div>
                         </div>
                     }

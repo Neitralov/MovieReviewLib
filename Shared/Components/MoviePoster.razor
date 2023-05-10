@@ -2,15 +2,7 @@
     <h1 class="grid__title">@Name</h1>
     <div class="grid__container">
         <h2 class="grid__year">@ReleaseYear</h2>
-        @if (IsWatchLater is false)
-        {
-            <div class="grid__score">
-                @for (var i = 0; i < Score; i++)
-                {
-                    <img class="grid__star" src="icons/star.svg" alt="Тут звезда"/>
-                }
-            </div>
-        }
+        <StarRating Score="Score" Size="14" Spacing="2"/>
     </div>
 </div>
 
@@ -29,10 +21,7 @@
     public int? ReleaseYear { get; set; }
 
     [Parameter]
-    public int Score { get; set; }
-
-    [Parameter]
-    public bool IsWatchLater { get; set; }
+    public int? Score { get; set; }
 
     [Parameter]
     public EventCallback<int> OpenInMovieEditor { get; set; }
