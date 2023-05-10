@@ -3,27 +3,13 @@
 <div class="grid">
     @foreach (var movie in Movies)
     {
-        if (movie.WatchLater)
-        {
-            <MoviePoster
-                Id="@movie.Id"
-                PosterPath="@movie.PosterPath"
-                Name="@movie.Name"
-                ReleaseYear="@movie.ReleaseYear"
-                Score="@movie.Score"
-                OpenInMovieEditor="OpenInMovieEditor"
-                IsWatchLater="true"/>
-        }
-        else
-        {
-            <MoviePoster
-                Id="@movie.Id"
-                PosterPath="@movie.PosterPath"
-                Name="@movie.Name"
-                ReleaseYear="@movie.ReleaseYear"
-                Score="@movie.Score"
-                OpenInMovieEditor="OpenInMovieEditor"/>
-        }
+        <MoviePoster
+            Id="@movie.Id"
+            PosterPath="@movie.PosterPath"
+            Name="@movie.Name"
+            ReleaseYear="@movie.ReleaseYear"
+            Score="@movie.Score"
+            OpenInMovieEditor="OpenInMovieEditor"/>
     }
 </div>
 
