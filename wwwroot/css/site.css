@@ -40,6 +40,7 @@
     margin: unset;
     border: unset;
     padding: unset;  
+    outline: unset;
 } 
 
 :root {
