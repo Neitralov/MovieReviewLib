@@ -122,10 +122,10 @@ html, body {
 }
 
 .nav {
-    background-color: var(--background-color);
+    background-color: var(--main-color);
     display: flex;
-    height: 60px;
-    align-items: center;
+    height: 45px;
+    align-items: start;
     padding-left: 40px;
 }
 
@@ -152,7 +152,7 @@ html, body {
 }
 
 .main__default-layout {
-    padding: 0 50px 20px 50px;
+    padding: 20px 50px;
     display: flex;
     flex-direction: column;
 }
