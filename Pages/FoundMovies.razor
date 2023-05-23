@@ -20,17 +20,6 @@ else
     [SupplyParameterFromQuery]
     public string? Name { get; set; }
 
-    protected override void OnParametersSet()
-    {
-        DatabaseContext.Movies
-            .Include(x => x.Genres)
-            .Include(x => x.Directors)
-            .Include(x => x.Writers)
-            .Include(x => x.Compositors)
-            .Include(x => x.Actors)
-            .Load();
-    }
-
     private List<Movie> FoundMovie()
     {
         var foundMovie = DatabaseContext.Movies.FirstOrDefault(movie => movie.Name == Name);

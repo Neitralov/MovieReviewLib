@@ -19,18 +19,7 @@ else
 @code {
 
     private SortType SortType { get; set; }
-
-    protected override void OnParametersSet()
-    {
-        DatabaseContext.Movies
-            .Include(x => x.Genres)
-            .Include(x => x.Directors)
-            .Include(x => x.Writers)
-            .Include(x => x.Compositors)
-            .Include(x => x.Actors)
-            .Load();
-    }
-
+    
     private List<Movie> SortedMovies()
     {
         var watchedMovies = DatabaseContext.Movies.Where(movie => movie.WatchLater == false);
