@@ -47,7 +47,7 @@
                         </InputSelect>
                     </div>
                     <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Название фильма:</h2>
+                        <h2 class="data-title data-panel__title">Название:</h2>
                         <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Name)"/>
                         <InputText class="data-value data-value_inverted data-value__input" placeholder="Введите название..." @bind-Value="Movie.Name"/>
                     </div>
@@ -123,7 +123,7 @@
                             <option selected disabled hidden>Выберите оценку</option>
                             @for (var index = 10; index >= 0; index--)
                             {
-                                <option style="color: var(--main-text)" value="@index">@((float)index / 2)</option>    
+                                <option style="color: var(--main-text)" value="@index">@((float)index / 2)</option>
                             }
                         </InputSelect>
                     </div>
@@ -199,10 +199,10 @@
 
     private void AddGenreOnEnterDown(KeyboardEventArgs args)
     {
-        if(IsEnterPressed(args)) 
-            AddGenre();    
+        if (IsEnterPressed(args))
+            AddGenre();
     }
-    
+
     private void AddGenre()
     {
         if (IsInputFieldEmpty(Genre))
@@ -218,14 +218,14 @@
     private void AddDirectorOnEnterDown(KeyboardEventArgs args)
     {
         if (IsEnterPressed(args))
-           AddDirector();
+            AddDirector();
     }
 
     private void AddDirector()
     {
-        if (IsInputFieldEmpty(Director))  
+        if (IsInputFieldEmpty(Director))
             return;
-        
+
         var director = new Director { Value = Director.Trim() };
         Movie.Directors.Add(director);
         Director = string.Empty;
@@ -243,10 +243,10 @@
     {
         if (IsInputFieldEmpty(Writer))
             return;
-        
+
         var writer = new Writer { Value = Writer.Trim() };
         Movie.Writers.Add(writer);
-        Writer = string.Empty;    
+        Writer = string.Empty;
     }
 
     private void RemoveWriter(Writer writer) => Movie.Writers.Remove(writer);
@@ -261,10 +261,10 @@
     {
         if (IsInputFieldEmpty(Compositor))
             return;
-        
+
         var compositor = new Compositor { Value = Compositor.Trim() };
         Movie.Compositors.Add(compositor);
-        Compositor = string.Empty;    
+        Compositor = string.Empty;
     }
 
     private void RemoveCompositor(Compositor compositor) => Movie.Compositors.Remove(compositor);
@@ -279,10 +279,10 @@
     {
         if (IsInputFieldEmpty(Actor))
             return;
-        
+
         var actor = new Actor { Value = Actor.Trim() };
         Movie.Actors.Add(actor);
-        Actor = string.Empty;    
+        Actor = string.Empty;
     }
 
     private void RemoveActor(Actor actor) => Movie.Actors.Remove(actor);
