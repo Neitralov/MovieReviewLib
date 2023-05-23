@@ -22,7 +22,7 @@ else
 
     private List<Movie> SortedMovies()
     {
-        var shelvedMovies = DatabaseContext.Movies.Where(movie => movie.WatchLater == true);
+        var shelvedMovies = DatabaseContext.Movies.AsNoTracking().Where(movie => movie.WatchLater == true);
 
         return SortType switch
         {

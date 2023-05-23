@@ -22,7 +22,7 @@ else
 
     private List<Movie> FoundMovie()
     {
-        var foundMovie = DatabaseContext.Movies.FirstOrDefault(movie => movie.Name == Name);
+        var foundMovie = DatabaseContext.Movies.AsNoTracking().FirstOrDefault(movie => movie.Name == Name);
         return foundMovie is null ? new List<Movie>() : new List<Movie> { foundMovie };
     }
 
