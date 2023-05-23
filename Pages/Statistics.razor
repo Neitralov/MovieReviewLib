@@ -14,6 +14,8 @@
             <p class="details__data">@NumberOfWatchedFilms</p>
             <h2 class="data-title details__title">Из них сериалов</h2>
             <p class="details__data">@NumberOfWatchedSeries</p>
+            <h2 class="data-title details__title">Из них шоу</h2>
+            <p class="details__data">@NumberOfWatchedShows</p>
             <h2 class="data-title details__title">Из них мультфильмов</h2>
             <p class="details__data">@NumberOfWatchedCartoons</p>
         </div>
@@ -31,6 +33,8 @@
             <p class="details__data">@NumberOfPostponedFilms</p>
             <h2 class="data-title details__title">Из них сериалов</h2>
             <p class="details__data">@NumberOfPostponedSeries</p>
+            <h2 class="data-title details__title">Из них шоу</h2>
+            <p class="details__data">@NumberOfPostponedShows</p>
             <h2 class="data-title details__title">Из них мультфильмов</h2>
             <p class="details__data">@NumberOfPostponedCartoons</p>
         </div>
@@ -48,6 +52,8 @@
             <p class="details__data">@AverageFilmRating.ToString("F")</p>
             <h2 class="data-title details__title">Средний рейтинг сериалов</h2>
             <p class="details__data">@AverageSeriesRating.ToString("F")</p>
+            <h2 class="data-title details__title">Средний рейтинг шоу</h2>
+            <p class="details__data">@AverageShowRating.ToString("F")</p>
             <h2 class="data-title details__title">Средний рейтинг мультфильмов</h2>
             <p class="details__data">@AverageCartoonRating.ToString("F")</p>
         </div>
@@ -85,6 +91,10 @@
     <p class="data-value statistic-group__data">
         @(NewestWatchedSeries is not null ? NewestWatchedSeries.Name : "N/A")
     </p>
+    <h2 class="data-title statistic-group__title">Самое современное просмотренное шоу</h2>
+    <p class="data-value statistic-group__data">
+        @(NewestWatchedShow is not null ? NewestWatchedShow.Name : "N/A")
+    </p>
     <h2 class="data-title statistic-group__title">Самый современный просмотренный мультфильм</h2>
     <p class="data-value statistic-group__data">
         @(NewestWatchedCartoon is not null ? NewestWatchedCartoon.Name : "N/A")
@@ -99,6 +109,10 @@
     <h2 class="data-title statistic-group__title">Самый старый просмотренный сериал</h2>
     <p class="data-value statistic-group__data">
         @(OldestWatchedSeries is not null ? OldestWatchedSeries.Name : "N/A")
+    </p>
+    <h2 class="data-title statistic-group__title">Самое старое просмотренное шоу</h2>
+    <p class="data-value statistic-group__data">
+        @(OldestWatchedShow is not null ? OldestWatchedShow.Name : "N/A")
     </p>
     <h2 class="data-title statistic-group__title">Самый старый просмотренный мультфильм</h2>
     <p class="data-value statistic-group__data">
@@ -117,6 +131,8 @@
             <p class="details__data">@TotalFilmViewingHours</p>
             <h2 class="data-title details__title">Из них сериалов</h2>
             <p class="details__data">@TotalSeriesViewingHours</p>
+            <h2 class="data-title details__title">Из них шоу</h2>
+            <p class="details__data">@TotalShowViewingHours</p>
             <h2 class="data-title details__title">Из них мультфильмов</h2>
             <p class="details__data">@TotalCartoonViewingHours</p>
         </div>
@@ -206,31 +222,37 @@
     private int NumberOfWatchedMovies { get; set; }
     private int NumberOfWatchedFilms { get; set; }
     private int NumberOfWatchedSeries { get; set; }
+    private int NumberOfWatchedShows { get; set; }
     private int NumberOfWatchedCartoons { get; set; }
     
     private int NumberOfPostponedMovies { get; set; }
     private int NumberOfPostponedFilms { get; set; }
     private int NumberOfPostponedSeries { get; set; }
+    private int NumberOfPostponedShows { get; set; }
     private int NumberOfPostponedCartoons { get; set; }
     
     private double AverageMovieRating { get; set; }
     private double AverageFilmRating { get; set; }
     private double AverageSeriesRating { get; set; }
+    private double AverageShowRating { get; set; }
     private double AverageCartoonRating { get; set; }
 
     private Movie[]? Top10MoviesByRaiting { get; set; } 
 
     private Movie? NewestWatchedFilm { get; set; }
     private Movie? NewestWatchedSeries { get; set; }
+    private Movie? NewestWatchedShow { get; set; }
     private Movie? NewestWatchedCartoon { get; set; }
     
     private Movie? OldestWatchedFilm { get; set; }
     private Movie? OldestWatchedSeries { get; set; }
+    private Movie? OldestWatchedShow { get; set; }
     private Movie? OldestWatchedCartoon { get; set; }
 
     private int TotalViewingHours { get; set; }
     private int TotalFilmViewingHours { get; set; }
     private int TotalSeriesViewingHours { get; set; }
+    private int TotalShowViewingHours { get; set; }
     private int TotalCartoonViewingHours { get; set; }
 
     protected override void OnParametersSet()
@@ -238,11 +260,13 @@
         NumberOfWatchedMovies = DatabaseContext.Movies.Count(movie => movie.WatchLater == false);
         NumberOfWatchedFilms = DatabaseContext.Movies.Count(movie => movie.WatchLater == false && movie.Type == MovieType.Film);
         NumberOfWatchedSeries = DatabaseContext.Movies.Count(movie => movie.WatchLater == false && movie.Type == MovieType.Series);
+        NumberOfWatchedShows = DatabaseContext.Movies.Count(movie => movie.WatchLater == false && movie.Type == MovieType.Show);
         NumberOfWatchedCartoons = DatabaseContext.Movies.Count(movie => movie.WatchLater == false && movie.Type == MovieType.Cartoon);
 
         NumberOfPostponedMovies = DatabaseContext.Movies.Count(movie => movie.WatchLater == true);
         NumberOfPostponedFilms = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Film);
         NumberOfPostponedSeries = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Series);
+        NumberOfPostponedShows = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Show);
         NumberOfPostponedCartoons = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Cartoon);
 
         AverageMovieRating = DatabaseContext.Movies.Any() 
@@ -253,6 +277,9 @@
 
         AverageSeriesRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).Average(movie => movie.Score!.Value) / 2 : 0;
+        
+        AverageShowRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show).Average(movie => movie.Score!.Value) / 2 : 0;
 
         AverageCartoonRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Average(movie => movie.Score!.Value) / 2 : 0;
@@ -267,6 +294,10 @@
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
         
+        NewestWatchedShow = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show  && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
+            : null;
+        
         NewestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon  && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
@@ -279,6 +310,10 @@
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
         
+        OldestWatchedShow = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
+            : null;
+        
         OldestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
@@ -287,6 +322,7 @@
         TotalViewingHours = DatabaseContext.Movies.Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
         TotalFilmViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
         TotalSeriesViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
+        TotalShowViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
         TotalCartoonViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
     }
 

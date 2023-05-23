@@ -4,5 +4,6 @@ public enum MovieType
 {
     Film,
     Series,
+    Show,
     Cartoon
 }
