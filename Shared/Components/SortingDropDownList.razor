@@ -3,11 +3,8 @@
     <InputSelect class="toolbar__sort-list" @bind-Value="SortType" @onclick="() => SortTypeChanged.InvokeAsync(SortType)">
         <option value="@SortType.AdditionOrder">сначала новые</option>
         <option value="@SortType.ReverseAdditionOrder">сначала старые</option>
-        @if (IncludeSortByRating)
-        {
-            <option value="@SortType.ByIncreasingRating">по возрастанию рейтинга</option>
-            <option value="@SortType.ByDescendingRating">по убыванию рейтинга</option>    
-        }
+        <option value="@SortType.ByIncreasingRating">по возрастанию рейтинга</option>
+        <option value="@SortType.ByDescendingRating">по убыванию рейтинга</option>    
         <option value="@SortType.AlphabeticalOrder">в алфавитном порядке</option>
         <option value="@SortType.ReverseAlphabeticalOrder">в обратном алфавитном порядке</option>
     </InputSelect>
@@ -19,8 +16,5 @@
 
     [Parameter]
     public EventCallback<SortType> SortTypeChanged { get; set; }
-
-    [Parameter]
-    public bool IncludeSortByRating { get; set; } = true;
 
 }
