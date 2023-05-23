@@ -3,7 +3,7 @@
 
 <PageTitle>Отложенные</PageTitle>
 
-<SortingDropDownList @bind-SortType="@SortType"/>
+<SortDropdown @bind-SortType="@SortType"/>
 
 @if (SortedMovies() is { Count: not 0 } movies)
 {

@@ -3,7 +3,9 @@
 
 <PageTitle>Просмотренные</PageTitle>
 
-<SortingDropDownList @bind-SortType="@SortType"/>
+<div style="display: flex; flex-wrap: wrap">
+    <SortDropdown @bind-SortType="@SortType"/>
+</div>
 
 @if (SortedMovies() is { Count: not 0 } movies)
 {
