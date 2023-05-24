@@ -5,9 +5,10 @@
 
 <div style="display: flex; flex-wrap: wrap">
     <SortDropdown @bind-SortType="@SortType"/>
+    <MovieTypeSortDropdown @bind-MovieType="@MovieType"/>
 </div>
 
-@if (SortedMovies() is { Count: not 0 } movies)
+@if (GetSortedMovies() is { Count: not 0 } movies)
 {
     <MovieGrid Movies="@movies"/>
 }
@@ -21,12 +22,13 @@ else
 @code {
 
     private SortType SortType { get; set; }
-    
-    private List<Movie> SortedMovies()
+    private MovieType MovieType { get; set; }
+
+    private List<Movie> GetSortedMovies()
     {
         var watchedMovies = DatabaseContext.Movies.AsNoTracking().Where(movie => movie.WatchLater == false);
-
-        return SortType switch
+        
+        var sortedMovies = SortType switch
         {
             SortType.AdditionOrder            => watchedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
             SortType.ReverseAdditionOrder     => watchedMovies.OrderBy(movie => movie.PublishDate).ToList(),
@@ -36,6 +38,18 @@ else
             SortType.ReverseAlphabeticalOrder => watchedMovies.OrderByDescending(movie => movie.Name).ToList(),
             _                                 => throw new ArgumentOutOfRangeException()
             };
+
+        var moviesSortedByType = MovieType switch
+        {
+            MovieType.All     => sortedMovies,
+            MovieType.Film    => sortedMovies.Where(movie => movie.Type == Data.MovieType.Film).ToList(),
+            MovieType.Series  => sortedMovies.Where(movie => movie.Type == Data.MovieType.Series).ToList(),
+            MovieType.Show    => sortedMovies.Where(movie => movie.Type == Data.MovieType.Show).ToList(),
+            MovieType.Cartoon => sortedMovies.Where(movie => movie.Type == Data.MovieType.Cartoon).ToList(),
+            _                 => throw new ArgumentOutOfRangeException()
+            };
+
+        return moviesSortedByType;
     }
 
 }

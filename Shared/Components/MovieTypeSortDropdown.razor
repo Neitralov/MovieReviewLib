@@ -1,0 +1,19 @@
+<div class="toolbar">
+    <span class="toolbar__sort-label">Тип: </span>
+    <InputSelect class="toolbar__sort-list" @bind-Value="MovieType" @onclick="() => MovieTypeChanged.InvokeAsync(MovieType)">
+        <option value="@MovieType.All">любой</option>
+        <option value="@MovieType.Film">фильм</option>
+        <option value="@MovieType.Series">сериал</option>
+        <option value="@MovieType.Show">шоу</option>    
+        <option value="@MovieType.Cartoon">мультфильм</option>
+    </InputSelect>
+</div>
+
+@code {
+    [Parameter]
+    public MovieType MovieType { get; set; }
+
+    [Parameter]
+    public EventCallback<MovieType> MovieTypeChanged { get; set; }
+
+}
