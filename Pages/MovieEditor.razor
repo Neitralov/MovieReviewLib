@@ -1,8 +1,8 @@
 @page "/Movie/{Id:int?}"
 @layout EmptyLayout
-@inject DatabaseContext DatabaseContext
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
+@implements IDisposable
 
 <PageTitle>Редактирование фильма</PageTitle>
 
@@ -157,6 +157,7 @@
 </CascadingValue>
 
 @code {
+    private DatabaseContext DatabaseContext { get; set; } = new DatabaseContext();
     private Movie Movie { get; set; } = new();
     private EditContext? EditContext { get; set; }
 
@@ -185,11 +186,8 @@
     private void LoadMovieData(int id)
     {
         if (id == 0) return;
-
-        DatabaseContext.ChangeTracker.Clear();
-
+        
         Movie = DatabaseContext.Movies
-            .AsNoTracking()
             .Include(x => x.Genres)
             .Include(x => x.Directors)
             .Include(x => x.Writers)
@@ -371,6 +369,11 @@
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", WriterInput);
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", CompositorInput);
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", ActorInput);
+    }
+
+    public void Dispose()
+    {
+        DatabaseContext.Dispose();
     }
 
 }
