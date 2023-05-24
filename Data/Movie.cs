@@ -37,7 +37,6 @@ public class Movie
     [MinLength(1, ErrorMessage = "У фильма не может отсутствовать продюсер!")]
     public List<Producer> Producers { get; set; } = new();
     
-    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать композитор!")]
     public List<Compositor> Compositors { get; set; } = new();
     
     [MinLength(1, ErrorMessage = "У фильма не может отсутствовать актер!")]
