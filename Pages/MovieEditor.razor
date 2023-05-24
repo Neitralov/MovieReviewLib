@@ -96,6 +96,17 @@
                         </div>
                     </div>
                     <div class="data-panel__section">
+                        <h2 class="data-title data-panel__title">Продюсер:</h2>
+                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Producers)"/>
+                        <div class="data-section">
+                            @foreach (var producer in Movie.Producers)
+                            {
+                                <InteractiveDataValue TItem="Producer" Data="@producer" RemoveData="RemoveProducer"/>
+                            }
+                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="ProducerInput" @onkeydown="AddProducerOnEnterDown" @onfocusout="AddProducer" @bind="Producer" @bind:event="oninput"/>
+                        </div>
+                    </div>
+                    <div class="data-panel__section">
                         <h2 class="data-title data-panel__title">Композитор:</h2>
                         <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Compositors)"/>
                         <div class="data-section">
@@ -168,12 +179,14 @@
     private string Genre { get; set; } = string.Empty;
     private string Director { get; set; } = string.Empty;
     private string Writer { get; set; } = string.Empty;
+    private string Producer { get; set; } = string.Empty;
     private string Compositor { get; set; } = string.Empty;
     private string Actor { get; set; } = string.Empty;
 
     private ElementReference GenreInput { get; set; }
     private ElementReference DirectorInput { get; set; }
     private ElementReference WriterInput { get; set; }
+    private ElementReference ProducerInput { get; set; }
     private ElementReference CompositorInput { get; set; }
     private ElementReference ActorInput { get; set; }
 
@@ -186,11 +199,12 @@
     private void LoadMovieData(int id)
     {
         if (id == 0) return;
-        
+
         Movie = DatabaseContext.Movies
             .Include(x => x.Genres)
             .Include(x => x.Directors)
             .Include(x => x.Writers)
+            .Include(x => x.Producers)
             .Include(x => x.Compositors)
             .Include(x => x.Actors)
             .First(x => x.Id == Id);
@@ -249,6 +263,24 @@
     }
 
     private void RemoveWriter(Writer writer) => Movie.Writers.Remove(writer);
+    
+    private void AddProducerOnEnterDown(KeyboardEventArgs args)
+    {
+        if (IsEnterPressed(args))
+            AddProducer();
+    }
+
+    private void AddProducer()
+    {
+        if (IsInputFieldEmpty(Producer))
+            return;
+
+        var producer = new Producer { Value = Producer.Trim() };
+        Movie.Producers.Add(producer);
+        Producer = string.Empty;
+    }
+
+    private void RemoveProducer(Producer producer) => Movie.Producers.Remove(producer);
 
     private void AddCompositorOnEnterDown(KeyboardEventArgs args)
     {
@@ -367,6 +399,7 @@
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", GenreInput);
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", DirectorInput);
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", WriterInput);
+        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", ProducerInput);
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", CompositorInput);
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", ActorInput);
     }
