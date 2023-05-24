@@ -14,9 +14,18 @@
 }
 else
 {
-    <div style="display: flex; justify-content: center; align-items: center; color: var(--secondary-text); font-weight: bold; font-size: 18px; flex-grow: 1">
-        У вас нет отложенных фильмов.
-    </div>
+    @if (DatabaseContext.Movies.Any(movie => movie.WatchLater == true))
+    {
+        <div style="display: flex; justify-content: center; align-items: center; color: var(--secondary-text); font-weight: bold; font-size: 18px; flex-grow: 1">
+            Нет ничего, чтобы удовлетворяло текущим настройкам сортировки.
+        </div>       
+    }
+    else
+    {
+        <div style="display: flex; justify-content: center; align-items: center; color: var(--secondary-text); font-weight: bold; font-size: 18px; flex-grow: 1">
+            У вас нет отложенных фильмов.
+        </div>    
+    }
 }
 
 @code {
