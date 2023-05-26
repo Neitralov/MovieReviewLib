@@ -1,9 +1,18 @@
 #!/bin/bash
 
+echo "Tailwind генерирует стили..."
+./tailwind -i Styles/app.css -o wwwroot/css/app.css --minify
+
+echo "Компилируется проект..."
 dotnet publish -c Release 
+
+echo "Остановка предыдущего контейнера..."
 podman stop test
+
+echo "Собирается Docker образ программы..."
 podman build . -t blazortest
 
+echo "Запускается контейнер с программой..."
 podman run \
 -d \
 --rm \
@@ -13,3 +22,5 @@ podman run \
 --name test \
 --env TZ=Asia/Barnaul \
 blazortest
+
+echo "Готово"
