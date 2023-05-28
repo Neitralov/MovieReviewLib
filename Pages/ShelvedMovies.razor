@@ -3,7 +3,7 @@
 
 <PageTitle>Отложенные</PageTitle>
 
-<div style="display: flex; flex-wrap: wrap">
+<div class="flex flex-wrap">
     <SortDropdown @bind-SortType="@SortType"/>
     <MovieTypeSortDropdown @bind-MovieType="@MovieType"/>
     <GenreSortDropdown @bind-Genre="@Genre"/>
@@ -17,13 +17,13 @@ else
 {
     @if (DatabaseContext.Movies.Any(movie => movie.WatchLater == true))
     {
-        <div style="display: flex; justify-content: center; align-items: center; color: var(--secondary-text); font-weight: bold; font-size: 18px; flex-grow: 1">
+        <div class="flex justify-center items-center text-neutral-400 font-bold text-[18px] grow">
             Нет ничего, чтобы удовлетворяло текущим настройкам сортировки.
         </div>
     }
     else
     {
-        <div style="display: flex; justify-content: center; align-items: center; color: var(--secondary-text); font-weight: bold; font-size: 18px; flex-grow: 1">
+        <div class="flex justify-center items-center text-neutral-400 font-bold text-[18px] grow">
             У вас нет отложенных фильмов.
         </div>
     }

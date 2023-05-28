@@ -7,159 +7,158 @@
 <PageTitle>Редактирование фильма</PageTitle>
 
 <CascadingValue Value="EditContext">
-    <div class="wrapper">
+    <div class="flex flex-col min-h-full">
         <DataAnnotationsValidator/>
-        <div class="movie-container main">
-            <aside style="position: fixed">
-                <div class="preview-panel">
+        <div class="flex w-full bg-neutral-900 grow">
+            <aside class="fixed">
+                <div class="flex flex-col p-[25px] pb-0">
                     @if (Movie.PosterPath != string.Empty)
                     {
-                        <div class="grid__item" style="background: url('@Movie.PosterPath'); background-size: cover; background-position: center; width: 270px; height: 480px; margin-bottom: 10px; box-shadow: inset 0 -105px 30px -15px rgba(0, 0, 0, 40%);">
-                            <h1 class="grid__title" style="font-size: 24px; margin: 0 15px 8px 15px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 75%);">@Movie.Name</h1>
-                            <div class="grid__container" style="margin: 0 15px 15px 15px;">
-                                <h2 class="grid__year" style="font-size: 21px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 75%);">@Movie.ReleaseYear</h2>
+                        <div class="flex flex-col justify-end h-[480px] w-[270px] rounded-[15px] bg-cover bg-center cursor-pointer shadow-[inset_0_-105px_30px_-15px_rgba(0,0,0,40%)] mb-[10px]" style="background-image: url('@Movie.PosterPath')">
+                            <h1 class="text-[24px] font-bold text-white mx-[15px] leading-tight break-words drop-shadow-[2px_2px_5px_rgba(0,0,0,75%)]">@Movie.Name</h1>
+                            <div class="flex justify-between mx-[15px] mb-[15px]">
+                                <h2 class="text-[21px] font-bold text-neutral-400 drop-shadow-[2px_2px_5px_rgba(0,0,0,75%)]">@Movie.ReleaseYear</h2>
                                 <StarRating Score="Movie.Score" Size="21" Spacing="3"/>
                             </div>
                         </div>
                     }
                     else
                     {
-                        <div class="preview-panel__poster data-title">Превью обложки</div>
+                        <div class="flex items-center justify-center h-[480px] w-[270px] rounded-[15px] mb-[10px] bg-neutral-800 text-[16px] font-bold text-white">Превью обложки</div>
                     }
-                    <ValidationMessage class="data-title data-panel__title" style="color: red; margin-bottom: 10px; text-align: center" For="@(() => Movie.PosterPath)"/>
-                    <InputFile class="button preview-panel__button" id="file" OnChange="@LoadPoster">Загрузить обложку</InputFile>
-                    <label class="button preview-panel__button preview-panel__label" for="file" style="display: flex; align-items: center">
+                    <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.PosterPath)"/>
+                    <InputFile class="bg-neutral-600 text-white rounded-[5px] cursor-pointer text-[16px] font-bold h-[30px] block text-center leading-[30px]" id="file" OnChange="@LoadPoster">Загрузить обложку</InputFile>
+                    <label class="flex items-center bg-neutral-600 text-white rounded-[5px] cursor-pointer text-[16px] font-bold h-[34px] text-center leading-[34px] py-[10px] mb-[10px] justify-center" for="file">
                         Загрузить обложку
                     </label>
-                    <a class="button preview-panel__button" href="https://www.moviemania.io/phone" target="_blank">Искать обложку</a>
+                    <a class="bg-neutral-600 text-white rounded-[5px] cursor-pointer text-[16px] font-bold h-[34px] block text-center leading-[34px]" href="https://www.moviemania.io/phone" target="_blank">Искать обложку</a>
                 </div>
             </aside>
-            <main style="width: 100%; margin-left: 320px">
-                <div class="data-panel">
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Тип произведения:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Type)"/>
-                        <InputSelect class="data-value data-value_inverted data-value__input" style="@InputSelectStyle(Movie.Type)" @bind-Value="Movie.Type">
+            <main class="ml-[320px] w-full">
+                <div class="pt-[25px] pr-[25px]">
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Тип произведения:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Type)"/>
+                        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-full box-border" style="@InputSelectStyle(Movie.Type)" @bind-Value="Movie.Type">
                             <option selected disabled hidden>Выберите тип</option>
-                            <option style="color: var(--main-text)" value="@MovieType.Film">Фильм</option>
-                            <option style="color: var(--main-text)" value="@MovieType.Series">Сериал</option>
-                            <option style="color: var(--main-text)" value="@MovieType.Show">Шоу</option>
-                            <option style="color: var(--main-text)" value="@MovieType.Cartoon">Мультфильм</option>
+                            <option class="text-white" value="@MovieType.Film">Фильм</option>
+                            <option class="text-white" value="@MovieType.Series">Сериал</option>
+                            <option class="text-white" value="@MovieType.Show">Шоу</option>
+                            <option class="text-white" value="@MovieType.Cartoon">Мультфильм</option>
                         </InputSelect>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Название:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Name)"/>
-                        <InputText class="data-value data-value_inverted data-value__input" placeholder="Введите название..." @bind-Value="Movie.Name"/>
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Название:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Name)"/>
+                        <InputText class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-full box-border" placeholder="Введите название..." @bind-Value="Movie.Name"/>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Год выхода:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.ReleaseYear)"/>
-                        <InputNumber class="data-value data-value_inverted data-value__input" placeholder="Введите год..." @bind-Value="Movie.ReleaseYear"/>
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Год выхода:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.ReleaseYear)"/>
+                        <InputNumber class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-full box-border" placeholder="Введите год..." @bind-Value="Movie.ReleaseYear"/>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Длительность:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Duration)"/>
-                        <InputNumber class="data-value data-value_inverted data-value__input" placeholder="Введите длительность..." @bind-Value="Movie.Duration"/>
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Длительность:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Duration)"/>
+                        <InputNumber class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-full box-border" placeholder="Введите длительность..." @bind-Value="Movie.Duration"/>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Жанр:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Genres)"/>
-                        <div class="data-section">
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Жанр:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Genres)"/>
+                        <div class="flex flex-wrap gap-[5px]">
                             @foreach (var genre in Movie.Genres)
                             {
                                 <InteractiveDataValue TItem="Genre" Data="@genre" RemoveData="RemoveGenre"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="GenreInput" @onkeydown="AddGenreOnEnterDown" @onfocusout="AddGenre" @bind="Genre" @bind:event="oninput"/>
+                            <input class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500" placeholder="Введите значение..." @ref="GenreInput" @onkeydown="AddGenreOnEnterDown" @onfocusout="AddGenre" @bind="Genre" @bind:event="oninput"/>
                         </div>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Режиссер:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Directors)"/>
-                        <div class="data-section">
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Режиссер:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Directors)"/>
+                        <div class="flex flex-wrap gap-[5px]">
                             @foreach (var director in Movie.Directors)
                             {
                                 <InteractiveDataValue TItem="Director" Data="@director" RemoveData="RemoveDirector"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="DirectorInput" @onkeydown="AddDirectorOnEnterDown" @onfocusout="AddDirector" @bind="Director" @bind:event="oninput"/>
+                            <input class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500" placeholder="Введите значение..." @ref="DirectorInput" @onkeydown="AddDirectorOnEnterDown" @onfocusout="AddDirector" @bind="Director" @bind:event="oninput"/>
                         </div>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Сценарист:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Writers)"/>
-                        <div class="data-section">
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Сценарист:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Writers)"/>
+                        <div class="flex flex-wrap gap-[5px]">
                             @foreach (var writer in Movie.Writers)
                             {
                                 <InteractiveDataValue TItem="Writer" Data="@writer" RemoveData="RemoveWriter"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="WriterInput" @onkeydown="AddWriterOnEnterDown" @onfocusout="AddWriter" @bind="Writer" @bind:event="oninput"/>
+                            <input class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500" placeholder="Введите значение..." @ref="WriterInput" @onkeydown="AddWriterOnEnterDown" @onfocusout="AddWriter" @bind="Writer" @bind:event="oninput"/>
                         </div>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Продюсер:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Producers)"/>
-                        <div class="data-section">
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Продюсер:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Producers)"/>
+                        <div class="flex flex-wrap gap-[5px]">
                             @foreach (var producer in Movie.Producers)
                             {
                                 <InteractiveDataValue TItem="Producer" Data="@producer" RemoveData="RemoveProducer"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="ProducerInput" @onkeydown="AddProducerOnEnterDown" @onfocusout="AddProducer" @bind="Producer" @bind:event="oninput"/>
+                            <input class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500" placeholder="Введите значение..." @ref="ProducerInput" @onkeydown="AddProducerOnEnterDown" @onfocusout="AddProducer" @bind="Producer" @bind:event="oninput"/>
                         </div>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Композитор:</h2>
-                        <div class="data-section">
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Композитор:</h2>
+                        <div class="flex flex-wrap gap-[5px]">
                             @foreach (var compositor in Movie.Compositors)
                             {
                                 <InteractiveDataValue TItem="Compositor" Data="@compositor" RemoveData="RemoveCompositor"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="CompositorInput" @onkeydown="AddCompositorOnEnterDown" @onfocusout="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
+                            <input class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500" placeholder="Введите значение..." @ref="CompositorInput" @onkeydown="AddCompositorOnEnterDown" @onfocusout="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
                         </div>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">В главных ролях:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Actors)"/>
-                        <div class="data-section">
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">В главных ролях:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Actors)"/>
+                        <div class="flex flex-wrap gap-[5px]">
                             @foreach (var actor in Movie.Actors)
                             {
                                 <InteractiveDataValue TItem="Actor" Data="@actor" RemoveData="RemoveActor"/>
                             }
-                            <input class="data-value data-value_inverted data-value__input_small" placeholder="Введите значение..." @ref="ActorInput" @onkeydown="AddActorOnEnterDown" @onfocusout="AddActor" @bind="Actor" @bind:event="oninput"/>
+                            <input class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500" placeholder="Введите значение..." @ref="ActorInput" @onkeydown="AddActorOnEnterDown" @onfocusout="AddActor" @bind="Actor" @bind:event="oninput"/>
                         </div>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Оценка:</h2>
-                        <ValidationMessage class="data-title data-panel__title" style="color: red" For="@(() => Movie.Score)"/>
-                        <InputSelect class="data-value data-value_inverted data-value__input data-value__score" style="@InputSelectStyle(Movie.Score)" @bind-Value="Movie.Score">
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Оценка:</h2>
+                        <ValidationMessage class="text-[16px] font-bold text-red-600 mb-[10px] text-center" For="@(() => Movie.Score)"/>
+                        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px] box-border" style="@InputSelectStyle(Movie.Score)" @bind-Value="Movie.Score">
                             <option selected disabled hidden>Выберите оценку</option>
                             @for (var index = 10; index >= 0; index--)
                             {
-                                <option style="color: var(--main-text)" value="@index">@((float)index / 2)</option>
+                                <option class="text-white" value="@index">@((float)index / 2)</option>
                             }
                         </InputSelect>
                     </div>
-                    <div class="data-panel__section">
-                        <h2 class="data-title data-panel__title">Заметка:</h2>
-                        <textarea class="data-value data-value_inverted data-value__input data-panel__textarea" placeholder="Введите текст заметки..." resize="none" @bind="Movie.Note" @bind:event="oninput"></textarea>
+                    <div class="mb-[10px]">
+                        <h2 class="text-[16px] font-bold text-white mb-[5px]">Заметка:</h2>
+                        <textarea class="text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-full box-border h-[90px] resize-none" placeholder="Введите текст заметки..." resize="none" @bind="Movie.Note" @bind:event="oninput"></textarea>
                     </div>
                 </div>
             </main>
         </div>
-        <input style="display: none" type="submit"/>
-        <footer style="position: sticky; bottom: 0; background-color: var(--main-color)">
-            <div class="buttons-container">
-                <div class="left-buttons-section">
-                    <button class="button buttons-container__button" @onclick="Back">Назад</button>
+        <footer class="sticky bottom-0 bg-neutral-900">
+            <div class="flex justify-between p-[25px]">
+                <div class="flex">
+                    <button class="bg-neutral-600 rounded-[5px] cursor-pointer text-white text-[16px] font-bold py-[5px] px-[10px]" @onclick="Back">Назад</button>
                 </div>
-                <div class="right-buttons-section">
+                <div class="flex gap-[10px]">
                     @if (DatabaseContext.Movies.Contains(Movie))
                     {
-                        <button class="danger-button buttons-container__ico" @onclick="Delete">
+                        <button class="bg-red-800 w-[34px] h-[34px] flex items-center justify-center rounded-[5px]" @onclick="Delete">
                             <img class="ico" src="icons/delete.svg" alt="Иконка удаления"/>
                         </button>
                     }
-                    <button class="button buttons-container__button" @onclick="AddToWatchLater">Смотреть позже</button>
-                    <button class="apply-button buttons-container__button" @onclick="Publish">Опубликовать</button>
+                    <button class="bg-neutral-600 rounded-[5px] cursor-pointer text-white text-[16px] font-bold py-[5px] px-[10px]" @onclick="AddToWatchLater">Смотреть позже</button>
+                    <button class="bg-emerald-600 text-white text-[16px] font-bold py-[5px] px-[10px] rounded-[5px]" @onclick="Publish">Опубликовать</button>
                 </div>
             </div>
         </footer>

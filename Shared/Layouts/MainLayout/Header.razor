@@ -1,9 +1,9 @@
 @inject NavigationManager NavigationManager
 
-<header class="header">
-    <h1 class="header__logo">MovieReviewLib</h1>
-    <input class="header__search-field" type="text" placeholder="Введите название фильма..." @bind="Name" @bind:event="oninput" @onkeydown="FindMovie"/>
-    <button class="apply-button header__add-movie-button" @onclick="OpenMovieEditor">Добавить</button>
+<header class="bg-neutral-900 h-[100px] flex sticky top-0">
+    <h1 class="text-[32px] font-bold text-white my-[30px] mx-[50px] inline-block leading-[40px]">MovieReviewLib</h1>
+    <input class="h-[50px] my-[25px] bg-neutral-800 text-neutral-100 placeholder-neutral-400 w-full indent-[20px] rounded-[5px] text-[16px] bold" type="text" placeholder="Введите название фильма..." @bind="Name" @bind:event="oninput" @onkeydown="FindMovie"/>
+    <button class="bg-emerald-600 hover:bg-emerald-700 text-white rounded-[5px] cursor-pointer m-[25px] mr-[50px] text-[24px] font-bold px-[40px]" @onclick="OpenMovieEditor">Добавить</button>
 </header>
 
 @code {

@@ -6,3 +6,6 @@ Build-and-Publish.sh
 MovieReviewLib.sln.DotSettings.user
 MovieReviewLib.csproj.DotSettings.user
 .env
+/package.json
+/package-lock.json
+/node_modules/
