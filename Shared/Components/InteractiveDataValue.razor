@@ -1,8 +1,8 @@
 @typeparam TItem
 
-<div class="flex items-center text-[16px] font-bold text-neutral-400 bg-neutral-800 py-[5px] px-[10px] rounded-[5px]">
+<div class="flex items-center text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px]">
     @Data
-    <button class="flex items-center justify-center bg-neutral-600 text-white rounded-[5px] cursor-pointer ml-[5px] w-[18px] h-[18px]"
+    <button class="flex items-center justify-center bg-neutral-400 dark:bg-neutral-600 text-white rounded-[5px] cursor-pointer ml-[5px] w-[18px] h-[18px]"
             @onclick="() => RemoveData.InvokeAsync(Data)">
         &Cross;
     </button>

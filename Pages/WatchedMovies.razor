@@ -17,13 +17,13 @@ else
 {
     @if (DatabaseContext.Movies.Any(movie => movie.WatchLater == false))
     {
-        <div class="flex justify-center items-center text-neutral-400 font-bold text-[18px] grow">
+        <div class="flex justify-center items-center text-neutral-600 dark:text-neutral-400 font-bold text-[18px] grow">
             Нет ничего, чтобы удовлетворяло текущим настройкам сортировки.
         </div>       
     }
     else
     {
-        <div class="flex justify-center items-center text-neutral-400 font-bold text-[18px] grow">
+        <div class="flex justify-center items-center text-neutral-600 dark:text-neutral-400 font-bold text-[18px] grow">
             У вас нет отложенных фильмов.
         </div>    
     }
