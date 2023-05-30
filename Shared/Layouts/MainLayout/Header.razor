@@ -2,18 +2,15 @@
 
 <header class="bg-neutral-100 dark:bg-neutral-900 flex sticky top-0 px-[50px] py-[25px] pb-0 z-10">
     <h1 class="leading-[50px] text-[32px] font-bold text-neutral-950 dark:text-white inline-block">MovieReviewLib</h1>
-    <input class="h-[50px] mx-[25px] bg-neutral-200 text-neutral-600 placeholder-neutral-500 dark:bg-neutral-800 dark:text-neutral-100 dark:placeholder-neutral-400 w-full indent-[20px] rounded-[5px] text-[16px] bold" type="text" placeholder="Введите название фильма..." @bind="Name" @bind:event="oninput" @onkeydown="FindMovie"/>
+    <input class="h-[50px] mx-[25px] bg-neutral-200 text-neutral-600 placeholder-neutral-500 dark:bg-neutral-800 dark:text-neutral-100 dark:placeholder-neutral-400 w-full indent-[20px] rounded-[5px] text-[16px] bold" type="text" placeholder="Введите название фильма..." @bind="Name" @bind:event="oninput" @bind:after="FindMovie"/>
     <button class="bg-teal-600 hover:bg-teal-700 text-white rounded-[5px] cursor-pointer text-[24px] font-bold px-[40px]" @onclick="OpenMovieEditor">Добавить</button>
 </header>
 
 @code {
     private string? Name { get; set; }
 
-    private void FindMovie(KeyboardEventArgs args)
+    private void FindMovie()
     {
-        if (args.Code is not "Enter")
-            return;
-
         NavigationManager.NavigateTo(string.IsNullOrWhiteSpace(Name) ? "/" : $"/FoundMovies/?Name={Name}");
     } 
     
