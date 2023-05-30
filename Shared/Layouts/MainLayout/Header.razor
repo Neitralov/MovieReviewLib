@@ -15,4 +15,11 @@
     } 
     
     private void OpenMovieEditor() => NavigationManager.NavigateTo("/Movie");
+    
+    public void ClearSearchLine()
+    {
+        Name = string.Empty;
+        StateHasChanged();
+    }
+
 }
