@@ -5,7 +5,11 @@ module.exports = {
         "./Shared/**/*.razor",
     ],
     theme: {
-        extend: {},
+        extend: {
+            boxShadow: {
+                'top' : '0 -1px 3px 0 rgba(0, 0, 0, 0.1)',
+            }
+        },
     },
     plugins: [],
 }
