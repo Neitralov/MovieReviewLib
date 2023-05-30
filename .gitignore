@@ -9,3 +9,4 @@ MovieReviewLib.csproj.DotSettings.user
 /package.json
 /package-lock.json
 /node_modules/
+/wwwroot/css/app.css
