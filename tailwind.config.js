@@ -4,6 +4,7 @@ module.exports = {
         "./Pages/*.razor",
         "./Shared/**/*.razor",
     ],
+    darkMode: 'class',
     theme: {
         extend: {
             boxShadow: {

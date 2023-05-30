@@ -49,11 +49,11 @@ html, body {
 }
 
 .nav-link {
-    @apply no-underline px-[10px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400;
+    @apply no-underline text-[16px] font-bold text-neutral-600 dark:text-neutral-400;
 }
 
 .nav-link.active {
-    @apply no-underline px-[10px] text-[16px] font-bold text-neutral-950 dark:text-white;
+    @apply no-underline text-[16px] font-bold text-neutral-950 dark:text-white;
 }
 
 input[type="file"] {

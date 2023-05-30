@@ -8,3 +8,12 @@ window.CalcInputWidthAndSet = (element) => {
         }
     }
 }
+
+window.DarkThemeToggle = (toggle) => {
+    if (toggle === true) {
+        document.documentElement.classList.add('dark')
+    }
+    else if (toggle === false) {
+        document.documentElement.classList.remove('dark')
+    }
+}

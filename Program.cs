@@ -1,9 +1,11 @@
+using Blazored.LocalStorage;
 using MovieReviewLib.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddDbContext<DatabaseContext>();
+builder.Services.AddBlazoredLocalStorage();
 
 var app = builder.Build();
 
