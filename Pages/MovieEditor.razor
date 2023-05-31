@@ -57,7 +57,7 @@
                     <InputNumber class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full box-border" placeholder="Введите год..." @bind-Value="Movie.ReleaseYear"/>
                 </div>
                 <div class="mb-[10px]">
-                    <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Длительность:</h2>
+                    <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Длительность в минутах:</h2>
                     <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Duration)"/>
                     <InputNumber class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full box-border" placeholder="Введите длительность..." @bind-Value="Movie.Duration"/>
                 </div>
