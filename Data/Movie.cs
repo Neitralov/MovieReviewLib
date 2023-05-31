@@ -42,8 +42,7 @@ public class Movie
     [MinLength(1, ErrorMessage = "У фильма не может отсутствовать актер!")]
     public List<Actor> Actors { get; set; } = new();
     
-    [Required(ErrorMessage = "Отсутствует оценка!")]
-    public int? Score { get; set; }
+    public int Score { get; set; }
     
     public string Note { get; set; } = string.Empty;
     

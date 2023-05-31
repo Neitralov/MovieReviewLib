@@ -128,13 +128,12 @@
                 </div>
                 <div class="mb-[10px]">
                     <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Оценка:</h2>
-                    <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Score)"/>
                     <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px] box-border" @bind-Value="Movie.Score">
-                        <option selected disabled hidden>Выберите оценку</option>
-                        @for (var index = 10; index >= 0; index--)
+                        @for (var index = 10; index > 0; index--)
                         {
                             <option value="@index">@((float)index / 2)</option>
                         }
+                        <option value="0">0</option>
                     </InputSelect>
                 </div>
                 <div>
