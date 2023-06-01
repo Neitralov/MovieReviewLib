@@ -45,19 +45,19 @@
 
 <div class="mb-[20px]">
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Средний рейтинг произведений</h2>
-    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">@AverageMovieRating.ToString("F")</p>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">@AverageMovieRating.ToString("F2")</p>
 
     <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
         <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">Детализация среднего рейтинга по типам произведений</summary>
         <div class="p-[10px]">
             <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Средний рейтинг фильмов</h2>
-            <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">@AverageFilmRating.ToString("F")</p>
+            <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">@AverageFilmRating.ToString("F2")</p>
             <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Средний рейтинг сериалов</h2>
-            <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">@AverageSeriesRating.ToString("F")</p>
+            <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">@AverageSeriesRating.ToString("F2")</p>
             <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Средний рейтинг шоу</h2>
-            <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">@AverageShowRating.ToString("F")</p>
+            <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">@AverageShowRating.ToString("F2")</p>
             <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Средний рейтинг мультфильмов</h2>
-            <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">@AverageCartoonRating.ToString("F")</p>
+            <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">@AverageCartoonRating.ToString("F2")</p>
         </div>
     </details>
 </div>
@@ -92,7 +92,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый современный просмотренный сериал</h2>
@@ -103,7 +103,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самое современное просмотренное шоу</h2>
@@ -114,7 +114,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый современный просмотренный мультфильм</h2>
@@ -125,7 +125,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
 </div>
@@ -139,7 +139,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый старый просмотренный сериал</h2>
@@ -150,7 +150,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самое старое просмотренное шоу</h2>
@@ -161,7 +161,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый старый просмотренный мультфильм</h2>
@@ -172,7 +172,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
 </div>
@@ -205,7 +205,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый длинный сериал</h2>
@@ -216,7 +216,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самое длинное шоу</h2>
@@ -227,7 +227,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый длинный мультфильм</h2>
@@ -238,7 +238,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
 </div>
@@ -252,7 +252,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый короткий сериал</h2>
@@ -263,7 +263,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самое короткое шоу</h2>
@@ -274,7 +274,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый короткий мультфильм</h2>
@@ -285,7 +285,7 @@
         }
         else
         {
-            <text>"N/A"</text>
+            <text>N/A</text>
         }
     </p>
 </div>
