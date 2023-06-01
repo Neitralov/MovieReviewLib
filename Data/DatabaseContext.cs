@@ -12,6 +12,6 @@ public sealed class DatabaseContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         //При миграциях установить: optionsBuilder.UseSqlite("Data Source=tmp/Database/Database.db");
-        optionsBuilder.UseSqlite("Data Source=Database/Database.db");
+        optionsBuilder.UseSqlite("Data Source=Database.db");
     }
 }
