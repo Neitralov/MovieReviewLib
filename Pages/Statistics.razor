@@ -3,6 +3,8 @@
 
 <PageTitle>Статистика</PageTitle>
 
+<div class="max-w-screen-lg w-full self-center">
+
 <div class="mb-[20px]">
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Количество просмотренных произведений</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">@NumberOfWatchedMovies</p>
@@ -23,7 +25,7 @@
 </div>
 
 <div class="mb-[20px]">
-    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Количество произведений отложенных в “смотреть позже"</h2>
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Количество отложенных произведений</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">@NumberOfPostponedMovies</p>
 
     <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
@@ -69,7 +71,7 @@
                 {
                     @if (i < Top10MoviesByRaiting?.Length && Top10MoviesByRaiting?[i] is not null)
                     {
-                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10MoviesByRaiting?[i].Name (@Top10MoviesByRaiting?[i].ReleaseYear)</li>
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10MoviesByRaiting?[i].Name (@(Top10MoviesByRaiting?[i].Score / 2.0))</li>
                     }
                     else
                     {
@@ -84,44 +86,100 @@
 <div class="mb-[20px]">
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый современный просмотренный фильм</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
-        @(NewestWatchedFilm is not null ? NewestWatchedFilm.Name : "N/A")
+        @if (NewestWatchedFilm is not null)
+        {
+            <text>@NewestWatchedFilm.Name (@NewestWatchedFilm.ReleaseYear год)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый современный просмотренный сериал</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
-        @(NewestWatchedSeries is not null ? NewestWatchedSeries.Name : "N/A")
+        @if (NewestWatchedSeries is not null)
+        {
+            <text>@NewestWatchedSeries.Name (@NewestWatchedSeries.ReleaseYear год)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самое современное просмотренное шоу</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
-        @(NewestWatchedShow is not null ? NewestWatchedShow.Name : "N/A")
+        @if (NewestWatchedShow is not null)
+        {
+            <text>@NewestWatchedShow.Name (@NewestWatchedShow.ReleaseYear год)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый современный просмотренный мультфильм</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
-        @(NewestWatchedCartoon is not null ? NewestWatchedCartoon.Name : "N/A")
+        @if (NewestWatchedCartoon is not null)
+        {
+            <text>@NewestWatchedCartoon.Name (@NewestWatchedCartoon.ReleaseYear год)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
     </p>
 </div>
 
 <div class="mb-[20px]">
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый старый просмотренный фильм</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
-        @(OldestWatchedFilm is not null ? OldestWatchedFilm.Name : "N/A")
+        @if (OldestWatchedFilm is not null)
+        {
+            <text>@OldestWatchedFilm.Name (@OldestWatchedFilm.ReleaseYear год)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый старый просмотренный сериал</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
-        @(OldestWatchedSeries is not null ? OldestWatchedSeries.Name : "N/A")
+        @if (OldestWatchedSeries is not null)
+        {
+            <text>@OldestWatchedSeries.Name (@OldestWatchedSeries.ReleaseYear год)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самое старое просмотренное шоу</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
-        @(OldestWatchedShow is not null ? OldestWatchedShow.Name : "N/A")
+        @if (OldestWatchedShow is not null)
+        {
+            <text>@OldestWatchedShow.Name (@OldestWatchedShow.ReleaseYear год)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
     </p>
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый старый просмотренный мультфильм</h2>
     <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
-        @(OldestWatchedCartoon is not null ? OldestWatchedCartoon.Name : "N/A")
+        @if (OldestWatchedCartoon is not null)
+        {
+            <text>@OldestWatchedCartoon.Name (@OldestWatchedCartoon.ReleaseYear год)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
     </p>
 </div>
 
-<div>
+<div class="mb-[20px]">
     <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Суммарное количество часов просмотра</h2>
-    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">@TotalViewingHours (@(TotalViewingHours / 24) дня)</p>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">@TotalViewingHours</p>
 
     <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
         <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">Детализация суммарного количества часов просмотров по типам произведений</summary>
@@ -138,83 +196,227 @@
     </details>
 </div>
 
-<!--
-<div class="statistic-group">
-    <details class="details">
-        <summary class="data-title details__summary">Топ-3 жанра по среднему рейтингу произведений</summary>
-        <div class="details__container">
-            <ol class="details__list">
-                <li class="details__list-item">Название жанра - Рейтинг</li>
-                <li class="details__list-item">Название жанра - Рейтинг</li>
-                <li class="details__list-item">Название жанра - Рейтинг</li>
-            </ol>
-        </div>
-    </details>
+<div class="mb-[20px]">
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый длинный фильм</h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @if (LongestFilm is not null)
+        {
+            <text>@LongestFilm.Name (@LongestFilm.Duration минут)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
+    </p>
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый длинный сериал</h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @if (LongestSeries is not null)
+        {
+            <text>@LongestSeries.Name (@LongestSeries.Duration минут)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
+    </p>
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самое длинное шоу</h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @if (LongestShow is not null)
+        {
+            <text>@LongestShow.Name (@LongestShow.Duration минут)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
+    </p>
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый длинный мультфильм</h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @if (LongestCartoon is not null)
+        {
+            <text>@LongestCartoon.Name (@LongestCartoon.Duration минут)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
+    </p>
+</div>
 
-    <details class="details">
-        <summary class="data-title details__summary">Топ-3 жанра по количеству произведений</summary>
-        <div class="details__container">
-            <ol class="details__list">
-                <li class="details__list-item">Название жанра - Количество</li>
-                <li class="details__list-item">Название жанра - Количество</li>
-                <li class="details__list-item">Название жанра - Количество</li>
+<div class="mb-[20px]">
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый короткий фильм</h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @if (ShortestFilm is not null)
+        {
+            <text>@ShortestFilm.Name (@ShortestFilm.Duration минут)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
+    </p>
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый короткий сериал</h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @if (ShortestSeries is not null)
+        {
+            <text>@ShortestSeries.Name (@ShortestSeries.Duration минут)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
+    </p>
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самое короткое шоу</h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @if (ShortestShow is not null)
+        {
+            <text>@ShortestShow.Name (@ShortestShow.Duration минут)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
+    </p>
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Самый короткий мультфильм</h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @if (ShortestCartoon is not null)
+        {
+            <text>@ShortestCartoon.Name (@ShortestCartoon.Duration минут)</text>
+        }
+        else
+        {
+            <text>"N/A"</text>
+        }
+    </p>
+</div>
+
+<div class="mb-[20px]">
+    <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
+        <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">Топ-10 жанров по количеству просмотренных произведений</summary>
+        <div class="p-[10px]">
+            <ol>
+                @for (var i = 0; i < 10; i++)
+                {
+                    @if (i < Top10GenresByViews?.Length && Top10GenresByViews?[i] is not null)
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10GenresByViews?[i].Genre (@Top10GenresByViews?[i].Count)</li>
+                    }
+                    else
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">N/A</li>
+                    }
+                }
             </ol>
         </div>
     </details>
 </div>
 
-<div class="statistic-group">
-    <details class="details">
-        <summary class="data-title details__summary">Топ-3 режиссера с самым высоким рейтингом оцененных работ</summary>
-        <div class="details__container">
-            <ol class="details__list">
-                <li class="details__list-item">ФИО Режиссера</li>
-                <li class="details__list-item">ФИО Режиссера</li>
-                <li class="details__list-item">ФИО Режиссера</li>
+<div class="mb-[20px]">
+    <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
+        <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">Топ-10 режиссеров по количеству просмотренных произведений</summary>
+        <div class="p-[10px]">
+            <ol>
+                @for (var i = 0; i < 10; i++)
+                {
+                    @if (i < Top10DirectorsByViews?.Length && Top10DirectorsByViews?[i] is not null)
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10DirectorsByViews?[i].Director (@Top10DirectorsByViews?[i].Count)</li>
+                    }
+                    else
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">N/A</li>
+                    }
+                }
             </ol>
         </div>
     </details>
+</div>
 
-    <details class="details">
-        <summary class="data-title details__summary">Топ-3 сценариста с самым высоким рейтингом оцененных работ</summary>
-        <div class="details__container">
-            <ol class="details__list">
-                <li class="details__list-item">ФИО Сценариста</li>
-                <li class="details__list-item">ФИО Сценариста</li>
-                <li class="details__list-item">ФИО Сценариста</li>
+<div class="mb-[20px]">
+    <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
+        <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">Топ-10 сценаристов по количеству просмотренных произведений</summary>
+        <div class="p-[10px]">
+            <ol>
+                @for (var i = 0; i < 10; i++)
+                {
+                    @if (i < Top10WritersByViews?.Length && Top10WritersByViews?[i] is not null)
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10WritersByViews?[i].Writer (@Top10WritersByViews?[i].Count)</li>
+                    }
+                    else
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">N/A</li>
+                    }
+                }
             </ol>
         </div>
     </details>
+</div>
 
-    <details class="details">
-        <summary class="data-title details__summary">Топ-3 композитора с самым высоким рейтингом оцененных работ</summary>
-        <div class="details__container">
-            <ol class="details__list">
-                <li class="details__list-item">ФИО Композитора</li>
-                <li class="details__list-item">ФИО Композитора</li>
-                <li class="details__list-item">ФИО Композитора</li>
+<div class="mb-[20px]">
+    <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
+        <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">Топ-10 продюсеров по количеству просмотренных произведений</summary>
+        <div class="p-[10px]">
+            <ol>
+                @for (var i = 0; i < 10; i++)
+                {
+                    @if (i < Top10ProducersByViews?.Length && Top10ProducersByViews?[i] is not null)
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10ProducersByViews?[i].Producer (@Top10ProducersByViews?[i].Count)</li>
+                    }
+                    else
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">N/A</li>
+                    }
+                }
             </ol>
         </div>
     </details>
+</div>
 
-    <details class="details">
-        <summary class="data-title details__summary">Топ-10 актеров с самым высоким рейтингом оцененных работ</summary>
-        <div class="details__container">
-            <ol class="details__list">
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
-                <li class="details__list-item">ФИО Актера</li>
+<div class="mb-[20px]">
+    <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
+        <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">Топ-10 композиторов по количеству просмотренных произведений</summary>
+        <div class="p-[10px]">
+            <ol>
+                @for (var i = 0; i < 10; i++)
+                {
+                    @if (i < Top10CompositorsByViews?.Length && Top10CompositorsByViews?[i] is not null)
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10CompositorsByViews?[i].Compositor (@Top10CompositorsByViews?[i].Count)</li>
+                    }
+                    else
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">N/A</li>
+                    }
+                }
             </ol>
         </div>
     </details>
-</div>-->
+</div>
+
+<div>
+    <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
+        <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">Топ-10 актеров по количеству просмотренных произведений</summary>
+        <div class="p-[10px]">
+            <ol>
+                @for (var i = 0; i < 10; i++)
+                {
+                    @if (i < Top10ActorsByViews?.Length && Top10ActorsByViews?[i] is not null)
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10ActorsByViews?[i].Actor (@Top10ActorsByViews?[i].Count)</li>
+                    }
+                    else
+                    {
+                        <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">N/A</li>
+                    }
+                }
+            </ol>
+        </div>
+    </details>
+</div>
+
+</div>
 
 @code {
 
@@ -223,26 +425,26 @@
     private int NumberOfWatchedSeries { get; set; }
     private int NumberOfWatchedShows { get; set; }
     private int NumberOfWatchedCartoons { get; set; }
-    
+
     private int NumberOfPostponedMovies { get; set; }
     private int NumberOfPostponedFilms { get; set; }
     private int NumberOfPostponedSeries { get; set; }
     private int NumberOfPostponedShows { get; set; }
     private int NumberOfPostponedCartoons { get; set; }
-    
+
     private double AverageMovieRating { get; set; }
     private double AverageFilmRating { get; set; }
     private double AverageSeriesRating { get; set; }
     private double AverageShowRating { get; set; }
     private double AverageCartoonRating { get; set; }
 
-    private Movie[]? Top10MoviesByRaiting { get; set; } 
+    private Movie[]? Top10MoviesByRaiting { get; set; }
 
     private Movie? NewestWatchedFilm { get; set; }
     private Movie? NewestWatchedSeries { get; set; }
     private Movie? NewestWatchedShow { get; set; }
     private Movie? NewestWatchedCartoon { get; set; }
-    
+
     private Movie? OldestWatchedFilm { get; set; }
     private Movie? OldestWatchedSeries { get; set; }
     private Movie? OldestWatchedShow { get; set; }
@@ -254,7 +456,24 @@
     private int TotalShowViewingHours { get; set; }
     private int TotalCartoonViewingHours { get; set; }
 
-    protected override void OnParametersSet()
+    private Movie? LongestFilm { get; set; }
+    private Movie? LongestSeries { get; set; }
+    private Movie? LongestShow { get; set; }
+    private Movie? LongestCartoon { get; set; }
+
+    private Movie? ShortestFilm { get; set; }
+    private Movie? ShortestSeries { get; set; }
+    private Movie? ShortestShow { get; set; }
+    private Movie? ShortestCartoon { get; set; }
+
+    private GenreNameWithViewCounter[]? Top10GenresByViews { get; set; }
+    private DirectorNameWithViewCounter[]? Top10DirectorsByViews { get; set; }
+    private WriterNameWithViewCounter[]? Top10WritersByViews { get; set; }
+    private ProducerNameWithViewCounter[]? Top10ProducersByViews { get; set; }
+    private CompositorNameWithViewCounter[]? Top10CompositorsByViews { get; set; }
+    private ActorNameWithViewCounter[]? Top10ActorsByViews { get; set; }
+
+    protected override void OnInitialized()
     {
         NumberOfWatchedMovies = DatabaseContext.Movies.Count(movie => movie.WatchLater == false);
         NumberOfWatchedFilms = DatabaseContext.Movies.Count(movie => movie.WatchLater == false && movie.Type == MovieType.Film);
@@ -268,7 +487,7 @@
         NumberOfPostponedShows = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Show);
         NumberOfPostponedCartoons = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Cartoon);
 
-        AverageMovieRating = DatabaseContext.Movies.Any() 
+        AverageMovieRating = DatabaseContext.Movies.Any()
             ? DatabaseContext.Movies.Average(movie => movie.Score) / 2 : 0;
 
         AverageFilmRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film)
@@ -276,43 +495,43 @@
 
         AverageSeriesRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).Average(movie => movie.Score) / 2 : 0;
-        
+
         AverageShowRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show).Average(movie => movie.Score) / 2 : 0;
 
         AverageCartoonRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Average(movie => movie.Score) / 2 : 0;
-        
+
         Top10MoviesByRaiting = DatabaseContext.Movies.Where(movie => movie.WatchLater == false).OrderByDescending(movie => movie.Score).Take(10).ToArray();
 
         NewestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
-        
-        NewestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series  && movie.WatchLater == false)
+
+        NewestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
-        
-        NewestWatchedShow = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show  && movie.WatchLater == false)
+
+        NewestWatchedShow = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
-        
-        NewestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon  && movie.WatchLater == false)
+
+        NewestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).AsEnumerable().MaxBy(movie => movie.ReleaseYear)
             : null;
-        
-        OldestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film  && movie.WatchLater == false)
+
+        OldestWatchedFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
-        
+
         OldestWatchedSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
-        
+
         OldestWatchedShow = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
-        
+
         OldestWatchedCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false)
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.ReleaseYear)
             : null;
@@ -323,6 +542,158 @@
         TotalSeriesViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
         TotalShowViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
         TotalCartoonViewingHours = DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).Select(movie => movie.Duration!.Value).Sum() / minutesInHour;
+
+        LongestFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).AsEnumerable().MaxBy(movie => movie.Duration)
+            : null;
+
+        LongestSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).AsEnumerable().MaxBy(movie => movie.Duration)
+            : null;
+
+        LongestShow = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show).AsEnumerable().MaxBy(movie => movie.Duration)
+            : null;
+
+        LongestCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).AsEnumerable().MaxBy(movie => movie.Duration)
+            : null;
+
+        ShortestFilm = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film).AsEnumerable().MinBy(movie => movie.Duration)
+            : null;
+
+        ShortestSeries = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series).AsEnumerable().MinBy(movie => movie.Duration)
+            : null;
+
+        ShortestShow = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show).AsEnumerable().MinBy(movie => movie.Duration)
+            : null;
+
+        ShortestCartoon = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false)
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon).AsEnumerable().MinBy(movie => movie.Duration)
+            : null;
+
+        Top10GenresByViews = DatabaseContext.Movies
+            .Where(movie => movie.WatchLater == false)
+            .SelectMany(movie => movie.Genres)
+            .Select(genre => genre.Value)
+            .GroupBy(genre => genre)
+            .Select(genre => new GenreNameWithViewCounter
+            {
+                Genre = genre.Key,
+                Count = genre.Count()
+            })
+            .OrderByDescending(genre => genre.Count)
+            .Take(10)
+            .ToArray();
+        
+        Top10DirectorsByViews = DatabaseContext.Movies
+            .Where(movie => movie.WatchLater == false)
+            .SelectMany(movie => movie.Directors)
+            .Select(director => director.Value)
+            .GroupBy(director => director)
+            .Select(director => new DirectorNameWithViewCounter
+            {
+                Director = director.Key,
+                Count = director.Count()
+            })
+            .OrderByDescending(director => director.Count)
+            .Take(10)
+            .ToArray();
+        
+        Top10WritersByViews = DatabaseContext.Movies
+            .Where(movie => movie.WatchLater == false)
+            .SelectMany(movie => movie.Writers)
+            .Select(writer => writer.Value)
+            .GroupBy(writer => writer)
+            .Select(writer => new WriterNameWithViewCounter
+            {
+                Writer = writer.Key,
+                Count = writer.Count()
+            })
+            .OrderByDescending(writer => writer.Count)
+            .Take(10)
+            .ToArray();
+        
+        Top10ProducersByViews = DatabaseContext.Movies
+            .Where(movie => movie.WatchLater == false)
+            .SelectMany(movie => movie.Producers)
+            .Select(producer => producer.Value)
+            .GroupBy(producer => producer)
+            .Select(producer => new ProducerNameWithViewCounter
+            {
+                Producer = producer.Key,
+                Count = producer.Count()
+            })
+            .OrderByDescending(producer => producer.Count)
+            .Take(10)
+            .ToArray();
+        
+        Top10CompositorsByViews = DatabaseContext.Movies
+            .Where(movie => movie.WatchLater == false)
+            .SelectMany(movie => movie.Compositors)
+            .Select(compositor => compositor.Value)
+            .GroupBy(compositor => compositor)
+            .Select(compositor => new CompositorNameWithViewCounter
+            {
+                Compositor = compositor.Key,
+                Count = compositor.Count()
+            })
+            .OrderByDescending(compositor => compositor.Count)
+            .Take(10)
+            .ToArray();
+        
+        Top10ActorsByViews = DatabaseContext.Movies
+            .Where(movie => movie.WatchLater == false)
+            .SelectMany(movie => movie.Actors)
+            .Select(actor => actor.Value)
+            .GroupBy(actor => actor)
+            .Select(actor => new ActorNameWithViewCounter
+            {
+                Actor = actor.Key,
+                Count = actor.Count()
+            })
+            .OrderByDescending(actor => actor.Count)
+            .Take(10)
+            .ToArray();
+    }
+
+    public record GenreNameWithViewCounter
+    {
+        public string? Genre { get; init; }
+        public int Count { get; init; }
+    }
+    
+    public record DirectorNameWithViewCounter
+    {
+        public string? Director { get; init; }
+        public int Count { get; init; }
+    }
+    
+    public record WriterNameWithViewCounter
+    {
+        public string? Writer { get; init; }
+        public int Count { get; init; }
+    }
+    
+    public record ProducerNameWithViewCounter
+    {
+        public string? Producer { get; init; }
+        public int Count { get; init; }
+    }
+    
+    public record CompositorNameWithViewCounter
+    {
+        public string? Compositor { get; init; }
+        public int Count { get; init; }
+    }
+    
+    public record ActorNameWithViewCounter
+    {
+        public string? Actor { get; init; }
+        public int Count { get; init; }
     }
 
 }
