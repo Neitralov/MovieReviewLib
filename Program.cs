@@ -30,5 +30,6 @@ var window = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOpt
     MinHeight = 600
 });
 window.RemoveMenu();
+window.Center();
 
 app.WaitForShutdown();
