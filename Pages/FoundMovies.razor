@@ -9,9 +9,9 @@
     <GenreSortDropdown @bind-Genre="@Genre"/>
 </div>
 
-@if (FoundMovie() is { Count: not 0 } movie)
+@if (GetSortedMovies() is { Count: not 0 } movies)
 {
-    <MovieGrid Movies="@movie"/>
+    <MovieGrid Movies="@movies"/>
 }
 else
 {
@@ -30,7 +30,7 @@ else
     private MovieType MovieType { get; set; }
     private string Genre { get; set; } = "all";
 
-    private List<Movie> FoundMovie()
+    private List<Movie> GetSortedMovies()
     {
         var movies = DatabaseContext.Movies
             .AsNoTracking()
