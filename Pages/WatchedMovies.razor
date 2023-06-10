@@ -46,8 +46,8 @@ else
         {
             SortType.AdditionOrder            => watchedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
             SortType.ReverseAdditionOrder     => watchedMovies.OrderBy(movie => movie.PublishDate).ToList(),
-            SortType.ByIncreasingRating       => watchedMovies.OrderByDescending(movie => movie.Score).ToList(),
-            SortType.ByDescendingRating       => watchedMovies.OrderBy(movie => movie.Score).ToList(),
+            SortType.ByIncreasingRating       => watchedMovies.OrderBy(movie => movie.Score).ToList(),
+            SortType.ByDescendingRating       => watchedMovies.OrderByDescending(movie => movie.Score).ToList(),
             SortType.AlphabeticalOrder        => watchedMovies.OrderBy(movie => movie.Name).ToList(),
             SortType.ReverseAlphabeticalOrder => watchedMovies.OrderByDescending(movie => movie.Name).ToList(),
             _                                 => throw new ArgumentOutOfRangeException()
