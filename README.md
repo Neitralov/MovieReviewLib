@@ -16,7 +16,6 @@
 ```
 docker run \
 -d \
---rm \
 -p 7430:80 \
 -v ./Data:/app/wwwroot/posters:Z \
 -v ./Database:/app/Database:Z \
