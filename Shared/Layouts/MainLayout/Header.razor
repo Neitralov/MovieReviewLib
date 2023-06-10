@@ -11,11 +11,13 @@
 
     private void FindMovie()
     {
-        NavigationManager.NavigateTo(string.IsNullOrWhiteSpace(Name) ? "/" : $"/FoundMovies/?Name={Name}");
-    } 
-    
+        NavigationManager.NavigateTo(string.IsNullOrWhiteSpace(Name)
+            ? "/"
+            : $"/FoundMovies/?Name={Name?.Trim()}");
+    }
+
     private void OpenMovieEditor() => NavigationManager.NavigateTo("/Movie");
-    
+
     public void ClearSearchLine()
     {
         Name = string.Empty;
