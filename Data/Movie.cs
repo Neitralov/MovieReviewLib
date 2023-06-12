@@ -11,7 +11,7 @@ public class Movie
     [Required(ErrorMessage = "Отсутствует обложка!")]
     public string PosterPath { get; set; } = string.Empty;
     
-    [Required(ErrorMessage = "Отсутствует тип фильма!")]
+    [Required(ErrorMessage = "Отсутствует тип произведения!")]
     public MovieType? Type { get; set; }
     
     [Required(ErrorMessage = "Название фильма не может быть пустым!")]
