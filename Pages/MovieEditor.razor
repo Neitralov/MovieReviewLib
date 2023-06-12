@@ -196,13 +196,14 @@
         if (id == 0) return;
 
         Movie = DatabaseContext.Movies
-            .Include(x => x.Genres)
-            .Include(x => x.Directors)
-            .Include(x => x.Writers)
-            .Include(x => x.Producers)
-            .Include(x => x.Compositors)
-            .Include(x => x.Actors)
-            .First(x => x.Id == Id);
+            .Include(movie => movie.Genres)
+            .Include(movie => movie.Directors)
+            .Include(movie => movie.Writers)
+            .Include(movie => movie.Producers)
+            .Include(movie => movie.Compositors)
+            .Include(movie => movie.Actors)
+            .AsSplitQuery()
+            .Single(x => x.Id == Id);
     }
 
     private void AddGenreOnEnterDown(KeyboardEventArgs args)
