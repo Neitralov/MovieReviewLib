@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        "./Pages/*.razor",
+        "./Pages/**/*.razor",
         "./Shared/**/*.razor",
     ],
     darkMode: 'class',

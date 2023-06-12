@@ -1,0 +1,53 @@
+@page "/Movie/{Id:int?}"
+@layout EmptyLayout
+@implements IDisposable
+
+<PageTitle>Редактирование фильма</PageTitle>
+
+<CascadingValue Value="EditContext">
+    <div class="flex flex-col min-h-full">
+        <DataAnnotationsValidator/>
+        <div class="flex w-full bg-neutral-100 dark:bg-neutral-900 grow p-[25px] pb-0 gap-[25px]">
+            <MovieEditorAside Movie="@Movie"/>
+            <MovieEditorMain Movie="@Movie"/>
+        </div>
+        <MovieEditorFooter Movie="@Movie" DatabaseContext="DatabaseContext" EditContext="EditContext"/>
+    </div>
+</CascadingValue>
+
+@code {
+    private DatabaseContext DatabaseContext { get; } = new();
+    private Movie Movie { get; set; } = new();
+    private EditContext? EditContext { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int Id { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        LoadMovieData(Id);
+        EditContext = new EditContext(Movie);
+    }
+
+    private void LoadMovieData(int id)
+    {
+        if (id == 0) return;
+
+        Movie = DatabaseContext.Movies
+            .Include(movie => movie.Genres)
+            .Include(movie => movie.Directors)
+            .Include(movie => movie.Writers)
+            .Include(movie => movie.Producers)
+            .Include(movie => movie.Compositors)
+            .Include(movie => movie.Actors)
+            .AsSplitQuery()
+            .Single(x => x.Id == Id);
+    }
+
+    public void Dispose()
+    {
+        DatabaseContext.Dispose();
+    }
+
+}

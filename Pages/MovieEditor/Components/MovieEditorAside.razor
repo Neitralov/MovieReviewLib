@@ -1,0 +1,62 @@
+<aside class="sticky top-[25px] h-fit">
+    <div class="flex flex-col gap-[10px]">
+        @if (Movie.PosterPath != string.Empty)
+        {
+            <div class="flex flex-col justify-end h-[480px] w-[270px] rounded-[15px] bg-cover bg-center cursor-pointer shadow-[inset_0_-105px_30px_-15px_rgba(0,0,0,40%)] opacity-95" 
+                 style="background-image: url('@Movie.PosterPath')">
+                <h1 class="text-[24px] font-bold text-white mx-[15px] leading-tight break-words drop-shadow-[2px_2px_5px_rgba(0,0,0,75%)]">
+                    @Movie.Name
+                </h1>
+                <div class="flex justify-between mx-[15px] mb-[15px]">
+                    <h2 class="text-[21px] font-bold text-neutral-400 drop-shadow-[2px_2px_5px_rgba(0,0,0,75%)]">
+                        @Movie.ReleaseYear
+                    </h2>
+                    <StarRating Score="Movie.Score" Size="21" Spacing="3"/>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="flex items-center justify-center h-[480px] w-[270px] rounded-[15px] bg-neutral-200 dark:bg-neutral-800 text-[16px] font-bold text-neutral-950 dark:text-white">
+                Превью обложки
+            </div>
+        }
+        <ValidationMessage class="text-[16px] font-bold text-red-600 text-center" For="@(() => Movie.PosterPath)"/>
+        <label class="flex items-center bg-neutral-400 hover:bg-neutral-500 dark:bg-neutral-700 dark:hover:bg-neutral-800 text-white rounded-[5px] cursor-pointer text-[16px] font-bold h-[34px] text-center leading-[34px] py-[10px] justify-center">
+            Загрузить обложку
+            <InputFile OnChange="@LoadPoster"/>
+        </label>
+        <a href="https://www.moviemania.io/phone" target="_blank">
+            <CommonButton Label="Искать обложку" IsStretch="true"/>
+        </a>
+    </div>
+</aside>
+
+@code {
+
+    [Parameter]
+    public Movie Movie { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback<InputFileChangeEventArgs> OnPosterLoadButtonClick { get; set; }
+    
+    private async Task LoadPoster(InputFileChangeEventArgs inputFile)
+    {
+        var filePath = "posters/" + inputFile.File.Name;
+        var fileUploadPath = "/app/wwwroot/posters/" + inputFile.File.Name;
+        const int maxAllowedFileSize = 1024 * 1024 * 5;
+
+        try
+        {
+            await using FileStream fileStream = new(fileUploadPath, FileMode.Create);
+            await inputFile.File.OpenReadStream(maxAllowedFileSize).CopyToAsync(fileStream);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        Movie.PosterPath = filePath;
+    }
+
+}

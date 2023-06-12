@@ -1,0 +1,82 @@
+@inject NavigationManager NavigationManager
+
+<footer class="sticky bottom-0 bg-neutral-100 dark:bg-neutral-900">
+    <div class="flex justify-between p-[25px]">
+        <div class="flex">
+            <CommonButton OnClick="Back" Label="Назад"/>
+        </div>
+        <div class="flex gap-[10px]">
+            @if (DatabaseContext.Movies.Contains(Movie))
+            {
+                <DangerButton OnClick="Delete" Label="Удалить"/>
+            }
+            <CommonButton OnClick="AddToWatchLater" Label="Сохранить в отложенные"/>
+            <PrimaryButton OnClick="Publish" Label="Сохранить в просмотренные"/>
+        </div>
+    </div>
+</footer>
+
+@code {
+
+    [Parameter]
+    public Movie Movie { get; set; } = null!;
+
+    [Parameter]
+    public DatabaseContext DatabaseContext { get; set; } = null!;
+
+    [Parameter]
+    public EditContext EditContext { get; set; } = null!;
+
+    private void Back()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void Delete()
+    {
+        if (DatabaseContext.Movies.Contains(Movie))
+        {
+            DatabaseContext.Movies.Remove(Movie);
+            DatabaseContext.SaveChanges();
+        }
+
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void AddToWatchLater()
+    {
+        if (EditContext.Validate() is false)
+            return;
+
+        Movie.WatchLater = true;
+        Movie.PublishDate = DateTime.Now;
+
+        if (DatabaseContext.Movies.Any(movie => movie.Id == Movie.Id) is false)
+            DatabaseContext.Movies.Add(Movie);
+        else
+            DatabaseContext.Movies.Update(Movie);
+
+        DatabaseContext.SaveChanges();
+
+        NavigationManager.NavigateTo("WatchLater");
+    }
+
+    private void Publish()
+    {
+        if (EditContext.Validate() is false)
+            return;
+
+        Movie.WatchLater = false;
+        Movie.PublishDate = DateTime.Now;
+
+        if (DatabaseContext.Movies.Any(movie => movie.Id == Movie.Id) is false)
+            DatabaseContext.Movies.Add(Movie);
+        else
+            DatabaseContext.Movies.Update(Movie);
+
+        DatabaseContext.SaveChanges();
+
+        NavigationManager.NavigateTo("/");
+    }
+
+}
