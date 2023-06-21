@@ -28,14 +28,14 @@
         <InputNumber class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full box-border" placeholder="Введите длительность..." @bind-Value="Movie.Duration"/>
     </div>
     <div class="mb-[10px]">
-        <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Жанр:</h2>
-        <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Genres)"/>
+        <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Теги:</h2>
+        <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Tags)"/>
         <div class="flex flex-wrap gap-[5px]">
-            @foreach (var genre in Movie.Genres)
+            @foreach (var tag in Movie.Tags)
             {
-                <InteractiveDataValue TItem="Genre" Data="@genre" RemoveData="RemoveGenre"/>
+                <TagsInput Data="@tag" RemoveData="RemoveTag"/>
             }
-            <input class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500" placeholder="Введите значение..." @ref="GenreInput" @onkeydown="AddGenreOnEnterDown" @onfocusout="AddGenre" @bind="Genre" @bind:event="oninput"/>
+            <input class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500" placeholder="Введите значение..." @ref="TagInput" @onkeydown="AddTagOnEnterDown" @onfocusout="AddTag" @bind="Tag" @bind:event="oninput"/>
         </div>
     </div>
     <div class="mb-[10px]">
@@ -59,34 +59,34 @@
     [Parameter]
     public Movie Movie { get; set; } = null!;
     
-    private string Genre { get; set; } = string.Empty;
+    private string Tag { get; set; } = string.Empty;
 
-    private ElementReference GenreInput { get; set; }
+    private ElementReference TagInput { get; set; }
 
-    private void AddGenreOnEnterDown(KeyboardEventArgs args)
+    private void AddTagOnEnterDown(KeyboardEventArgs args)
     {
         if (IsEnterPressed(args))
-            AddGenre();
+            AddTag();
     }
 
-    private void AddGenre()
+    private void AddTag()
     {
-        if (IsInputFieldEmpty(Genre))
+        if (IsInputFieldEmpty(Tag))
             return;
 
-        var genre = new Genre { Value = Genre.Trim() };
-        Movie.Genres.Add(genre);
-        Genre = string.Empty;
+        var tag = new Tag { Value = Tag.Trim() };
+        Movie.Tags.Add(tag);
+        Tag = string.Empty;
     }
 
-    private void RemoveGenre(Genre genre) => Movie.Genres.Remove(genre);
+    private void RemoveTag(Tag tag) => Movie.Tags.Remove(tag);
 
     private static bool IsEnterPressed(KeyboardEventArgs args) => args.Code is "Enter";
     private static bool IsInputFieldEmpty(string inputValue) => string.IsNullOrWhiteSpace(inputValue);
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", GenreInput);
+        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", TagInput);
     }
     
 }

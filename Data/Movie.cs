@@ -25,8 +25,8 @@ public class Movie
     [Range(1, int.MaxValue, ErrorMessage = "Длительность не может быть меньше одной минуты!")]
     public int? Duration { get; set; }
     
-    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать жанр!")]
-    public List<Genre> Genres { get; set; } = new();
+    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать тег!")]
+    public List<Tag> Tags { get; set; } = new();
 
     public int Score { get; set; }
     

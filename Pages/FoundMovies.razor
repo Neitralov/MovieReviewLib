@@ -6,7 +6,7 @@
 <div class="flex flex-wrap">
     <SortDropdown @bind-SortType="@SortType"/>
     <MovieTypeSortDropdown @bind-MovieType="@MovieType"/>
-    <GenreSortDropdown @bind-Genre="@Genre"/>
+    <TagSortDropdown @bind-Tag="@Tag"/>
 </div>
 
 @if (GetSortedMovies() is { Count: not 0 } movies)
@@ -28,13 +28,13 @@ else
     
     private SortType SortType { get; set; }
     private MovieType MovieType { get; set; }
-    private string Genre { get; set; } = "all";
+    private string Tag { get; set; } = "all";
 
     private List<Movie> GetSortedMovies()
     {
         var movies = DatabaseContext.Movies
             .AsNoTracking()
-            .Include(movie => movie.Genres)
+            .Include(movie => movie.Tags)
             .AsEnumerable()
             .Where(movie => movie.Name.ToLower().Contains(Name!.ToLower()))
             .ToList();
@@ -60,13 +60,13 @@ else
             _                 => throw new ArgumentOutOfRangeException()
             };
 
-        var moviesSortedByGenre = Genre switch
+        var moviesSortedByTag = Tag switch
         {
             "all" => moviesSortedByType,
-            _ => moviesSortedByType.Where(movie => movie.Genres.Select(genre => genre.Value).Any(genre => genre == Genre)).ToList()
+            _ => moviesSortedByType.Where(movie => movie.Tags.Select(tag => tag.Value).Any(tag => tag == Tag)).ToList()
             };
 
-        return moviesSortedByGenre;
+        return moviesSortedByTag;
     }
 
 }

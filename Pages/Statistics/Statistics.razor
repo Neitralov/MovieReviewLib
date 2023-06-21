@@ -129,12 +129,12 @@
 </div>
 
 <Top10DataList
-    Label="Топ-10 жанров по количеству просмотренных произведений">
+    Label="Топ-10 тегов по количеству просмотренных произведений">
     @for (var i = 0; i < 10; i++)
     {
-        @if (i < Top10GenresByViews?.Length && Top10GenresByViews?[i] is not null)
+        @if (i < Top10TagsByViews?.Length && Top10TagsByViews?[i] is not null)
         {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10GenresByViews?[i].Genre (@Top10GenresByViews?[i].Count)</li>
+            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10TagsByViews?[i].Tag (@Top10TagsByViews?[i].Count)</li>
         }
         else
         {
@@ -193,7 +193,7 @@
     private Movie? ShortestShow { get; set; }
     private Movie? ShortestCartoon { get; set; }
 
-    private GenreNameWithViewCounter[]? Top10GenresByViews { get; set; }
+    private TagNameWithViewCounter[]? Top10TagsByViews { get; set; }
 
     protected override void OnInitialized()
     {
@@ -297,24 +297,24 @@
             ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).AsEnumerable().MinBy(movie => movie.Duration)
             : null;
 
-        Top10GenresByViews = DatabaseContext.Movies
+        Top10TagsByViews = DatabaseContext.Movies
             .Where(movie => movie.WatchLater == false)
-            .SelectMany(movie => movie.Genres)
-            .Select(genre => genre.Value)
-            .GroupBy(genre => genre)
-            .Select(genre => new GenreNameWithViewCounter
+            .SelectMany(movie => movie.Tags)
+            .Select(tag => tag.Value)
+            .GroupBy(tag => tag)
+            .Select(tag => new TagNameWithViewCounter
             {
-                Genre = genre.Key,
-                Count = genre.Count()
+                Tag = tag.Key,
+                Count = tag.Count()
             })
-            .OrderByDescending(genre => genre.Count)
+            .OrderByDescending(tag => tag.Count)
             .Take(10)
             .ToArray();
     }
 
-    public record GenreNameWithViewCounter
+    public record TagNameWithViewCounter
     {
-        public string? Genre { get; init; }
+        public string? Tag { get; init; }
         public int Count { get; init; }
     }
 
