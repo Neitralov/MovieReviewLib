@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-[10px]">
         @if (Movie.PosterPath != string.Empty)
         {
-            <div class="flex flex-col justify-end h-[480px] w-[270px] rounded-[15px] bg-cover bg-center cursor-pointer shadow-[inset_0_-105px_30px_-15px_rgba(0,0,0,40%)] opacity-95" 
+            <div class="flex flex-col justify-end h-[480px] w-[270px] rounded-[15px] bg-cover bg-center cursor-pointer shadow-[inset_0_-105px_30px_-15px_rgba(0,0,0,40%)] opacity-95"
                  style="background-image: url('@Movie.PosterPath')">
                 <h1 class="text-[24px] font-bold text-white mx-[15px] leading-tight break-words drop-shadow-[2px_2px_5px_rgba(0,0,0,75%)]">
                     @Movie.Name
@@ -29,6 +29,12 @@
         <a href="https://www.moviemania.io/phone" target="_blank">
             <CommonButton Label="Искать обложку" IsStretch="true"/>
         </a>
+        @if (DatabaseContext.Movies.Contains(Movie))
+        {
+            <a href="https://www.kinopoisk.ru/index.php?kp_query=@Movie.Name" target="_blank">
+                <CommonButton Label="Искать на Кинопоиске" IsStretch="true"/>
+            </a>
+        }
     </div>
 </aside>
 
@@ -38,8 +44,11 @@
     public Movie Movie { get; set; } = null!;
 
     [Parameter]
+    public DatabaseContext DatabaseContext { get; set; } = null!;
+
+    [Parameter]
     public EventCallback<InputFileChangeEventArgs> OnPosterLoadButtonClick { get; set; }
-    
+
     private async Task LoadPoster(InputFileChangeEventArgs inputFile)
     {
         var filePath = "posters/" + inputFile.File.Name;

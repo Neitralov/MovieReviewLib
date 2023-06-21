@@ -39,6 +39,13 @@
         </div>
     </div>
     <div class="mb-[10px]">
+        <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Статус:</h2>
+        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px] box-border" @bind-Value="Movie.WatchLater">
+            <option value="false">Отложен</option>
+            <option value="true">Просмотрен</option>
+        </InputSelect>
+    </div>
+    <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Оценка:</h2>
         <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px] box-border" @bind-Value="Movie.Score">
             @for (var index = 5; index > 0; index--)
@@ -58,7 +65,7 @@
 
     [Parameter]
     public Movie Movie { get; set; } = null!;
-    
+
     private string Tag { get; set; } = string.Empty;
 
     private ElementReference TagInput { get; set; }
@@ -83,10 +90,10 @@
 
     private static bool IsEnterPressed(KeyboardEventArgs args) => args.Code is "Enter";
     private static bool IsInputFieldEmpty(string inputValue) => string.IsNullOrWhiteSpace(inputValue);
-    
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", TagInput);
     }
-    
+
 }

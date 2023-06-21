@@ -10,8 +10,7 @@
             {
                 <DangerButton OnClick="Delete" Label="Удалить"/>
             }
-            <CommonButton OnClick="AddToWatchLater" Label="Сохранить в отложенные"/>
-            <PrimaryButton OnClick="Publish" Label="Сохранить в просмотренные"/>
+            <PrimaryButton OnClick="Save" Label="Сохранить"/>
         </div>
     </div>
 </footer>
@@ -42,13 +41,12 @@
 
         NavigationManager.NavigateTo("/");
     }
-
-    private void AddToWatchLater()
+    
+    private void Save()
     {
         if (EditContext.Validate() is false)
             return;
-
-        Movie.WatchLater = true;
+        
         Movie.PublishDate = DateTime.Now;
 
         if (DatabaseContext.Movies.Any(movie => movie.Id == Movie.Id) is false)
@@ -58,25 +56,7 @@
 
         DatabaseContext.SaveChanges();
 
-        NavigationManager.NavigateTo("WatchLater");
-    }
-
-    private void Publish()
-    {
-        if (EditContext.Validate() is false)
-            return;
-
-        Movie.WatchLater = false;
-        Movie.PublishDate = DateTime.Now;
-
-        if (DatabaseContext.Movies.Any(movie => movie.Id == Movie.Id) is false)
-            DatabaseContext.Movies.Add(Movie);
-        else
-            DatabaseContext.Movies.Update(Movie);
-
-        DatabaseContext.SaveChanges();
-
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo(Movie.WatchLater ? "WatchLater" : "/");
     }
 
 }
