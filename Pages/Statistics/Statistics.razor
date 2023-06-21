@@ -47,7 +47,7 @@
     {
         @if (i < Top10MoviesByRaiting?.Length && Top10MoviesByRaiting?[i] is not null)
         {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10MoviesByRaiting?[i].Name (@(Top10MoviesByRaiting?[i].Score / 2.0))</li>
+            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10MoviesByRaiting?[i].Name (@Top10MoviesByRaiting?[i].Score)</li>
         }
         else
         {
@@ -210,19 +210,19 @@
         NumberOfPostponedCartoons = DatabaseContext.Movies.Count(movie => movie.WatchLater == true && movie.Type == MovieType.Cartoon);
 
         AverageMovieRating = DatabaseContext.Movies.Any(movie => movie.WatchLater == false)
-            ? DatabaseContext.Movies.Where(movie => movie.WatchLater == false).Average(movie => movie.Score) / 2 : 0;
+            ? DatabaseContext.Movies.Where(movie => movie.WatchLater == false).Average(movie => movie.Score) : 0;
 
         AverageFilmRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Film && movie.WatchLater == false)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film && movie.WatchLater == false).Average(movie => movie.Score) / 2 : 0;
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Film && movie.WatchLater == false).Average(movie => movie.Score) : 0;
 
         AverageSeriesRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Series && movie.WatchLater == false)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series && movie.WatchLater == false).Average(movie => movie.Score) / 2 : 0;
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Series && movie.WatchLater == false).Average(movie => movie.Score) : 0;
 
         AverageShowRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Show && movie.WatchLater == false)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show && movie.WatchLater == false).Average(movie => movie.Score) / 2 : 0;
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Show && movie.WatchLater == false).Average(movie => movie.Score) : 0;
 
         AverageCartoonRating = DatabaseContext.Movies.Any(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false)
-            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).Average(movie => movie.Score) / 2 : 0;
+            ? DatabaseContext.Movies.Where(movie => movie.Type == MovieType.Cartoon && movie.WatchLater == false).Average(movie => movie.Score) : 0;
 
         Top10MoviesByRaiting = DatabaseContext.Movies.Where(movie => movie.WatchLater == false).OrderByDescending(movie => movie.Score).Take(10).ToArray();
 

@@ -10,20 +10,11 @@
 </svg>
 
 <div class="flex items-center">
-    @for (var index = 1; index <= Score; index += 2)
+    @for (var index = 1; index <= Score; index++)
     {
-        if (index == Score && index % 2 != 0)
-        {
-            <svg width="@(Size / 2 + Spacing)" height="@Size" viewBox="0 0 16 32" fill="#DBCB3A">
-                <use xlink:href="#half-star"/>
-            </svg>
-        }
-        else
-        {
-            <svg width="@(Size + Spacing)" height="@Size" viewBox="0 0 32 32" fill="#DBCB3A">
-                <use xlink:href="#star"/>
-            </svg>
-        }
+        <svg width="@(Size + Spacing)" height="@Size" viewBox="0 0 32 32" fill="#DBCB3A">
+            <use xlink:href="#star"/>
+        </svg>
     }
 </div>
 
