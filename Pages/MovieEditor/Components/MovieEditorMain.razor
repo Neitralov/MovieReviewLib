@@ -4,7 +4,7 @@
     <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Тип произведения:</h2>
         <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Type)"/>
-        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full box-border" @bind-Value="Movie.Type">
+        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full" @bind-Value="Movie.Type">
             <option selected disabled hidden>Выберите тип</option>
             <option value="@MovieType.Film">Фильм</option>
             <option value="@MovieType.Series">Сериал</option>
@@ -15,17 +15,17 @@
     <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Название:</h2>
         <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Name)"/>
-        <InputText class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full box-border" placeholder="Введите название..." @bind-Value="Movie.Name"/>
+        <InputText class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full" placeholder="Введите название..." @bind-Value="Movie.Name"/>
     </div>
     <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Год выхода:</h2>
         <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.ReleaseYear)"/>
-        <InputNumber class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full box-border" placeholder="Введите год..." @bind-Value="Movie.ReleaseYear"/>
+        <InputNumber class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full" placeholder="Введите год..." @bind-Value="Movie.ReleaseYear"/>
     </div>
     <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Длительность в минутах:</h2>
         <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Duration)"/>
-        <InputNumber class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full box-border" placeholder="Введите длительность..." @bind-Value="Movie.Duration"/>
+        <InputNumber class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500 w-full" placeholder="Введите длительность..." @bind-Value="Movie.Duration"/>
     </div>
     <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Теги:</h2>
@@ -40,14 +40,14 @@
     </div>
     <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Статус:</h2>
-        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px] box-border" @bind-Value="Movie.WatchLater">
+        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px]" @bind-Value="Movie.WatchLater">
             <option value="false">Отложен</option>
             <option value="true">Просмотрен</option>
         </InputSelect>
     </div>
     <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Оценка:</h2>
-        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px] box-border" @bind-Value="Movie.Score">
+        <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px]" @bind-Value="Movie.Score">
             @for (var index = 5; index > 0; index--)
             {
                 <option value="@index">@index</option>
@@ -57,7 +57,7 @@
     </div>
     <div>
         <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Заметка:</h2>
-        <textarea class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-full box-border h-[90px] resize-none" placeholder="Введите текст заметки..." resize="none" @bind="Movie.Note" @bind:event="oninput"></textarea>
+        <textarea class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-full resize-none" placeholder="Введите текст заметки..." rows="5" resize="none" @bind="Movie.Note" @bind:event="oninput"></textarea>
     </div>
 </main>
 
