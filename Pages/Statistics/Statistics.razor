@@ -143,21 +143,6 @@
     }
 </Top10DataList>
 
-<Top10DataList
-    Label="Топ-10 актеров по количеству просмотренных произведений">
-    @for (var i = 0; i < 10; i++)
-    {
-        @if (i < Top10ActorsByViews?.Length && Top10ActorsByViews?[i] is not null)
-        {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">@Top10ActorsByViews?[i].Actor (@Top10ActorsByViews?[i].Count)</li>
-        }
-        else
-        {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">N/A</li>
-        }
-    }
-</Top10DataList>
-
 </div>
 
 @code {
@@ -209,7 +194,6 @@
     private Movie? ShortestCartoon { get; set; }
 
     private GenreNameWithViewCounter[]? Top10GenresByViews { get; set; }
-    private ActorNameWithViewCounter[]? Top10ActorsByViews { get; set; }
 
     protected override void OnInitialized()
     {
@@ -326,55 +310,11 @@
             .OrderByDescending(genre => genre.Count)
             .Take(10)
             .ToArray();
-
-        Top10ActorsByViews = DatabaseContext.Movies
-            .Where(movie => movie.WatchLater == false)
-            .SelectMany(movie => movie.Actors)
-            .Select(actor => actor.Value)
-            .GroupBy(actor => actor)
-            .Select(actor => new ActorNameWithViewCounter
-            {
-                Actor = actor.Key,
-                Count = actor.Count()
-            })
-            .OrderByDescending(actor => actor.Count)
-            .Take(10)
-            .ToArray();
     }
 
     public record GenreNameWithViewCounter
     {
         public string? Genre { get; init; }
-        public int Count { get; init; }
-    }
-
-    public record DirectorNameWithViewCounter
-    {
-        public string? Director { get; init; }
-        public int Count { get; init; }
-    }
-
-    public record WriterNameWithViewCounter
-    {
-        public string? Writer { get; init; }
-        public int Count { get; init; }
-    }
-
-    public record ProducerNameWithViewCounter
-    {
-        public string? Producer { get; init; }
-        public int Count { get; init; }
-    }
-
-    public record CompositorNameWithViewCounter
-    {
-        public string? Compositor { get; init; }
-        public int Count { get; init; }
-    }
-
-    public record ActorNameWithViewCounter
-    {
-        public string? Actor { get; init; }
         public int Count { get; init; }
     }
 

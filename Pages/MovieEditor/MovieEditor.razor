@@ -36,11 +36,6 @@
 
         Movie = DatabaseContext.Movies
             .Include(movie => movie.Genres)
-            .Include(movie => movie.Directors)
-            .Include(movie => movie.Writers)
-            .Include(movie => movie.Producers)
-            .Include(movie => movie.Compositors)
-            .Include(movie => movie.Actors)
             .AsSplitQuery()
             .Single(x => x.Id == Id);
     }

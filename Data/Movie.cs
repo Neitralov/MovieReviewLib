@@ -27,21 +27,7 @@ public class Movie
     
     [MinLength(1, ErrorMessage = "У фильма не может отсутствовать жанр!")]
     public List<Genre> Genres { get; set; } = new();
-    
-    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать режиссер!")]
-    public List<Director> Directors { get; set; } = new();
-    
-    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать сценарист!")]
-    public List<Writer> Writers { get; set; } = new();
-    
-    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать продюсер!")]
-    public List<Producer> Producers { get; set; } = new();
-    
-    public List<Compositor> Compositors { get; set; } = new();
-    
-    [MinLength(1, ErrorMessage = "У фильма не может отсутствовать актер!")]
-    public List<Actor> Actors { get; set; } = new();
-    
+
     public int Score { get; set; }
     
     public string Note { get; set; } = string.Empty;

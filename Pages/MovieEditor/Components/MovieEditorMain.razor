@@ -39,60 +39,6 @@
         </div>
     </div>
     <div class="mb-[10px]">
-        <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Режиссер:</h2>
-        <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Directors)"/>
-        <div class="flex flex-wrap gap-[5px]">
-            @foreach (var director in Movie.Directors)
-            {
-                <InteractiveDataValue TItem="Director" Data="@director" RemoveData="RemoveDirector"/>
-            }
-            <input class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500" placeholder="Введите значение..." @ref="DirectorInput" @onkeydown="AddDirectorOnEnterDown" @onfocusout="AddDirector" @bind="Director" @bind:event="oninput"/>
-        </div>
-    </div>
-    <div class="mb-[10px]">
-        <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Сценарист:</h2>
-        <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Writers)"/>
-        <div class="flex flex-wrap gap-[5px]">
-            @foreach (var writer in Movie.Writers)
-            {
-                <InteractiveDataValue TItem="Writer" Data="@writer" RemoveData="RemoveWriter"/>
-            }
-            <input class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500" placeholder="Введите значение..." @ref="WriterInput" @onkeydown="AddWriterOnEnterDown" @onfocusout="AddWriter" @bind="Writer" @bind:event="oninput"/>
-        </div>
-    </div>
-    <div class="mb-[10px]">
-        <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Продюсер:</h2>
-        <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Producers)"/>
-        <div class="flex flex-wrap gap-[5px]">
-            @foreach (var producer in Movie.Producers)
-            {
-                <InteractiveDataValue TItem="Producer" Data="@producer" RemoveData="RemoveProducer"/>
-            }
-            <input class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500" placeholder="Введите значение..." @ref="ProducerInput" @onkeydown="AddProducerOnEnterDown" @onfocusout="AddProducer" @bind="Producer" @bind:event="oninput"/>
-        </div>
-    </div>
-    <div class="mb-[10px]">
-        <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Композитор:</h2>
-        <div class="flex flex-wrap gap-[5px]">
-            @foreach (var compositor in Movie.Compositors)
-            {
-                <InteractiveDataValue TItem="Compositor" Data="@compositor" RemoveData="RemoveCompositor"/>
-            }
-            <input class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500" placeholder="Введите значение..." @ref="CompositorInput" @onkeydown="AddCompositorOnEnterDown" @onfocusout="AddCompositor" @bind="Compositor" @bind:event="oninput"/>
-        </div>
-    </div>
-    <div class="mb-[10px]">
-        <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">В главных ролях:</h2>
-        <ValidationMessage class="inline-block text-[16px] font-bold text-red-600 mb-[5px] text-center" For="@(() => Movie.Actors)"/>
-        <div class="flex flex-wrap gap-[5px]">
-            @foreach (var actor in Movie.Actors)
-            {
-                <InteractiveDataValue TItem="Actor" Data="@actor" RemoveData="RemoveActor"/>
-            }
-            <input class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] placeholder-neutral-500" placeholder="Введите значение..." @ref="ActorInput" @onkeydown="AddActorOnEnterDown" @onfocusout="AddActor" @bind="Actor" @bind:event="oninput"/>
-        </div>
-    </div>
-    <div class="mb-[10px]">
         <h2 class="inline-block text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">Оценка:</h2>
         <InputSelect class="h-[34px] text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] block placeholder-neutral-500 w-[188px] box-border" @bind-Value="Movie.Score">
             @for (var index = 10; index > 0; index--)
@@ -114,19 +60,9 @@
     public Movie Movie { get; set; } = null!;
     
     private string Genre { get; set; } = string.Empty;
-    private string Director { get; set; } = string.Empty;
-    private string Writer { get; set; } = string.Empty;
-    private string Producer { get; set; } = string.Empty;
-    private string Compositor { get; set; } = string.Empty;
-    private string Actor { get; set; } = string.Empty;
 
     private ElementReference GenreInput { get; set; }
-    private ElementReference DirectorInput { get; set; }
-    private ElementReference WriterInput { get; set; }
-    private ElementReference ProducerInput { get; set; }
-    private ElementReference CompositorInput { get; set; }
-    private ElementReference ActorInput { get; set; }
-    
+
     private void AddGenreOnEnterDown(KeyboardEventArgs args)
     {
         if (IsEnterPressed(args))
@@ -145,107 +81,12 @@
 
     private void RemoveGenre(Genre genre) => Movie.Genres.Remove(genre);
 
-    private void AddDirectorOnEnterDown(KeyboardEventArgs args)
-    {
-        if (IsEnterPressed(args))
-            AddDirector();
-    }
-
-    private void AddDirector()
-    {
-        if (IsInputFieldEmpty(Director))
-            return;
-
-        var director = new Director { Value = Director.Trim() };
-        Movie.Directors.Add(director);
-        Director = string.Empty;
-    }
-
-    private void RemoveDirector(Director director) => Movie.Directors.Remove(director);
-
-    private void AddWriterOnEnterDown(KeyboardEventArgs args)
-    {
-        if (IsEnterPressed(args))
-            AddWriter();
-    }
-
-    private void AddWriter()
-    {
-        if (IsInputFieldEmpty(Writer))
-            return;
-
-        var writer = new Writer { Value = Writer.Trim() };
-        Movie.Writers.Add(writer);
-        Writer = string.Empty;
-    }
-
-    private void RemoveWriter(Writer writer) => Movie.Writers.Remove(writer);
-
-    private void AddProducerOnEnterDown(KeyboardEventArgs args)
-    {
-        if (IsEnterPressed(args))
-            AddProducer();
-    }
-
-    private void AddProducer()
-    {
-        if (IsInputFieldEmpty(Producer))
-            return;
-
-        var producer = new Producer { Value = Producer.Trim() };
-        Movie.Producers.Add(producer);
-        Producer = string.Empty;
-    }
-
-    private void RemoveProducer(Producer producer) => Movie.Producers.Remove(producer);
-
-    private void AddCompositorOnEnterDown(KeyboardEventArgs args)
-    {
-        if (IsEnterPressed(args))
-            AddCompositor();
-    }
-
-    private void AddCompositor()
-    {
-        if (IsInputFieldEmpty(Compositor))
-            return;
-
-        var compositor = new Compositor { Value = Compositor.Trim() };
-        Movie.Compositors.Add(compositor);
-        Compositor = string.Empty;
-    }
-
-    private void RemoveCompositor(Compositor compositor) => Movie.Compositors.Remove(compositor);
-
-    private void AddActorOnEnterDown(KeyboardEventArgs args)
-    {
-        if (IsEnterPressed(args))
-            AddActor();
-    }
-
-    private void AddActor()
-    {
-        if (IsInputFieldEmpty(Actor))
-            return;
-
-        var actor = new Actor { Value = Actor.Trim() };
-        Movie.Actors.Add(actor);
-        Actor = string.Empty;
-    }
-
-    private void RemoveActor(Actor actor) => Movie.Actors.Remove(actor);
-
     private static bool IsEnterPressed(KeyboardEventArgs args) => args.Code is "Enter";
     private static bool IsInputFieldEmpty(string inputValue) => string.IsNullOrWhiteSpace(inputValue);
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", GenreInput);
-        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", DirectorInput);
-        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", WriterInput);
-        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", ProducerInput);
-        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", CompositorInput);
-        await JsRuntime.InvokeVoidAsync("CalcInputWidthAndSet", ActorInput);
     }
     
 }
