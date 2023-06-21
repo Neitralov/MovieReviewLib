@@ -81,6 +81,12 @@
         if (IsInputFieldEmpty(Tag))
             return;
 
+        if (Movie.Tags.Any(tag => tag.Value.Trim().ToLower().Contains(Tag.Trim().ToLower())))
+        {
+            Tag = string.Empty;
+            return;
+        }
+
         var tag = new Tag { Value = Tag.Trim() };
         Movie.Tags.Add(tag);
         Tag = string.Empty;
