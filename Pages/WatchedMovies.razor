@@ -15,7 +15,7 @@
 }
 else
 {
-    @if (DatabaseContext.Movies.Any(movie => movie.WatchLater == false))
+    @if (DatabaseContext.Movies.Any(movie => movie.IsWatched == true))
     {
         <div class="flex justify-center items-center text-neutral-600 dark:text-neutral-400 font-bold text-[18px] grow">
             Нет ничего, чтобы удовлетворяло текущим настройкам сортировки.
@@ -40,7 +40,7 @@ else
         var watchedMovies = DatabaseContext.Movies
             .AsNoTracking()
             .Include(movie => movie.Tags)
-            .Where(movie => movie.WatchLater == false);
+            .Where(movie => movie.IsWatched == true);
         
         var sortedMovies = SortType switch
         {

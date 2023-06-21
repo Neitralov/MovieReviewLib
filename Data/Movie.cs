@@ -6,7 +6,7 @@ public class Movie
 {
     public int Id { get; set; }
     
-    public bool WatchLater { get; set; }
+    public bool IsWatched { get; set; }
     
     [Required(ErrorMessage = "Отсутствует обложка!")]
     public string PosterPath { get; set; } = string.Empty;
