@@ -46,6 +46,8 @@ else
         {
             SortType.AdditionOrder            => shelvedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
             SortType.ReverseAdditionOrder     => shelvedMovies.OrderBy(movie => movie.PublishDate).ToList(),
+            SortType.FromNewToOld             => shelvedMovies.OrderByDescending(movie => movie.ReleaseYear).ToList(),
+            SortType.FromOldToNew             => shelvedMovies.OrderBy(movie => movie.ReleaseYear).ToList(),
             SortType.ByIncreasingRating       => shelvedMovies.OrderBy(movie => movie.Score).ToList(),
             SortType.ByDescendingRating       => shelvedMovies.OrderByDescending(movie => movie.Score).ToList(),
             SortType.AlphabeticalOrder        => shelvedMovies.OrderBy(movie => movie.Name).ToList(),

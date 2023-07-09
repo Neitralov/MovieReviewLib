@@ -7,5 +7,7 @@ public enum SortType
     ByIncreasingRating,
     ByDescendingRating,
     AlphabeticalOrder,
-    ReverseAlphabeticalOrder
+    ReverseAlphabeticalOrder,
+    FromNewToOld,
+    FromOldToNew
 }

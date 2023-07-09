@@ -1,7 +1,9 @@
 <span class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400">Сортировка: </span>
 <InputSelect class="text-[16px] font-bold text-neutral-950 dark:text-white bg-neutral-200 dark:bg-neutral-900 cursor-pointer py-[1px] px-[5px] ml-[5px] mr-[10px] rounded-[5px]" @bind-Value="SortType" @onclick="() => SortTypeChanged.InvokeAsync(SortType)">
-    <option value="@SortType.AdditionOrder">сначала новые</option>
-    <option value="@SortType.ReverseAdditionOrder">сначала старые</option>
+    <option value="@SortType.AdditionOrder">в порядке обновления</option>
+    <option value="@SortType.ReverseAdditionOrder">в порядке обратном обновлению</option>
+    <option value="@SortType.FromNewToOld">сначала новые</option>
+    <option value="@SortType.FromOldToNew">сначала старые</option>
     <option value="@SortType.ByDescendingRating">сначала с высоким рейтингом</option>
     <option value="@SortType.ByIncreasingRating">сначала с низким рейтингом</option>
     <option value="@SortType.AlphabeticalOrder">в алфавитном порядке</option>
