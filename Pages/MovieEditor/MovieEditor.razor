@@ -8,8 +8,8 @@
     <div class="flex flex-col min-h-full">
         <DataAnnotationsValidator/>
         <div class="flex w-full bg-neutral-100 dark:bg-neutral-900 grow p-[25px] pb-0 gap-[25px]">
-            <MovieEditorAside Movie="@Movie" DatabaseContext="DatabaseContext"/>
-            <MovieEditorMain Movie="@Movie"/>
+            <MovieEditorAside @ref="MovieEditorAside" Movie="@Movie" DatabaseContext="DatabaseContext"/>
+            <MovieEditorMain Movie="@Movie" MovieDataChanged="() => MovieEditorAside?.UpdatePosterPreview()"/>
         </div>
         <MovieEditorFooter Movie="@Movie" DatabaseContext="DatabaseContext" EditContext="EditContext"/>
     </div>
@@ -19,6 +19,8 @@
     private DatabaseContext DatabaseContext { get; } = new();
     private Movie Movie { get; set; } = new();
     private EditContext? EditContext { get; set; }
+
+    private MovieEditorAside? MovieEditorAside { get; set; }
 
     [Parameter]
     [SupplyParameterFromQuery]
