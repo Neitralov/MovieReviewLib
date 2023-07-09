@@ -1,4 +1,5 @@
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
 
 <footer class="sticky bottom-0 bg-neutral-100 dark:bg-neutral-900">
     <div class="flex justify-between p-[25px]">
@@ -26,9 +27,9 @@
     [Parameter]
     public EditContext EditContext { get; set; } = null!;
 
-    private void Back()
+    private async Task Back()
     {
-        NavigationManager.NavigateTo("/");
+        await JsRuntime.InvokeVoidAsync("history.back");
     }
 
     private void Delete()
