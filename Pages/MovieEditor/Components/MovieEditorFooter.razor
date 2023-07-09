@@ -40,7 +40,7 @@
             DatabaseContext.SaveChanges();
         }
 
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo(Movie.IsWatched ? "/" : "WatchLater");
     }
     
     private void Save()
