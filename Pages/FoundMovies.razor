@@ -7,6 +7,7 @@
     <SortDropdown @bind-SortType="@SortType"/>
     <MovieTypeSortDropdown @bind-MovieType="@MovieType"/>
     <TagSortDropdown @bind-Tag="@Tag"/>
+    <ResetButton OnClick="ResetSorting"/>
 </div>
 
 @if (GetSortedMovies() is { Count: not 0 } movies)
@@ -69,6 +70,13 @@ else
             };
 
         return moviesSortedByTag;
+    }
+
+    private void ResetSorting()
+    {
+        SortType = SortType.AdditionOrder;
+        MovieType = MovieType.All;
+        Tag = "all";
     }
 
 }
