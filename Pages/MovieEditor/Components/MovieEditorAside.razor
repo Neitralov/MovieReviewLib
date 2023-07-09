@@ -26,9 +26,6 @@
             Загрузить обложку
             <InputFile OnChange="@LoadPoster"/>
         </label>
-        <a href="https://www.moviemania.io/phone" target="_blank">
-            <CommonButton Label="Искать обложку" IsStretch="true"/>
-        </a>
         @if (DatabaseContext.Movies.Contains(Movie))
         {
             <a href="https://www.kinopoisk.ru/index.php?kp_query=@Movie.Name" target="_blank">
