@@ -58,12 +58,14 @@ else
 
         var moviesSortedByType = MovieType switch
         {
-            MovieType.All     => sortedMovies,
-            MovieType.Film    => sortedMovies.Where(movie => movie.Type == MovieType.Film).ToList(),
-            MovieType.Series  => sortedMovies.Where(movie => movie.Type == MovieType.Series).ToList(),
-            MovieType.Show    => sortedMovies.Where(movie => movie.Type == MovieType.Show).ToList(),
-            MovieType.Cartoon => sortedMovies.Where(movie => movie.Type == MovieType.Cartoon).ToList(),
-            _                 => throw new ArgumentOutOfRangeException()
+            MovieType.All           => sortedMovies,
+            MovieType.Film          => sortedMovies.Where(movie => movie.Type == MovieType.Film).ToList(),
+            MovieType.Series        => sortedMovies.Where(movie => movie.Type == MovieType.Series).ToList(),
+            MovieType.Show          => sortedMovies.Where(movie => movie.Type == MovieType.Show).ToList(),
+            MovieType.Cartoon       => sortedMovies.Where(movie => movie.Type == MovieType.Cartoon).ToList(),
+            MovieType.CartoonSeries => sortedMovies.Where(movie => movie.Type == MovieType.CartoonSeries).ToList(),
+            MovieType.Anime         => sortedMovies.Where(movie => movie.Type == MovieType.Anime).ToList(),
+            _                       => throw new ArgumentOutOfRangeException()
             };
 
         var moviesSortedByTag = Tag switch

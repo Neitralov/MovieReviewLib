@@ -6,5 +6,7 @@ public enum MovieType
     Film,
     Series,
     Show,
-    Cartoon
+    Cartoon,
+    CartoonSeries,
+    Anime
 }
