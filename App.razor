@@ -8,7 +8,9 @@
     <NotFound>
         <PageTitle>Not found</PageTitle>
         <LayoutView Layout="@typeof(MainLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
+            <p class="text-neutral-600 dark:text-neutral-400">
+                Извините, такой страницы не существует.
+            </p>
         </LayoutView>
     </NotFound>
 </Router>
@@ -20,7 +22,7 @@
         if (firstRender)
         {
             var isDarkMode = await LocalStorage.GetItemAsync<bool>("DarkMode");
-            await JsRuntime.InvokeVoidAsync("DarkThemeToggle", isDarkMode);    
+            await JsRuntime.InvokeVoidAsync("DarkThemeToggle", isDarkMode);
         }
     }
 
