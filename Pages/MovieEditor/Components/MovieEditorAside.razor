@@ -48,8 +48,9 @@
 
     private async Task LoadPoster(InputFileChangeEventArgs inputFile)
     {
-        var filePath = "posters/" + inputFile.File.Name;
-        var fileUploadPath = "/app/wwwroot/posters/" + inputFile.File.Name;
+        var fileName = Path.GetRandomFileName() + Path.GetExtension(inputFile.File.Name);
+        var filePath = "posters/" + fileName;
+        var fileUploadPath = "/app/wwwroot/posters/" + fileName;
         const int maxAllowedFileSize = 1024 * 1024 * 5;
 
         try
