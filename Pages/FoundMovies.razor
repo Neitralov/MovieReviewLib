@@ -51,9 +51,9 @@ else
             SortType.AlphabeticalOrder        => movies.OrderBy(movie => movie.Name).ToList(),
             SortType.ReverseAlphabeticalOrder => movies.OrderByDescending(movie => movie.Name).ToList(),
             _                                 => throw new ArgumentOutOfRangeException()
-            };
+        };
 
-        var moviesSortedByType = MovieType switch
+        var moviesFilteredByType = MovieType switch
         {
             MovieType.All           => sortedMovies,
             MovieType.Film          => sortedMovies.Where(movie => movie.Type == MovieType.Film).ToList(),
@@ -63,15 +63,15 @@ else
             MovieType.CartoonSeries => sortedMovies.Where(movie => movie.Type == MovieType.CartoonSeries).ToList(),
             MovieType.Anime         => sortedMovies.Where(movie => movie.Type == MovieType.Anime).ToList(),
             _                       => throw new ArgumentOutOfRangeException()
-            };
+        };
 
-        var moviesSortedByTag = Tag switch
+        var moviesFilteredByTag = Tag switch
         {
-            "all" => moviesSortedByType,
-            _ => moviesSortedByType.Where(movie => movie.Tags.Select(tag => tag.Value).Any(tag => tag == Tag)).ToList()
-            };
+            "all" => moviesFilteredByType,
+            _ => moviesFilteredByType.Where(movie => movie.Tags.Select(tag => tag.Value).Any(tag => tag == Tag)).ToList()
+        };
 
-        return moviesSortedByTag;
+        return moviesFilteredByTag;
     }
 
     private void ResetSorting()
