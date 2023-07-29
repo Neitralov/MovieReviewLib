@@ -48,6 +48,8 @@ else
             SortType.ByDescendingRating       => movies.OrderByDescending(movie => movie.Score).ToList(),
             SortType.AlphabeticalOrder        => movies.OrderBy(movie => movie.Name).ToList(),
             SortType.ReverseAlphabeticalOrder => movies.OrderByDescending(movie => movie.Name).ToList(),
+            SortType.FromShortToLong          => movies.OrderBy(movie => movie.Duration).ToList(),
+            SortType.FromLongToShort          => movies.OrderByDescending(movie => movie.Duration).ToList(),
             _                                 => throw new ArgumentOutOfRangeException()
         };
 

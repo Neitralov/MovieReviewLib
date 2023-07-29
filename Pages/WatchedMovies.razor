@@ -52,6 +52,8 @@ else
             SortType.ByDescendingRating       => watchedMovies.OrderByDescending(movie => movie.Score).ToList(),
             SortType.AlphabeticalOrder        => watchedMovies.OrderBy(movie => movie.Name).ToList(),
             SortType.ReverseAlphabeticalOrder => watchedMovies.OrderByDescending(movie => movie.Name).ToList(),
+            SortType.FromShortToLong          => watchedMovies.OrderBy(movie => movie.Duration).ToList(),
+            SortType.FromLongToShort          => watchedMovies.OrderByDescending(movie => movie.Duration).ToList(),
             _                                 => throw new ArgumentOutOfRangeException()
         };
 

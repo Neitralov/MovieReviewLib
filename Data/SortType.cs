@@ -8,5 +8,7 @@ public enum SortType
     AlphabeticalOrder,
     ReverseAlphabeticalOrder,
     FromNewToOld,
-    FromOldToNew
+    FromOldToNew,
+    FromShortToLong,
+    FromLongToShort
 }
