@@ -37,13 +37,11 @@ else
             .AsNoTracking()
             .Include(movie => movie.Tags)
             .AsEnumerable()
-            .Where(movie => movie.Name.ToLower().Contains(Name!.ToLower()))
-            .ToList();
+            .Where(movie => movie.Name.ToLower().Contains(Name!.ToLower()));
 
         var sortedMovies = SortType switch
         {
-            SortType.AdditionOrder            => movies.OrderByDescending(movie => movie.PublishDate).ToList(),
-            SortType.ReverseAdditionOrder     => movies.OrderBy(movie => movie.PublishDate).ToList(),
+            SortType.None                     => movies.OrderByDescending(movie => movie.PublishDate).ToList(),
             SortType.FromNewToOld             => movies.OrderByDescending(movie => movie.ReleaseYear).ToList(),
             SortType.FromOldToNew             => movies.OrderBy(movie => movie.ReleaseYear).ToList(),
             SortType.ByIncreasingRating       => movies.OrderBy(movie => movie.Score).ToList(),
@@ -76,7 +74,7 @@ else
 
     private void ResetSorting()
     {
-        SortType = SortType.AdditionOrder;
+        SortType = SortType.None;
         MovieType = MovieType.All;
         Tag = "all";
     }

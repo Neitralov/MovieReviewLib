@@ -45,8 +45,7 @@ else
 
         var sortedMovies = SortType switch
         {
-            SortType.AdditionOrder            => shelvedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
-            SortType.ReverseAdditionOrder     => shelvedMovies.OrderBy(movie => movie.PublishDate).ToList(),
+            SortType.None                     => shelvedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
             SortType.FromNewToOld             => shelvedMovies.OrderByDescending(movie => movie.ReleaseYear).ToList(),
             SortType.FromOldToNew             => shelvedMovies.OrderBy(movie => movie.ReleaseYear).ToList(),
             SortType.ByIncreasingRating       => shelvedMovies.OrderBy(movie => movie.Score).ToList(),
@@ -79,7 +78,7 @@ else
     
     private void ResetSorting()
     {
-        SortType = SortType.AdditionOrder;
+        SortType = SortType.None;
         MovieType = MovieType.All;
         Tag = "all";
     }

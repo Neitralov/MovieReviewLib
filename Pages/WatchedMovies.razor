@@ -45,8 +45,7 @@ else
         
         var sortedMovies = SortType switch
         {
-            SortType.AdditionOrder            => watchedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
-            SortType.ReverseAdditionOrder     => watchedMovies.OrderBy(movie => movie.PublishDate).ToList(),
+            SortType.None                     => watchedMovies.OrderByDescending(movie => movie.PublishDate).ToList(),
             SortType.FromNewToOld             => watchedMovies.OrderByDescending(movie => movie.ReleaseYear).ToList(),
             SortType.FromOldToNew             => watchedMovies.OrderBy(movie => movie.ReleaseYear).ToList(),
             SortType.ByIncreasingRating       => watchedMovies.OrderBy(movie => movie.Score).ToList(),
@@ -79,7 +78,7 @@ else
     
     private void ResetSorting()
     {
-        SortType = SortType.AdditionOrder;
+        SortType = SortType.None;
         MovieType = MovieType.All;
         Tag = "all";
     }

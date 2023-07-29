@@ -2,8 +2,7 @@ namespace MovieReviewLib.Data;
 
 public enum SortType
 {
-    AdditionOrder,
-    ReverseAdditionOrder,
+    None,
     ByIncreasingRating,
     ByDescendingRating,
     AlphabeticalOrder,
