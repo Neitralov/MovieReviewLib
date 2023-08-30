@@ -1,0 +1,50 @@
+﻿@page "/"
+@inject MovieService MovieService
+@implements IDisposable
+
+<PageTitle>Просмотренные</PageTitle>
+
+<div class="flex flex-wrap">
+    <SortDropdown @bind-SortType="@SortType"/>
+    <MovieTypeSortDropdown @bind-MovieType="@MovieType"/>
+    <TagSortDropdown @bind-Tag="@Tag"/>
+    <ResetButton OnClick="ResetSorting"/>
+</div>
+
+@if (MovieService.GetWatchedMovies(SortType, MovieType, Tag) is { Count: not 0 } movies)
+{
+    <MovieGrid Movies="@movies"/>
+}
+else
+{
+    @if (MovieService.HasAnyWatchedMovie())
+    {
+        <div class="flex justify-center items-center text-neutral-600 dark:text-neutral-400 font-bold text-[18px] grow">
+            Нет ничего, чтобы удовлетворяло текущим настройкам сортировки.
+        </div>       
+    }
+    else
+    {
+        <div class="flex justify-center items-center text-neutral-600 dark:text-neutral-400 font-bold text-[18px] grow">
+            У вас нет просмотренных фильмов.
+        </div>    
+    }
+}
+
+@code {
+    private SortType SortType { get; set; }
+    private MovieType MovieType { get; set; }
+    private string Tag { get; set; } = "all";
+
+    private void ResetSorting()
+    {
+        SortType = SortType.None;
+        MovieType = MovieType.All;
+        Tag = "all";
+    }
+    
+    public void Dispose()
+    {
+        MovieService.Dispose();
+    }
+}

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd src/Web
+
 echo "Tailwind генерирует стили..."
 ./tailwind -i Styles/app.css -o wwwroot/css/app.css --minify
 

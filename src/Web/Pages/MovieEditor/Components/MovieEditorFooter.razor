@@ -1,0 +1,72 @@
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@implements IDisposable
+
+<footer class="sticky bottom-0 bg-neutral-100 dark:bg-neutral-900">
+    <div class="flex justify-between p-[25px]">
+        <div class="flex">
+            <CommonButton OnClick="Back" Label="Назад"/>
+        </div>
+        <div class="flex gap-[10px]">
+            @if (MovieService.HasMovie(Movie))
+            {
+                <DangerButton OnClick="Delete" Label="Удалить"/>
+            }
+            <PrimaryButton OnClick="Save" Label="Сохранить"/>
+        </div>
+    </div>
+</footer>
+
+@code {
+    [Parameter]
+    public MovieService MovieService { get; set; } = null!;
+
+    [Parameter]
+    public Movie Movie { get; set; } = null!;
+    
+    [Parameter]
+    public EditContext EditContext { get; set; } = null!;
+    
+    private ValidationMessageStore? _messageStore; 
+
+    protected override void OnInitialized()
+    {
+        _messageStore = new(EditContext);
+        EditContext.OnValidationStateChanged += CheckIsWatched;
+    }
+
+    public void Dispose()
+    {
+        EditContext.OnValidationStateChanged -= CheckIsWatched;
+    }
+    
+    private void CheckIsWatched(object? sender, ValidationStateChangedEventArgs args)
+    {
+        _messageStore?.Clear();
+        
+        if (Movie is { IsWatched: true, Score: 0 })
+            _messageStore?.Add(() => Movie.Score, "Отсутствует оценка!");
+    }
+
+    private async Task Back()
+    {
+        await JsRuntime.InvokeVoidAsync("history.back");
+    }
+
+    private void Delete()
+    {
+        MovieService.RemoveMovie(Movie);
+
+        NavigationManager.NavigateTo(Movie.IsWatched ? "/" : "WatchLater");
+    }
+
+    private void Save()
+    {
+        if (EditContext.Validate() is false)
+            return;
+        
+        MovieService.SaveMovie(Movie);
+
+        NavigationManager.NavigateTo(Movie.IsWatched ? "/" : "WatchLater");
+    }
+}

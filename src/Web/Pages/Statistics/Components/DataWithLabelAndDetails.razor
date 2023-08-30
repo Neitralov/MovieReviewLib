@@ -1,0 +1,39 @@
+<div>
+    <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">
+        @Label
+    </h2>
+    <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-900 py-[5px] px-[10px] rounded-[5px] block mb-[5px]">
+        @Text
+    </p>
+
+    <details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
+        <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">
+            @SummaryLabel
+        </summary>
+        <div class="p-[10px]">
+            @foreach (var touple in Details)
+            {
+                <h2 class="text-[16px] font-bold text-neutral-950 dark:text-white mb-[5px]">
+                    @touple.Item1
+                </h2>
+                <p class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px]">
+                    @touple.Item2
+                </p>
+            }
+        </div>
+    </details>
+</div>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Text { get; set; } = string.Empty;
+
+    [Parameter]
+    public string SummaryLabel { get; set; } = string.Empty;
+
+    [Parameter]
+    public (string, string)[] Details { get; set; } = null!;
+}

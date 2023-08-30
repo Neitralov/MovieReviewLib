@@ -1,0 +1,20 @@
+<div class="flex">
+    @for (var index = 1; index <= 5; index++)
+    {
+        <Star Index="@index" CurrentScore="@Score" GetIndex="@ChangeScore"/>    
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int Score { get; set; }
+
+    [Parameter]
+    public EventCallback<int>? ScoreChanged { get; set; }
+
+    private async Task ChangeScore(int index)
+    {
+        Score = index;
+        await ScoreChanged?.InvokeAsync(index)!;
+    }
+}

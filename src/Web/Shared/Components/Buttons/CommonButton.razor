@@ -1,0 +1,23 @@
+<button
+    class="@GetClassAttribute()"
+    @onclick="OnClick">
+    @Label
+</button>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public bool IsStretch { get; set; }
+
+    private string GetClassAttribute()
+    {
+        return IsStretch
+        ? "bg-neutral-400 hover:bg-neutral-500 dark:bg-neutral-700 dark:hover:bg-neutral-800 rounded-[5px] cursor-pointer text-white text-[16px] font-bold py-[5px] px-[10px] w-full"
+        : "bg-neutral-400 hover:bg-neutral-500 dark:bg-neutral-700 dark:hover:bg-neutral-800 rounded-[5px] cursor-pointer text-white text-[16px] font-bold py-[5px] px-[10px]";
+    }
+}

@@ -1,0 +1,29 @@
+<section class="shadow-md dark:shadow-none rounded-[15px] z-0">
+    <div class="flex flex-col justify-end h-[320px] w-[180px] rounded-[15px] bg-cover bg-center cursor-pointer shadow-[inset_0_-70px_20px_-10px_rgba(0,0,0,40%)] opacity-95" style="background-image: url('@PosterPath');" @onclick="() => OpenInMovieEditor.InvokeAsync(MovieId)">
+        <h1 class="text-[16px] font-bold text-white mx-[10px] leading-tight break-words drop-shadow-[1px_1px_3px_rgba(0,0,0,75%)]">@Title</h1>
+        <div class="flex justify-between mx-[10px] mb-[10px]">
+            <h2 class="text-[14px] font-bold text-neutral-400 drop-shadow-[1px_1px_3px_rgba(0,0,0,75%)]">@ReleaseYear</h2>
+            <StarRatingView Score="Score" Size="14" Spacing="2"/>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public int MovieId { get; set; }
+
+    [Parameter]
+    public string PosterPath { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public int? ReleaseYear { get; set; }
+
+    [Parameter]
+    public int? Score { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OpenInMovieEditor { get; set; }
+}

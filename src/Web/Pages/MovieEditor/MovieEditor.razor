@@ -1,0 +1,38 @@
+@layout EmptyLayout
+@page "/Movie/{Id:int?}"
+@inject MovieService MovieService
+@implements IDisposable
+
+<PageTitle>Редактирование фильма</PageTitle>
+
+<CascadingValue Value="EditContext">
+    <div class="flex flex-col min-h-full">
+        <DataAnnotationsValidator/>
+        <div class="flex w-full bg-neutral-100 dark:bg-neutral-900 grow p-[25px] pb-0 gap-[25px]">
+            <MovieEditorAside @ref="MovieEditorAside" Movie="@Movie"/>
+            <MovieEditorMain Movie="@Movie" MovieDataChanged="() => MovieEditorAside?.UpdatePosterPreview()"/>
+        </div>
+        <MovieEditorFooter MovieService="@MovieService" Movie="@Movie" EditContext="EditContext"/>
+    </div>
+</CascadingValue>
+
+@code {
+    private Movie? Movie { get; set; }
+    private EditContext? EditContext { get; set; }
+
+    private MovieEditorAside? MovieEditorAside { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Movie = MovieService.GetMovieById(Id) ?? new();
+        EditContext = new EditContext(Movie);
+    }
+
+    public void Dispose()
+    {
+        MovieService.Dispose();
+    }
+}

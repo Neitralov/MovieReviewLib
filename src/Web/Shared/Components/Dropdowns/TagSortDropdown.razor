@@ -1,0 +1,18 @@
+@inject MovieService MovieService
+
+<span class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400">Тег: </span>
+<InputSelect class="text-[16px] font-bold text-neutral-950 dark:text-white bg-neutral-200 dark:bg-neutral-900 cursor-pointer py-[1px] px-[5px] ml-[5px] mr-[10px] rounded-[5px]" @bind-Value="Tag" @onclick="() => TagChanged.InvokeAsync(Tag)">
+    <option value="all">любой</option>
+    @foreach (var tag in MovieService.GetAllTags())
+    {
+        <option value="@tag">@tag.ToLower()</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public string Tag { get; set; } = "all";
+
+    [Parameter]
+    public EventCallback<string> TagChanged { get; set; }
+}

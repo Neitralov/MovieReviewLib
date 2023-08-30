@@ -1,0 +1,45 @@
+@page "/FoundMovies/{Name?}"
+@inject MovieService MovieService
+@implements IDisposable
+
+<PageTitle>Найденные фильмы</PageTitle>
+
+<div class="flex flex-wrap">
+    <SortDropdown @bind-SortType="@SortType"/>
+    <MovieTypeSortDropdown @bind-MovieType="@MovieType"/>
+    <TagSortDropdown @bind-Tag="@Tag"/>
+    <ResetButton OnClick="ResetSorting"/>
+</div>
+
+@if (MovieService.GetMoviesByName(SortType, MovieType, Tag, Name) is { Count: not 0 } movies)
+{
+    <MovieGrid Movies="@movies"/>
+}
+else
+{
+    <div class="flex justify-center items-center text-neutral-600 dark:text-neutral-400 font-bold text-[18px] grow">
+        По вашему запросу ничего не найдено :(
+    </div>
+}
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string Name { get; set; } = string.Empty;
+
+    private SortType SortType { get; set; }
+    private MovieType MovieType { get; set; }
+    private string Tag { get; set; } = "all";
+    
+    private void ResetSorting()
+    {
+        SortType = SortType.None;
+        MovieType = MovieType.All;
+        Tag = "all";
+    }
+
+    public void Dispose()
+    {
+        MovieService.Dispose();
+    }
+}
