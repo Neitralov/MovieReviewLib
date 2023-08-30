@@ -36,6 +36,9 @@ neitralov/moviereviewlib:latest
 * ORM: [EF Core](https://learn.microsoft.com/ru-ru/ef/core/)
 * СУБД: [SQLite](https://www.sqlite.org/about.html)
 
+Дополнительные пакеты:
+* [Blazored/LocalStorage](https://github.com/Blazored/LocalStorage).
+
 # 📃 Лицензия
 Программа распространяется под лицензией [MIT](https://github.com/Neitralov/MovieReviewLib/blob/master/LICENSE).
 
