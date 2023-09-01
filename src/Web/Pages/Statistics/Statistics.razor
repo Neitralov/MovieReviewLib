@@ -66,6 +66,25 @@
     }
 </Top10DataList>
 
+<Top10DataList
+    Label="Топ-10 тегов по количеству просмотренных произведений">
+    @for (var i = 0; i < 10; i++)
+    {
+        @if (i < StatisticsService.GetTop10TagsByViews().Length)
+        {
+            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                @StatisticsService.GetTop10TagsByViews()[i].Tag (@StatisticsService.GetTop10TagsByViews()[i].Counter)
+            </li>
+        }
+        else
+        {
+            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                N/A
+            </li>
+        }
+    }
+</Top10DataList>
+
 <div>
     <DataWithLabel
         Label="Самый современный просмотренный фильм"
@@ -163,25 +182,6 @@
         Label="Самое короткое аниме"
         Text="@(StatisticsService.GetShortestAnime() is null ? "N/A" : $"{StatisticsService.GetShortestAnime()?.Title} ({StatisticsService.GetShortestAnime()?.Duration} минут)")"/>
 </div>
-
-<Top10DataList
-    Label="Топ-10 тегов по количеству просмотренных произведений">
-    @for (var i = 0; i < 10; i++)
-    {
-        @if (i < StatisticsService.GetTop10TagsByViews().Length)
-        {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                @StatisticsService.GetTop10TagsByViews()[i].Tag (@StatisticsService.GetTop10TagsByViews()[i].Counter)
-            </li>
-        }
-        else
-        {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                N/A
-            </li>
-        }
-    }
-</Top10DataList>
 
 </div>
 
