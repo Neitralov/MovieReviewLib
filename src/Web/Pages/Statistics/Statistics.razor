@@ -8,7 +8,7 @@
 <DataWithLabelAndDetails
     Label="Количество просмотренных произведений"
     Text="@StatisticsService.GetNumberOfWatchedMovies().ToString()"
-    SummaryLabel="Детализация количества просмотренных произведений по типам"
+    SummaryLabel="Количества просмотренных произведений по типам"
     Details="@(new[] 
              {
                  ("Из них фильмов",       StatisticsService.GetNumberOfWatchedFilms().ToString()), 
@@ -22,7 +22,7 @@
 <DataWithLabelAndDetails
      Label="Количество отложенных произведений"
      Text="@StatisticsService.GetNumberOfPostponedMovies().ToString()"
-     SummaryLabel="Детализация количества отложенных произведений по типам"
+     SummaryLabel="Количество отложенных произведений по типам"
      Details="@(new[] 
      {
          ("Из них фильмов",       StatisticsService.GetNumberOfPostponedFilms().ToString()), 
@@ -36,7 +36,7 @@
 <DataWithLabelAndDetails
      Label="Средний рейтинг произведений"
      Text="@StatisticsService.GetAverageMovieRating().ToString("F2")"
-     SummaryLabel="Детализация среднего рейтинга произведений по типам"
+     SummaryLabel="Средний рейтинг произведений по типам"
      Details="@(new[] 
      {
          ("Средний рейтинг фильмов",       StatisticsService.GetAverageFilmRating().ToString("F2")), 
@@ -111,7 +111,7 @@
 <DataWithLabelAndDetails
     Label="Суммарное количество часов просмотра"
     Text="@($"{StatisticsService.GetTotalViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalViewingHours())})")"
-    SummaryLabel="Детализация суммарного количества часов просмотров произведений по типам"
+    SummaryLabel="Суммарного количества часов просмотра по типам произведений"
     Details="@(new[] 
     {
         ("Из них фильмов",       $"{StatisticsService.GetTotalFilmViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalFilmViewingHours())})"),
