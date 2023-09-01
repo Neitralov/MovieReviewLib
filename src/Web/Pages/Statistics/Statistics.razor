@@ -110,16 +110,16 @@
 
 <DataWithLabelAndDetails
     Label="Суммарное количество часов просмотра"
-    Text="@StatisticsService.GetTotalViewingHours().ToString()"
+    Text="@($"{StatisticsService.GetTotalViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalViewingHours())})")"
     SummaryLabel="Детализация суммарного количества часов просмотров произведений по типам"
     Details="@(new[] 
     {
-        ("Из них фильмов",       StatisticsService.GetTotalFilmViewingHours().ToString()), 
-        ("Из них сериалов",      StatisticsService.GetTotalSeriesViewingHours().ToString()), 
-        ("Из них шоу",           StatisticsService.GetTotalShowViewingHours().ToString()), 
-        ("Из них мультфильмов",  StatisticsService.GetTotalCartoonViewingHours().ToString()), 
-        ("Из них мультсериалов", StatisticsService.GetTotalCartoonSeriesViewingHours().ToString()),
-        ("Из них аниме",         StatisticsService.GetTotalAnimeViewingHours().ToString())
+        ("Из них фильмов",       $"{StatisticsService.GetTotalFilmViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalFilmViewingHours())})"),
+        ("Из них сериалов",      $"{StatisticsService.GetTotalSeriesViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalSeriesViewingHours())})"),
+        ("Из них шоу",           $"{StatisticsService.GetTotalShowViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalShowViewingHours())})"),
+        ("Из них мультфильмов",  $"{StatisticsService.GetTotalCartoonViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalCartoonViewingHours())})"),
+        ("Из них мультсериалов", $"{StatisticsService.GetTotalCartoonSeriesViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalCartoonSeriesViewingHours())})"),
+        ("Из них аниме",         $"{StatisticsService.GetTotalAnimeViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalAnimeViewingHours())})")
     })"/>
 
 <div>
@@ -184,3 +184,23 @@
 </Top10DataList>
 
 </div>
+
+@code {
+    private string GetDaysFromHours(int hours)
+    {
+        string GetEndingOfTheDay(int days)
+        {
+            var lastDigitOfDays = days % 10;
+            return lastDigitOfDays switch
+            {
+                1           => "день",
+                2 or 3 or 4 => "дня",
+                _           => "дней"
+            };
+        }
+
+        var days = hours / 24;
+
+        return $"{days} {GetEndingOfTheDay(days)}";
+    }
+}
