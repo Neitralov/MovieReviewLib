@@ -1,0 +1,32 @@
+<details class="bg-neutral-200 dark:bg-neutral-900 rounded-[5px] mb-[5px]">
+    <summary class="text-[16px] font-bold text-neutral-950 dark:text-white py-[5px] px-[10px]">
+        @Label
+    </summary>
+    <div class="p-[10px]">
+        <ol>
+            @for (var i = 0; i < 10; i++)
+            {
+                @if (i < TagWithViewCounterDtos.Length)
+                {
+                    <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                        @TagWithViewCounterDtos[i].Tag (@TagWithViewCounterDtos[i].Counter)
+                    </li>
+                }
+                else
+                {
+                    <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                        N/A
+                    </li>
+                }
+            }
+        </ol>
+    </div>
+</details>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public TagWithViewCounterDto[] TagWithViewCounterDtos { get; set; } = null!;
+}

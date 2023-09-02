@@ -7,255 +7,137 @@
 
 <DataWithLabelAndDetails
     Label="Количество просмотренных произведений"
-    Text="@StatisticsService.GetNumberOfWatchedMovies().ToString()"
+    Text="@StatisticsService.GetNumberOfWatchedMovies()"
     SummaryLabel="Количества просмотренных произведений по типам"
     Details="@(new[] 
-             {
-                 ("Из них фильмов",       StatisticsService.GetNumberOfWatchedFilms().ToString()), 
-                 ("Из них сериалов",      StatisticsService.GetNumberOfWatchedSeries().ToString()), 
-                 ("Из них шоу",           StatisticsService.GetNumberOfWatchedShows().ToString()), 
-                 ("Из них мультфильмов",  StatisticsService.GetNumberOfWatchedCartoons().ToString()),
-                 ("Из них мультсериалов", StatisticsService.GetNumberOfWatchedCartoonSeries().ToString()),
-                 ("Из них аниме",         StatisticsService.GetNumberOfWatchedAnime().ToString()) 
-             })"/>
+    {
+        ("Из них фильмов",       StatisticsService.GetNumberOfWatchedFilms()),
+        ("Из них сериалов",      StatisticsService.GetNumberOfWatchedSeries()),
+        ("Из них шоу",           StatisticsService.GetNumberOfWatchedShows()),
+        ("Из них мультфильмов",  StatisticsService.GetNumberOfWatchedCartoons()),
+        ("Из них мультсериалов", StatisticsService.GetNumberOfWatchedCartoonSeries()),
+        ("Из них аниме",         StatisticsService.GetNumberOfWatchedAnime())
+    })"/>
              
 <DataWithLabelAndDetails
      Label="Количество отложенных произведений"
-     Text="@StatisticsService.GetNumberOfPostponedMovies().ToString()"
+     Text="@StatisticsService.GetNumberOfPostponedMovies()"
      SummaryLabel="Количество отложенных произведений по типам"
      Details="@(new[] 
      {
-         ("Из них фильмов",       StatisticsService.GetNumberOfPostponedFilms().ToString()), 
-         ("Из них сериалов",      StatisticsService.GetNumberOfPostponedSeries().ToString()), 
-         ("Из них шоу",           StatisticsService.GetNumberOfPostponedShows().ToString()), 
-         ("Из них мультфильмов",  StatisticsService.GetNumberOfPostponedCartoons().ToString()),
-         ("Из них мультсериалов", StatisticsService.GetNumberOfPostponedCartoonSeries().ToString()),
-         ("Из них аниме",         StatisticsService.GetNumberOfPostponedAnime().ToString())
+        ("Из них фильмов",       StatisticsService.GetNumberOfPostponedFilms()),
+        ("Из них сериалов",      StatisticsService.GetNumberOfPostponedSeries()),
+        ("Из них шоу",           StatisticsService.GetNumberOfPostponedShows()),
+        ("Из них мультфильмов",  StatisticsService.GetNumberOfPostponedCartoons()),
+        ("Из них мультсериалов", StatisticsService.GetNumberOfPostponedCartoonSeries()),
+        ("Из них аниме",         StatisticsService.GetNumberOfPostponedAnime())
      })"/>
      
 <div>
-    <Top10DataList
-        Label="Топ-10 фильмов по рейтингу">
-        @for (var i = 0; i < 10; i++)
-        {
-            @if (i < StatisticsService.GetTop10FilmsByRaiting().Length)
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    @StatisticsService.GetTop10FilmsByRaiting()[i].Title (@StatisticsService.GetTop10FilmsByRaiting()[i].Score)
-                </li>
-            }
-            else
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    N/A
-                </li>
-            }
-        }
-    </Top10DataList>
+    <Top10MoviesByRaiting
+        Label="Топ-10 фильмов по рейтингу"
+        MovieTitleWithScoreDtos="@StatisticsService.GetTop10FilmsByRaiting()">
+    </Top10MoviesByRaiting>
 
-    <Top10DataList
-        Label="Топ-10 сериалов по рейтингу">
-        @for (var i = 0; i < 10; i++)
-        {
-            @if (i < StatisticsService.GetTop10SeriesByRaiting().Length)
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    @StatisticsService.GetTop10SeriesByRaiting()[i].Title (@StatisticsService.GetTop10SeriesByRaiting()[i].Score)
-                </li>
-            }
-            else
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    N/A
-                </li>
-            }
-        }
-    </Top10DataList>
+    <Top10MoviesByRaiting
+        Label="Топ-10 сериалов по рейтингу"
+        MovieTitleWithScoreDtos="@StatisticsService.GetTop10SeriesByRaiting()">
+    </Top10MoviesByRaiting>
     
-    <Top10DataList
-        Label="Топ-10 шоу по рейтингу">
-        @for (var i = 0; i < 10; i++)
-        {
-            @if (i < StatisticsService.GetTop10ShowsByRaiting().Length)
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    @StatisticsService.GetTop10ShowsByRaiting()[i].Title (@StatisticsService.GetTop10ShowsByRaiting()[i].Score)
-                </li>
-            }
-            else
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    N/A
-                </li>
-            }
-        }
-    </Top10DataList>
+    <Top10MoviesByRaiting
+        Label="Топ-10 шоу по рейтингу"
+        MovieTitleWithScoreDtos="@StatisticsService.GetTop10ShowsByRaiting()">
+    </Top10MoviesByRaiting>
     
-    <Top10DataList
-        Label="Топ-10 мультфильмов по рейтингу">
-        @for (var i = 0; i < 10; i++)
-        {
-            @if (i < StatisticsService.GetTop10CartoonsByRaiting().Length)
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    @StatisticsService.GetTop10CartoonsByRaiting()[i].Title (@StatisticsService.GetTop10CartoonsByRaiting()[i].Score)
-                </li>
-            }
-            else
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    N/A
-                </li>
-            }
-        }
-    </Top10DataList>
+    <Top10MoviesByRaiting
+        Label="Топ-10 мультфильмов по рейтингу"
+        MovieTitleWithScoreDtos="@StatisticsService.GetTop10CartoonsByRaiting()">
+    </Top10MoviesByRaiting>
     
-    <Top10DataList
-        Label="Топ-10 мультсериалов по рейтингу">
-        @for (var i = 0; i < 10; i++)
-        {
-            @if (i < StatisticsService.GetTop10CartoonSeriesByRaiting().Length)
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    @StatisticsService.GetTop10CartoonSeriesByRaiting()[i].Title (@StatisticsService.GetTop10CartoonSeriesByRaiting()[i].Score)
-                </li>
-            }
-            else
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    N/A
-                </li>
-            }
-        }
-    </Top10DataList>
+    <Top10MoviesByRaiting
+        Label="Топ-10 мультсериалов по рейтингу"
+        MovieTitleWithScoreDtos="@StatisticsService.GetTop10CartoonSeriesByRaiting()">
+    </Top10MoviesByRaiting>
     
-    <Top10DataList
-        Label="Топ-10 аниме по рейтингу">
-        @for (var i = 0; i < 10; i++)
-        {
-            @if (i < StatisticsService.GetTop10AnimeByRaiting().Length)
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    @StatisticsService.GetTop10AnimeByRaiting()[i].Title (@StatisticsService.GetTop10AnimeByRaiting()[i].Score)
-                </li>
-            }
-            else
-            {
-                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                    N/A
-                </li>
-            }
-        }
-    </Top10DataList>    
+    <Top10MoviesByRaiting
+        Label="Топ-10 аниме по рейтингу"
+        MovieTitleWithScoreDtos="@StatisticsService.GetTop10AnimeByRaiting()">
+    </Top10MoviesByRaiting>
 </div> 
 
-<Top10DataList
-    Label="Топ-10 тегов по количеству просмотренных произведений">
-    @for (var i = 0; i < 10; i++)
-    {
-        @if (i < StatisticsService.GetTop10TagsByViews().Length)
-        {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                @StatisticsService.GetTop10TagsByViews()[i].Tag (@StatisticsService.GetTop10TagsByViews()[i].Counter)
-            </li>
-        }
-        else
-        {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                N/A
-            </li>
-        }
-    }
-</Top10DataList>
+<Top10TagsByViews
+    Label="Топ-10 тегов по количеству просмотренных произведений"
+    TagWithViewCounterDtos="@StatisticsService.GetTop10TagsByViews()">
+</Top10TagsByViews>
 
 <DataWithLabelAndDetails
     Label="Самое современное просмотренное произведение"
-    Text="@($"{StatisticsService.GetNewestWatchedMovie()?.Title} ({StatisticsService.GetNewestWatchedMovie()?.ReleaseYear} год)")"
+    Text="@StatisticsService.GetNewestWatchedMovie()"
     SummaryLabel="Самые современные просмотренные произведения по типам"
     Details="@(new[]
     {
-        ("Фильм",       StatisticsService.GetNewestWatchedFilm() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedFilm()?.Title} ({StatisticsService.GetNewestWatchedFilm()?.ReleaseYear} год)"),
-        ("Сериал",      StatisticsService.GetNewestWatchedSeries() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedSeries()?.Title} ({StatisticsService.GetNewestWatchedSeries()?.ReleaseYear} год)"),
-        ("Шоу",         StatisticsService.GetNewestWatchedShow() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedShow()?.Title} ({StatisticsService.GetNewestWatchedShow()?.ReleaseYear} год)"),
-        ("Мультфильм",  StatisticsService.GetNewestWatchedCartoon() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedCartoon()?.Title} ({StatisticsService.GetNewestWatchedCartoon()?.ReleaseYear} год)"),
-        ("Мультсериал", StatisticsService.GetNewestWatchedCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedCartoonSeries()?.Title} ({StatisticsService.GetNewestWatchedCartoonSeries()?.ReleaseYear} год)"),
-        ("Аниме",       StatisticsService.GetNewestWatchedAnime() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedAnime()?.Title} ({StatisticsService.GetNewestWatchedAnime()?.ReleaseYear} год)")
+        ("Фильм",       StatisticsService.GetNewestWatchedFilm()),
+        ("Сериал",      StatisticsService.GetNewestWatchedSeries()),
+        ("Шоу",         StatisticsService.GetNewestWatchedShow()),
+        ("Мультфильм",  StatisticsService.GetNewestWatchedCartoon()),
+        ("Мультсериал", StatisticsService.GetNewestWatchedCartoonSeries()),
+        ("Аниме",       StatisticsService.GetNewestWatchedAnime())
     })"/>
 
 <DataWithLabelAndDetails
     Label="Самое старое просмотренное произведение"
-    Text="@($"{StatisticsService.GetOldestWatchedMovie()?.Title} ({StatisticsService.GetOldestWatchedMovie()?.ReleaseYear} год)")"
+    Text="@StatisticsService.GetOldestWatchedMovie()"
     SummaryLabel="Самые старые просмотренные произведения по типам"
     Details="@(new[]
     {
-        ("Фильм",       StatisticsService.GetOldestWatchedFilm() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedFilm()?.Title} ({StatisticsService.GetOldestWatchedFilm()?.ReleaseYear} год)"),
-        ("Сериал",      StatisticsService.GetOldestWatchedSeries() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedSeries()?.Title} ({StatisticsService.GetOldestWatchedSeries()?.ReleaseYear} год)"),
-        ("Шоу",         StatisticsService.GetOldestWatchedShow() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedShow()?.Title} ({StatisticsService.GetOldestWatchedShow()?.ReleaseYear} год)"),
-        ("Мультфильм",  StatisticsService.GetOldestWatchedCartoon() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedCartoon()?.Title} ({StatisticsService.GetOldestWatchedCartoon()?.ReleaseYear} год)"),
-        ("Мультсериал", StatisticsService.GetOldestWatchedCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedCartoonSeries()?.Title} ({StatisticsService.GetOldestWatchedCartoonSeries()?.ReleaseYear} год)"),
-        ("Аниме",       StatisticsService.GetOldestWatchedAnime() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedAnime()?.Title} ({StatisticsService.GetOldestWatchedAnime()?.ReleaseYear} год)")
+        ("Фильм",       StatisticsService.GetOldestWatchedFilm()),
+        ("Сериал",      StatisticsService.GetOldestWatchedSeries()),
+        ("Шоу",         StatisticsService.GetOldestWatchedShow()),
+        ("Мультфильм",  StatisticsService.GetOldestWatchedCartoon()),
+        ("Мультсериал", StatisticsService.GetOldestWatchedCartoonSeries()),
+        ("Аниме",       StatisticsService.GetOldestWatchedAnime())
     })"/>
     
 <DataWithLabelAndDetails
     Label="Суммарное количество часов просмотра"
-    Text="@($"{StatisticsService.GetTotalViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalViewingHours())})")"
+    Text="@StatisticsService.GetTotalViewingHours()"
     SummaryLabel="Суммарного количества часов просмотра по типам произведений"
     Details="@(new[] 
     {
-        ("Из них фильмов",       $"{StatisticsService.GetTotalFilmViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalFilmViewingHours())})"),
-        ("Из них сериалов",      $"{StatisticsService.GetTotalSeriesViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalSeriesViewingHours())})"),
-        ("Из них шоу",           $"{StatisticsService.GetTotalShowViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalShowViewingHours())})"),
-        ("Из них мультфильмов",  $"{StatisticsService.GetTotalCartoonViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalCartoonViewingHours())})"),
-        ("Из них мультсериалов", $"{StatisticsService.GetTotalCartoonSeriesViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalCartoonSeriesViewingHours())})"),
-        ("Из них аниме",         $"{StatisticsService.GetTotalAnimeViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalAnimeViewingHours())})")
+        ("Из них фильмов",       StatisticsService.GetTotalFilmViewingHours()),
+        ("Из них сериалов",      StatisticsService.GetTotalSeriesViewingHours()),
+        ("Из них шоу",           StatisticsService.GetTotalShowViewingHours()),
+        ("Из них мультфильмов",  StatisticsService.GetTotalCartoonViewingHours()),
+        ("Из них мультсериалов", StatisticsService.GetTotalCartoonSeriesViewingHours()),
+        ("Из них аниме",         StatisticsService.GetTotalAnimeViewingHours())
     })"/>
 
 <DataWithLabelAndDetails
     Label="Самое длинное просмотренное произведение"
-    Text="@($"{StatisticsService.GetLongestMovie()?.Title} ({StatisticsService.GetLongestMovie()?.Duration} минут)")"
+    Text="@StatisticsService.GetLongestMovie()"
     SummaryLabel="Самые длинные просмотренные произведения по типам"
     Details="@(new[]
     {
-        ("Фильм",       StatisticsService.GetLongestFilm() is null ? "N/A" : $"{StatisticsService.GetLongestFilm()?.Title} ({StatisticsService.GetLongestFilm()?.Duration} минут)"),
-        ("Сериал",      StatisticsService.GetLongestSeries() is null ? "N/A" : $"{StatisticsService.GetLongestSeries()?.Title} ({StatisticsService.GetLongestSeries()?.Duration} минут)"),
-        ("Шоу",         StatisticsService.GetLongestShow() is null ? "N/A" : $"{StatisticsService.GetLongestShow()?.Title} ({StatisticsService.GetLongestShow()?.Duration} минут)"),
-        ("Мультфильм",  StatisticsService.GetLongestCartoon() is null ? "N/A" : $"{StatisticsService.GetLongestCartoon()?.Title} ({StatisticsService.GetLongestCartoon()?.Duration} минут)"),
-        ("Мультсериал", StatisticsService.GetLongestCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetLongestCartoonSeries()?.Title} ({StatisticsService.GetLongestCartoonSeries()?.Duration} минут)"),
-        ("Аниме",       StatisticsService.GetLongestAnime() is null ? "N/A" : $"{StatisticsService.GetLongestAnime()?.Title} ({StatisticsService.GetLongestAnime()?.Duration} минут)")
+        ("Фильм",       StatisticsService.GetLongestFilm()),
+        ("Сериал",      StatisticsService.GetLongestSeries()),
+        ("Шоу",         StatisticsService.GetLongestShow()),
+        ("Мультфильм",  StatisticsService.GetLongestCartoon()),
+        ("Мультсериал", StatisticsService.GetLongestCartoonSeries()),
+        ("Аниме",       StatisticsService.GetLongestAnime())
     })"/>
 
 <DataWithLabelAndDetails
     Label="Самое короткое просмотренное произведение"
-    Text="@($"{StatisticsService.GetShortestMovie()?.Title} ({StatisticsService.GetShortestMovie()?.Duration} минут)")"
+    Text="@StatisticsService.GetShortestMovie()"
     SummaryLabel="Самые короткие просмотренные произведения по типам"
     Details="@(new[]
     {
-        ("Фильм",       StatisticsService.GetShortestFilm() is null ? "N/A" : $"{StatisticsService.GetShortestFilm()?.Title} ({StatisticsService.GetShortestFilm()?.Duration} минут)"),
-        ("Сериал",      StatisticsService.GetShortestSeries() is null ? "N/A" : $"{StatisticsService.GetShortestSeries()?.Title} ({StatisticsService.GetShortestSeries()?.Duration} минут)"),
-        ("Шоу",         StatisticsService.GetShortestShow() is null ? "N/A" : $"{StatisticsService.GetShortestShow()?.Title} ({StatisticsService.GetShortestShow()?.Duration} минут)"),
-        ("Мультфильм",  StatisticsService.GetShortestCartoon() is null ? "N/A" : $"{StatisticsService.GetShortestCartoon()?.Title} ({StatisticsService.GetShortestCartoon()?.Duration} минут)"),
-        ("Мультсериал", StatisticsService.GetShortestCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetShortestCartoonSeries()?.Title} ({StatisticsService.GetShortestCartoonSeries()?.Duration} минут)"),
-        ("Аниме",       StatisticsService.GetShortestAnime() is null ? "N/A" : $"{StatisticsService.GetShortestAnime()?.Title} ({StatisticsService.GetShortestAnime()?.Duration} минут)")
+        ("Фильм",       StatisticsService.GetShortestFilm()),
+        ("Сериал",      StatisticsService.GetShortestSeries()),
+        ("Шоу",         StatisticsService.GetShortestShow()),
+        ("Мультфильм",  StatisticsService.GetShortestCartoon()),
+        ("Мультсериал", StatisticsService.GetShortestCartoonSeries()),
+        ("Аниме",       StatisticsService.GetShortestAnime())
     })"/>    
 
 </div>
-
-@code {
-    private string GetDaysFromHours(int hours)
-    {
-        string GetEndingOfTheDay(int days)
-        {
-            var lastDigitOfDays = days % 10;
-            return lastDigitOfDays switch
-            {
-                1           => "день",
-                2 or 3 or 4 => "дня",
-                _           => "дней"
-            };
-        }
-
-        var days = hours / 24;
-
-        return $"{days} {GetEndingOfTheDay(days)}";
-    }
-}
