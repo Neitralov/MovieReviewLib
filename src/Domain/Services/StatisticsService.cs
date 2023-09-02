@@ -33,7 +33,12 @@ public class StatisticsService
     public double GetAverageCartoonSeriesRating() => _repository.GetAverageCartoonSeriesRating();
     public double GetAverageAnimeRating()         => _repository.GetAverageAnimeRating();
     
-    public MovieTitleWithScoreDto[] GetTop10MoviesByRaiting() => _repository.GetTop10MoviesByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10FilmsByRaiting()         => _repository.GetTop10FilmsByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10SeriesByRaiting()        => _repository.GetTop10SeriesByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10ShowsByRaiting()         => _repository.GetTop10ShowsByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10CartoonsByRaiting()      => _repository.GetTop10CartoonsByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10CartoonSeriesByRaiting() => _repository.GetTop10CartoonSeriesByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10AnimeByRaiting()         => _repository.GetTop10AnimeByRaiting();
     
     public MovieTitleWithReleaseYearDto? GetNewestWatchedMovie()         => _repository.GetNewestWatchedMovie();
     public MovieTitleWithReleaseYearDto? GetNewestWatchedFilm()          => _repository.GetNewestWatchedFilm();

@@ -26,7 +26,12 @@ public interface IStatisticsRepository
     double GetAverageCartoonSeriesRating();  
     double GetAverageAnimeRating();
     
-    MovieTitleWithScoreDto[] GetTop10MoviesByRaiting();
+    MovieTitleWithScoreDto[] GetTop10FilmsByRaiting();
+    MovieTitleWithScoreDto[] GetTop10SeriesByRaiting();
+    MovieTitleWithScoreDto[] GetTop10ShowsByRaiting();
+    MovieTitleWithScoreDto[] GetTop10CartoonsByRaiting();
+    MovieTitleWithScoreDto[] GetTop10CartoonSeriesByRaiting();
+    MovieTitleWithScoreDto[] GetTop10AnimeByRaiting();
 
     MovieTitleWithReleaseYearDto? GetNewestWatchedMovie();
     MovieTitleWithReleaseYearDto? GetNewestWatchedFilm();

@@ -164,10 +164,60 @@ public class StatisticsRepository : IStatisticsRepository
                 : 0;
     }
 
-    public MovieTitleWithScoreDto[] GetTop10MoviesByRaiting()
+    public MovieTitleWithScoreDto[] GetTop10FilmsByRaiting()
     {
         return _database.Movies
-            .Where(movie => movie.IsWatched == true)
+            .Where(movie => movie.Type == MovieType.Film && movie.IsWatched == true)
+            .MapMoviesToMovieTitleWithScoreDto()
+            .OrderByDescending(movie => movie.Score)
+            .Take(10)
+            .ToArray();
+    }
+
+    public MovieTitleWithScoreDto[] GetTop10SeriesByRaiting()
+    {
+        return _database.Movies
+            .Where(movie => movie.Type == MovieType.Series && movie.IsWatched == true)
+            .MapMoviesToMovieTitleWithScoreDto()
+            .OrderByDescending(movie => movie.Score)
+            .Take(10)
+            .ToArray();
+    }
+
+    public MovieTitleWithScoreDto[] GetTop10ShowsByRaiting()
+    {
+        return _database.Movies
+            .Where(movie => movie.Type == MovieType.Show && movie.IsWatched == true)
+            .MapMoviesToMovieTitleWithScoreDto()
+            .OrderByDescending(movie => movie.Score)
+            .Take(10)
+            .ToArray();
+    }
+
+    public MovieTitleWithScoreDto[] GetTop10CartoonsByRaiting()
+    {
+        return _database.Movies
+            .Where(movie => movie.Type == MovieType.Cartoon && movie.IsWatched == true)
+            .MapMoviesToMovieTitleWithScoreDto()
+            .OrderByDescending(movie => movie.Score)
+            .Take(10)
+            .ToArray();
+    }
+
+    public MovieTitleWithScoreDto[] GetTop10CartoonSeriesByRaiting()
+    {
+        return _database.Movies
+            .Where(movie => movie.Type == MovieType.CartoonSeries && movie.IsWatched == true)
+            .MapMoviesToMovieTitleWithScoreDto()
+            .OrderByDescending(movie => movie.Score)
+            .Take(10)
+            .ToArray();
+    }
+
+    public MovieTitleWithScoreDto[] GetTop10AnimeByRaiting()
+    {
+        return _database.Movies
+            .Where(movie => movie.Type == MovieType.Anime && movie.IsWatched == true)
             .MapMoviesToMovieTitleWithScoreDto()
             .OrderByDescending(movie => movie.Score)
             .Take(10)

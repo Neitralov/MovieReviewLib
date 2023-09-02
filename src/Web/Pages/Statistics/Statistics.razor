@@ -47,24 +47,121 @@
          ("Средний рейтинг аниме",         StatisticsService.GetAverageAnimeRating().ToString("F2"))
      })"/>
      
-<Top10DataList
-    Label="Топ-10 произведений по рейтингу">
-    @for (var i = 0; i < 10; i++)
-    {
-        @if (i < StatisticsService.GetTop10MoviesByRaiting().Length)
+<div>
+    <Top10DataList
+        Label="Топ-10 фильмов по рейтингу">
+        @for (var i = 0; i < 10; i++)
         {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                @StatisticsService.GetTop10MoviesByRaiting()[i].Title (@StatisticsService.GetTop10MoviesByRaiting()[i].Score)
-            </li>
+            @if (i < StatisticsService.GetTop10FilmsByRaiting().Length)
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    @StatisticsService.GetTop10FilmsByRaiting()[i].Title (@StatisticsService.GetTop10FilmsByRaiting()[i].Score)
+                </li>
+            }
+            else
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    N/A
+                </li>
+            }
         }
-        else
+    </Top10DataList>
+
+    <Top10DataList
+        Label="Топ-10 сериалов по рейтингу">
+        @for (var i = 0; i < 10; i++)
         {
-            <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
-                N/A
-            </li>
+            @if (i < StatisticsService.GetTop10SeriesByRaiting().Length)
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    @StatisticsService.GetTop10SeriesByRaiting()[i].Title (@StatisticsService.GetTop10SeriesByRaiting()[i].Score)
+                </li>
+            }
+            else
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    N/A
+                </li>
+            }
         }
-    }
-</Top10DataList>
+    </Top10DataList>
+    
+    <Top10DataList
+        Label="Топ-10 шоу по рейтингу">
+        @for (var i = 0; i < 10; i++)
+        {
+            @if (i < StatisticsService.GetTop10ShowsByRaiting().Length)
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    @StatisticsService.GetTop10ShowsByRaiting()[i].Title (@StatisticsService.GetTop10ShowsByRaiting()[i].Score)
+                </li>
+            }
+            else
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    N/A
+                </li>
+            }
+        }
+    </Top10DataList>
+    
+    <Top10DataList
+        Label="Топ-10 мультфильмов по рейтингу">
+        @for (var i = 0; i < 10; i++)
+        {
+            @if (i < StatisticsService.GetTop10CartoonsByRaiting().Length)
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    @StatisticsService.GetTop10CartoonsByRaiting()[i].Title (@StatisticsService.GetTop10CartoonsByRaiting()[i].Score)
+                </li>
+            }
+            else
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    N/A
+                </li>
+            }
+        }
+    </Top10DataList>
+    
+    <Top10DataList
+        Label="Топ-10 мультсериалов по рейтингу">
+        @for (var i = 0; i < 10; i++)
+        {
+            @if (i < StatisticsService.GetTop10CartoonSeriesByRaiting().Length)
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    @StatisticsService.GetTop10CartoonSeriesByRaiting()[i].Title (@StatisticsService.GetTop10CartoonSeriesByRaiting()[i].Score)
+                </li>
+            }
+            else
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    N/A
+                </li>
+            }
+        }
+    </Top10DataList>
+    
+    <Top10DataList
+        Label="Топ-10 аниме по рейтингу">
+        @for (var i = 0; i < 10; i++)
+        {
+            @if (i < StatisticsService.GetTop10AnimeByRaiting().Length)
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    @StatisticsService.GetTop10AnimeByRaiting()[i].Title (@StatisticsService.GetTop10AnimeByRaiting()[i].Score)
+                </li>
+            }
+            else
+            {
+                <li class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 py-[5px] px-[10px] rounded-[5px] mb-[5px] list-inside">
+                    N/A
+                </li>
+            }
+        }
+    </Top10DataList>    
+</div> 
 
 <Top10DataList
     Label="Топ-10 тегов по количеству просмотренных произведений">
