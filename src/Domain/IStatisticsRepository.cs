@@ -18,12 +18,12 @@ public interface IStatisticsRepository
     int GetNumberOfPostponedCartoonSeries();  
     int GetNumberOfPostponedAnime();  
     
-    MovieTitleWithScoreDto[] GetTop10FilmsByRaiting();
-    MovieTitleWithScoreDto[] GetTop10SeriesByRaiting();
-    MovieTitleWithScoreDto[] GetTop10ShowsByRaiting();
-    MovieTitleWithScoreDto[] GetTop10CartoonsByRaiting();
-    MovieTitleWithScoreDto[] GetTop10CartoonSeriesByRaiting();
-    MovieTitleWithScoreDto[] GetTop10AnimeByRaiting();
+    MovieTitleWithScoreDto[] GetTop10WatchedFilmsByRaiting();
+    MovieTitleWithScoreDto[] GetTop10WatchedSeriesByRaiting();
+    MovieTitleWithScoreDto[] GetTop10WatchedShowsByRaiting();
+    MovieTitleWithScoreDto[] GetTop10WatchedCartoonsByRaiting();
+    MovieTitleWithScoreDto[] GetTop10WatchedCartoonSeriesByRaiting();
+    MovieTitleWithScoreDto[] GetTop10WatchedAnimeByRaiting();
 
     MovieTitleWithReleaseYearDto? GetNewestWatchedMovie();
     MovieTitleWithReleaseYearDto? GetNewestWatchedFilm();
@@ -41,29 +41,29 @@ public interface IStatisticsRepository
     MovieTitleWithReleaseYearDto? GetOldestWatchedCartoonSeries();
     MovieTitleWithReleaseYearDto? GetOldestWatchedAnime();
 
-    int GetTotalViewingHours();
-    int GetTotalFilmViewingHours();
-    int GetTotalSeriesViewingHours();
-    int GetTotalShowViewingHours();
-    int GetTotalCartoonViewingHours();
-    int GetTotalCartoonSeriesViewingHours();
-    int GetTotalAnimeViewingHours();
+    int GetTotalWatchedViewingHours();
+    int GetTotalWatchedFilmViewingHours();
+    int GetTotalWatchedSeriesViewingHours();
+    int GetTotalWatchedShowViewingHours();
+    int GetTotalWatchedCartoonViewingHours();
+    int GetTotalWatchedCartoonSeriesViewingHours();
+    int GetTotalWatchedAnimeViewingHours();
 
-    MovieTitleWithDurationDto? GetLongestMovie();
-    MovieTitleWithDurationDto? GetLongestFilm();
-    MovieTitleWithDurationDto? GetLongestSeries();
-    MovieTitleWithDurationDto? GetLongestShow();
-    MovieTitleWithDurationDto? GetLongestCartoon();
-    MovieTitleWithDurationDto? GetLongestCartoonSeries();
-    MovieTitleWithDurationDto? GetLongestAnime();
+    MovieTitleWithDurationDto? GetLongestWatchedMovie();
+    MovieTitleWithDurationDto? GetLongestWatchedFilm();
+    MovieTitleWithDurationDto? GetLongestWatchedSeries();
+    MovieTitleWithDurationDto? GetLongestWatchedShow();
+    MovieTitleWithDurationDto? GetLongestWatchedCartoon();
+    MovieTitleWithDurationDto? GetLongestWatchedCartoonSeries();
+    MovieTitleWithDurationDto? GetLongestWatchedAnime();
 
-    MovieTitleWithDurationDto? GetShortestMovie();
-    MovieTitleWithDurationDto? GetShortestFilm();
-    MovieTitleWithDurationDto? GetShortestSeries();
-    MovieTitleWithDurationDto? GetShortestShow();
-    MovieTitleWithDurationDto? GetShortestCartoon();
-    MovieTitleWithDurationDto? GetShortestCartoonSeries();
-    MovieTitleWithDurationDto? GetShortestAnime();
+    MovieTitleWithDurationDto? GetShortestWatchedMovie();
+    MovieTitleWithDurationDto? GetShortestWatchedFilm();
+    MovieTitleWithDurationDto? GetShortestWatchedSeries();
+    MovieTitleWithDurationDto? GetShortestWatchedShow();
+    MovieTitleWithDurationDto? GetShortestWatchedCartoon();
+    MovieTitleWithDurationDto? GetShortestWatchedCartoonSeries();
+    MovieTitleWithDurationDto? GetShortestWatchedAnime();
     
     TagWithViewCounterDto[] GetTop10TagsByViews();
 }

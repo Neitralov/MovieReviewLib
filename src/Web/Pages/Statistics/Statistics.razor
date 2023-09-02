@@ -100,44 +100,44 @@
     
 <DataWithLabelAndDetails
     Label="Суммарное количество часов просмотра"
-    Text="@StatisticsService.GetTotalViewingHours()"
+    Text="@StatisticsService.GetTotalWatchedViewingHours()"
     SummaryLabel="Суммарного количества часов просмотра по типам произведений"
     Details="@(new[] 
     {
-        ("Из них фильмов",       StatisticsService.GetTotalFilmViewingHours()),
-        ("Из них сериалов",      StatisticsService.GetTotalSeriesViewingHours()),
-        ("Из них шоу",           StatisticsService.GetTotalShowViewingHours()),
-        ("Из них мультфильмов",  StatisticsService.GetTotalCartoonViewingHours()),
-        ("Из них мультсериалов", StatisticsService.GetTotalCartoonSeriesViewingHours()),
-        ("Из них аниме",         StatisticsService.GetTotalAnimeViewingHours())
+        ("Из них фильмов",       StatisticsService.GetTotalWatchedFilmViewingHours()),
+        ("Из них сериалов",      StatisticsService.GetTotalWatchedSeriesViewingHours()),
+        ("Из них шоу",           StatisticsService.GetTotalWatchedShowViewingHours()),
+        ("Из них мультфильмов",  StatisticsService.GetTotalWatchedCartoonViewingHours()),
+        ("Из них мультсериалов", StatisticsService.GetTotalWatchedCartoonSeriesViewingHours()),
+        ("Из них аниме",         StatisticsService.GetTotalWatchedAnimeViewingHours())
     })"/>
 
 <DataWithLabelAndDetails
     Label="Самое длинное просмотренное произведение"
-    Text="@StatisticsService.GetLongestMovie()"
+    Text="@StatisticsService.GetLongestWatchedMovie()"
     SummaryLabel="Самые длинные просмотренные произведения по типам"
     Details="@(new[]
     {
-        ("Фильм",       StatisticsService.GetLongestFilm()),
-        ("Сериал",      StatisticsService.GetLongestSeries()),
-        ("Шоу",         StatisticsService.GetLongestShow()),
-        ("Мультфильм",  StatisticsService.GetLongestCartoon()),
-        ("Мультсериал", StatisticsService.GetLongestCartoonSeries()),
-        ("Аниме",       StatisticsService.GetLongestAnime())
+        ("Фильм",       StatisticsService.GetLongestWatchedFilm()),
+        ("Сериал",      StatisticsService.GetLongestWatchedSeries()),
+        ("Шоу",         StatisticsService.GetLongestWatchedShow()),
+        ("Мультфильм",  StatisticsService.GetLongestWatchedCartoon()),
+        ("Мультсериал", StatisticsService.GetLongestWatchedCartoonSeries()),
+        ("Аниме",       StatisticsService.GetLongestWatchedAnime())
     })"/>
 
 <DataWithLabelAndDetails
     Label="Самое короткое просмотренное произведение"
-    Text="@StatisticsService.GetShortestMovie()"
+    Text="@StatisticsService.GetShortestWatchedMovie()"
     SummaryLabel="Самые короткие просмотренные произведения по типам"
     Details="@(new[]
     {
-        ("Фильм",       StatisticsService.GetShortestFilm()),
-        ("Сериал",      StatisticsService.GetShortestSeries()),
-        ("Шоу",         StatisticsService.GetShortestShow()),
-        ("Мультфильм",  StatisticsService.GetShortestCartoon()),
-        ("Мультсериал", StatisticsService.GetShortestCartoonSeries()),
-        ("Аниме",       StatisticsService.GetShortestAnime())
+        ("Фильм",       StatisticsService.GetShortestWatchedFilm()),
+        ("Сериал",      StatisticsService.GetShortestWatchedSeries()),
+        ("Шоу",         StatisticsService.GetShortestWatchedShow()),
+        ("Мультфильм",  StatisticsService.GetShortestWatchedCartoon()),
+        ("Мультсериал", StatisticsService.GetShortestWatchedCartoonSeries()),
+        ("Аниме",       StatisticsService.GetShortestWatchedAnime())
     })"/>    
 
 </div>

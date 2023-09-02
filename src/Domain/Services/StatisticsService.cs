@@ -25,12 +25,12 @@ public class StatisticsService
     public string GetNumberOfPostponedCartoonSeries() => _repository.GetNumberOfPostponedCartoonSeries().ToString();
     public string GetNumberOfPostponedAnime()         => _repository.GetNumberOfPostponedAnime().ToString();
     
-    public MovieTitleWithScoreDto[] GetTop10FilmsByRaiting()         => _repository.GetTop10FilmsByRaiting();
-    public MovieTitleWithScoreDto[] GetTop10SeriesByRaiting()        => _repository.GetTop10SeriesByRaiting();
-    public MovieTitleWithScoreDto[] GetTop10ShowsByRaiting()         => _repository.GetTop10ShowsByRaiting();
-    public MovieTitleWithScoreDto[] GetTop10CartoonsByRaiting()      => _repository.GetTop10CartoonsByRaiting();
-    public MovieTitleWithScoreDto[] GetTop10CartoonSeriesByRaiting() => _repository.GetTop10CartoonSeriesByRaiting();
-    public MovieTitleWithScoreDto[] GetTop10AnimeByRaiting()         => _repository.GetTop10AnimeByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10FilmsByRaiting()         => _repository.GetTop10WatchedFilmsByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10SeriesByRaiting()        => _repository.GetTop10WatchedSeriesByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10ShowsByRaiting()         => _repository.GetTop10WatchedShowsByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10CartoonsByRaiting()      => _repository.GetTop10WatchedCartoonsByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10CartoonSeriesByRaiting() => _repository.GetTop10WatchedCartoonSeriesByRaiting();
+    public MovieTitleWithScoreDto[] GetTop10AnimeByRaiting()         => _repository.GetTop10WatchedAnimeByRaiting();
     
     public string GetNewestWatchedMovie()         => GetFormattedTitleWithReleaseYear(_repository.GetNewestWatchedMovie());
     public string GetNewestWatchedFilm()          => GetFormattedTitleWithReleaseYear(_repository.GetNewestWatchedFilm());
@@ -48,29 +48,29 @@ public class StatisticsService
     public string GetOldestWatchedCartoonSeries() => GetFormattedTitleWithReleaseYear(_repository.GetOldestWatchedCartoonSeries());
     public string GetOldestWatchedAnime()         => GetFormattedTitleWithReleaseYear(_repository.GetOldestWatchedAnime());
 
-    public string GetTotalViewingHours()              => GetFormattedViewingHours(_repository.GetTotalViewingHours());
-    public string GetTotalFilmViewingHours()          => GetFormattedViewingHours(_repository.GetTotalFilmViewingHours());
-    public string GetTotalSeriesViewingHours()        => GetFormattedViewingHours(_repository.GetTotalSeriesViewingHours());
-    public string GetTotalShowViewingHours()          => GetFormattedViewingHours(_repository.GetTotalShowViewingHours());
-    public string GetTotalCartoonViewingHours()       => GetFormattedViewingHours(_repository.GetTotalCartoonViewingHours());
-    public string GetTotalCartoonSeriesViewingHours() => GetFormattedViewingHours(_repository.GetTotalCartoonSeriesViewingHours());
-    public string GetTotalAnimeViewingHours()         => GetFormattedViewingHours(_repository.GetTotalAnimeViewingHours());
+    public string GetTotalWatchedViewingHours()              => GetFormattedViewingHours(_repository.GetTotalWatchedViewingHours());
+    public string GetTotalWatchedFilmViewingHours()          => GetFormattedViewingHours(_repository.GetTotalWatchedFilmViewingHours());
+    public string GetTotalWatchedSeriesViewingHours()        => GetFormattedViewingHours(_repository.GetTotalWatchedSeriesViewingHours());
+    public string GetTotalWatchedShowViewingHours()          => GetFormattedViewingHours(_repository.GetTotalWatchedShowViewingHours());
+    public string GetTotalWatchedCartoonViewingHours()       => GetFormattedViewingHours(_repository.GetTotalWatchedCartoonViewingHours());
+    public string GetTotalWatchedCartoonSeriesViewingHours() => GetFormattedViewingHours(_repository.GetTotalWatchedCartoonSeriesViewingHours());
+    public string GetTotalWatchedAnimeViewingHours()         => GetFormattedViewingHours(_repository.GetTotalWatchedAnimeViewingHours());
 
-    public string GetLongestMovie()         => GetFormattedMovieTitleWithDuration(_repository.GetLongestMovie());
-    public string GetLongestFilm()          => GetFormattedMovieTitleWithDuration(_repository.GetLongestFilm());
-    public string GetLongestSeries()        => GetFormattedMovieTitleWithDuration(_repository.GetLongestSeries());
-    public string GetLongestShow()          => GetFormattedMovieTitleWithDuration(_repository.GetLongestShow());
-    public string GetLongestCartoon()       => GetFormattedMovieTitleWithDuration(_repository.GetLongestCartoon());
-    public string GetLongestCartoonSeries() => GetFormattedMovieTitleWithDuration(_repository.GetLongestCartoonSeries());
-    public string GetLongestAnime()         => GetFormattedMovieTitleWithDuration(_repository.GetLongestAnime());
+    public string GetLongestWatchedMovie()         => GetFormattedMovieTitleWithDuration(_repository.GetLongestWatchedMovie());
+    public string GetLongestWatchedFilm()          => GetFormattedMovieTitleWithDuration(_repository.GetLongestWatchedFilm());
+    public string GetLongestWatchedSeries()        => GetFormattedMovieTitleWithDuration(_repository.GetLongestWatchedSeries());
+    public string GetLongestWatchedShow()          => GetFormattedMovieTitleWithDuration(_repository.GetLongestWatchedShow());
+    public string GetLongestWatchedCartoon()       => GetFormattedMovieTitleWithDuration(_repository.GetLongestWatchedCartoon());
+    public string GetLongestWatchedCartoonSeries() => GetFormattedMovieTitleWithDuration(_repository.GetLongestWatchedCartoonSeries());
+    public string GetLongestWatchedAnime()         => GetFormattedMovieTitleWithDuration(_repository.GetLongestWatchedAnime());
 
-    public string GetShortestMovie()         => GetFormattedMovieTitleWithDuration(_repository.GetShortestMovie());
-    public string GetShortestFilm()          => GetFormattedMovieTitleWithDuration(_repository.GetShortestFilm());
-    public string GetShortestSeries()        => GetFormattedMovieTitleWithDuration(_repository.GetShortestSeries());
-    public string GetShortestShow()          => GetFormattedMovieTitleWithDuration(_repository.GetShortestShow());
-    public string GetShortestCartoon()       => GetFormattedMovieTitleWithDuration(_repository.GetShortestCartoon());
-    public string GetShortestCartoonSeries() => GetFormattedMovieTitleWithDuration(_repository.GetShortestCartoonSeries());
-    public string GetShortestAnime()         => GetFormattedMovieTitleWithDuration(_repository.GetShortestAnime());
+    public string GetShortestWatchedMovie()         => GetFormattedMovieTitleWithDuration(_repository.GetShortestWatchedMovie());
+    public string GetShortestWatchedFilm()          => GetFormattedMovieTitleWithDuration(_repository.GetShortestWatchedFilm());
+    public string GetShortestWatchedSeries()        => GetFormattedMovieTitleWithDuration(_repository.GetShortestWatchedSeries());
+    public string GetShortestWatchedShow()          => GetFormattedMovieTitleWithDuration(_repository.GetShortestWatchedShow());
+    public string GetShortestWatchedCartoon()       => GetFormattedMovieTitleWithDuration(_repository.GetShortestWatchedCartoon());
+    public string GetShortestWatchedCartoonSeries() => GetFormattedMovieTitleWithDuration(_repository.GetShortestWatchedCartoonSeries());
+    public string GetShortestWatchedAnime()         => GetFormattedMovieTitleWithDuration(_repository.GetShortestWatchedAnime());
     
     public TagWithViewCounterDto[] GetTop10TagsByViews() => _repository.GetTop10TagsByViews();
 

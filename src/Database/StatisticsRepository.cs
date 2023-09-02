@@ -94,7 +94,7 @@ public class StatisticsRepository : IStatisticsRepository
             .Count(movie => movie.IsWatched == false && movie.Type == MovieType.Anime);
     }
 
-    public MovieTitleWithScoreDto[] GetTop10FilmsByRaiting()
+    public MovieTitleWithScoreDto[] GetTop10WatchedFilmsByRaiting()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Film && movie.IsWatched == true)
@@ -104,7 +104,7 @@ public class StatisticsRepository : IStatisticsRepository
             .ToArray();
     }
 
-    public MovieTitleWithScoreDto[] GetTop10SeriesByRaiting()
+    public MovieTitleWithScoreDto[] GetTop10WatchedSeriesByRaiting()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Series && movie.IsWatched == true)
@@ -114,7 +114,7 @@ public class StatisticsRepository : IStatisticsRepository
             .ToArray();
     }
 
-    public MovieTitleWithScoreDto[] GetTop10ShowsByRaiting()
+    public MovieTitleWithScoreDto[] GetTop10WatchedShowsByRaiting()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Show && movie.IsWatched == true)
@@ -124,7 +124,7 @@ public class StatisticsRepository : IStatisticsRepository
             .ToArray();
     }
 
-    public MovieTitleWithScoreDto[] GetTop10CartoonsByRaiting()
+    public MovieTitleWithScoreDto[] GetTop10WatchedCartoonsByRaiting()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Cartoon && movie.IsWatched == true)
@@ -134,7 +134,7 @@ public class StatisticsRepository : IStatisticsRepository
             .ToArray();
     }
 
-    public MovieTitleWithScoreDto[] GetTop10CartoonSeriesByRaiting()
+    public MovieTitleWithScoreDto[] GetTop10WatchedCartoonSeriesByRaiting()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.CartoonSeries && movie.IsWatched == true)
@@ -144,7 +144,7 @@ public class StatisticsRepository : IStatisticsRepository
             .ToArray();
     }
 
-    public MovieTitleWithScoreDto[] GetTop10AnimeByRaiting()
+    public MovieTitleWithScoreDto[] GetTop10WatchedAnimeByRaiting()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Anime && movie.IsWatched == true)
@@ -336,7 +336,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public int GetTotalViewingHours()
+    public int GetTotalWatchedViewingHours()
     {
         return _database.Movies
             .Where(movie => movie.IsWatched == true)
@@ -344,7 +344,7 @@ public class StatisticsRepository : IStatisticsRepository
             .Sum() / MinutesInHour;
     }
 
-    public int GetTotalFilmViewingHours()
+    public int GetTotalWatchedFilmViewingHours()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Film && movie.IsWatched == true)
@@ -352,7 +352,7 @@ public class StatisticsRepository : IStatisticsRepository
             .Sum() / MinutesInHour;
     }
 
-    public int GetTotalSeriesViewingHours()
+    public int GetTotalWatchedSeriesViewingHours()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Series && movie.IsWatched == true)
@@ -360,7 +360,7 @@ public class StatisticsRepository : IStatisticsRepository
             .Sum() / MinutesInHour;
     }
 
-    public int GetTotalShowViewingHours()
+    public int GetTotalWatchedShowViewingHours()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Show && movie.IsWatched == true)
@@ -368,7 +368,7 @@ public class StatisticsRepository : IStatisticsRepository
             .Sum() / MinutesInHour;
     }
 
-    public int GetTotalCartoonViewingHours()
+    public int GetTotalWatchedCartoonViewingHours()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Cartoon && movie.IsWatched == true)
@@ -376,7 +376,7 @@ public class StatisticsRepository : IStatisticsRepository
             .Sum() / MinutesInHour;
     }
 
-    public int GetTotalCartoonSeriesViewingHours()
+    public int GetTotalWatchedCartoonSeriesViewingHours()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.CartoonSeries && movie.IsWatched == true)
@@ -384,7 +384,7 @@ public class StatisticsRepository : IStatisticsRepository
             .Sum() / MinutesInHour;
     }
 
-    public int GetTotalAnimeViewingHours()
+    public int GetTotalWatchedAnimeViewingHours()
     {
         return _database.Movies
             .Where(movie => movie.Type == MovieType.Anime && movie.IsWatched == true)
@@ -392,7 +392,7 @@ public class StatisticsRepository : IStatisticsRepository
             .Sum() / MinutesInHour;
     }
 
-    public MovieTitleWithDurationDto? GetLongestMovie()
+    public MovieTitleWithDurationDto? GetLongestWatchedMovie()
     {
         return _database.Movies
             .Any(movie => movie.IsWatched == true)
@@ -405,7 +405,7 @@ public class StatisticsRepository : IStatisticsRepository
             : null;
     }
 
-    public MovieTitleWithDurationDto? GetLongestFilm()
+    public MovieTitleWithDurationDto? GetLongestWatchedFilm()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Film && movie.IsWatched == true)
@@ -418,7 +418,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetLongestSeries()
+    public MovieTitleWithDurationDto? GetLongestWatchedSeries()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Series && movie.IsWatched == true)
@@ -431,7 +431,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetLongestShow()
+    public MovieTitleWithDurationDto? GetLongestWatchedShow()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Show && movie.IsWatched == true)
@@ -444,7 +444,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetLongestCartoon()
+    public MovieTitleWithDurationDto? GetLongestWatchedCartoon()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Cartoon && movie.IsWatched == true)
@@ -457,7 +457,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetLongestCartoonSeries()
+    public MovieTitleWithDurationDto? GetLongestWatchedCartoonSeries()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.CartoonSeries && movie.IsWatched == true)
@@ -470,7 +470,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetLongestAnime()
+    public MovieTitleWithDurationDto? GetLongestWatchedAnime()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Anime && movie.IsWatched == true)
@@ -483,7 +483,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetShortestMovie()
+    public MovieTitleWithDurationDto? GetShortestWatchedMovie()
     {
         return _database.Movies
             .Any(movie => movie.IsWatched == true)
@@ -496,7 +496,7 @@ public class StatisticsRepository : IStatisticsRepository
             : null;
     }
 
-    public MovieTitleWithDurationDto? GetShortestFilm()
+    public MovieTitleWithDurationDto? GetShortestWatchedFilm()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Film && movie.IsWatched == true)
@@ -509,7 +509,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetShortestSeries()
+    public MovieTitleWithDurationDto? GetShortestWatchedSeries()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Series && movie.IsWatched == true)
@@ -522,7 +522,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetShortestShow()
+    public MovieTitleWithDurationDto? GetShortestWatchedShow()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Show && movie.IsWatched == true)
@@ -535,7 +535,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetShortestCartoon()
+    public MovieTitleWithDurationDto? GetShortestWatchedCartoon()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Cartoon && movie.IsWatched == true)
@@ -548,7 +548,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetShortestCartoonSeries()
+    public MovieTitleWithDurationDto? GetShortestWatchedCartoonSeries()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.CartoonSeries && movie.IsWatched == true)
@@ -561,7 +561,7 @@ public class StatisticsRepository : IStatisticsRepository
                 : null;
     }
 
-    public MovieTitleWithDurationDto? GetShortestAnime()
+    public MovieTitleWithDurationDto? GetShortestWatchedAnime()
     {
         return _database.Movies
             .Any(movie => movie.Type == MovieType.Anime && movie.IsWatched == true)
