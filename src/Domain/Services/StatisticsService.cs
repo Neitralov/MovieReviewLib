@@ -25,14 +25,6 @@ public class StatisticsService
     public int GetNumberOfPostponedCartoonSeries() => _repository.GetNumberOfPostponedCartoonSeries();
     public int GetNumberOfPostponedAnime()         => _repository.GetNumberOfPostponedAnime();
     
-    public double GetAverageMovieRating()         => _repository.GetAverageMovieRating();
-    public double GetAverageFilmRating()          => _repository.GetAverageFilmRating();
-    public double GetAverageSeriesRating()        => _repository.GetAverageSeriesRating();
-    public double GetAverageShowRating()          => _repository.GetAverageShowRating();
-    public double GetAverageCartoonRating()       => _repository.GetAverageCartoonRating();
-    public double GetAverageCartoonSeriesRating() => _repository.GetAverageCartoonSeriesRating();
-    public double GetAverageAnimeRating()         => _repository.GetAverageAnimeRating();
-    
     public MovieTitleWithScoreDto[] GetTop10FilmsByRaiting()         => _repository.GetTop10FilmsByRaiting();
     public MovieTitleWithScoreDto[] GetTop10SeriesByRaiting()        => _repository.GetTop10SeriesByRaiting();
     public MovieTitleWithScoreDto[] GetTop10ShowsByRaiting()         => _repository.GetTop10ShowsByRaiting();

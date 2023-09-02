@@ -18,14 +18,6 @@ public interface IStatisticsRepository
     int GetNumberOfPostponedCartoonSeries();  
     int GetNumberOfPostponedAnime();  
     
-    double GetAverageMovieRating();  
-    double GetAverageFilmRating();  
-    double GetAverageSeriesRating();  
-    double GetAverageShowRating();  
-    double GetAverageCartoonRating();  
-    double GetAverageCartoonSeriesRating();  
-    double GetAverageAnimeRating();
-    
     MovieTitleWithScoreDto[] GetTop10FilmsByRaiting();
     MovieTitleWithScoreDto[] GetTop10SeriesByRaiting();
     MovieTitleWithScoreDto[] GetTop10ShowsByRaiting();

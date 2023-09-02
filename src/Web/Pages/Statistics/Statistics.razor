@@ -32,20 +32,6 @@
          ("Из них мультсериалов", StatisticsService.GetNumberOfPostponedCartoonSeries().ToString()),
          ("Из них аниме",         StatisticsService.GetNumberOfPostponedAnime().ToString())
      })"/>
-
-<DataWithLabelAndDetails
-     Label="Средний рейтинг произведений"
-     Text="@StatisticsService.GetAverageMovieRating().ToString("F2")"
-     SummaryLabel="Средний рейтинг произведений по типам"
-     Details="@(new[] 
-     {
-         ("Средний рейтинг фильмов",       StatisticsService.GetAverageFilmRating().ToString("F2")), 
-         ("Средний рейтинг сериалов",      StatisticsService.GetAverageSeriesRating().ToString("F2")), 
-         ("Средний рейтинг шоу",           StatisticsService.GetAverageShowRating().ToString("F2")), 
-         ("Средний рейтинг мультфильмов",  StatisticsService.GetAverageCartoonRating().ToString("F2")),
-         ("Средний рейтинг мультсериалов", StatisticsService.GetAverageCartoonSeriesRating().ToString("F2")),
-         ("Средний рейтинг аниме",         StatisticsService.GetAverageAnimeRating().ToString("F2"))
-     })"/>
      
 <div>
     <Top10DataList
