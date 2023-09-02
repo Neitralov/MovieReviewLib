@@ -174,6 +174,19 @@ public class StatisticsRepository : IStatisticsRepository
             .ToArray();
     }
 
+    public MovieTitleWithReleaseYearDto? GetNewestWatchedMovie()
+    {
+        return _database.Movies
+            .Any(movie => movie.IsWatched == true)
+                ? _database.Movies
+                    .AsNoTracking()
+                    .Where(movie => movie.IsWatched == true)
+                    .MapMoviesToMovieTitleWithReleaseYearDto()
+                    .OrderByDescending(movie => movie.ReleaseYear)
+                    .FirstOrDefault()
+            : null; 
+    }
+
     public MovieTitleWithReleaseYearDto? GetNewestWatchedFilm()
     {
         return _database.Movies
@@ -250,6 +263,19 @@ public class StatisticsRepository : IStatisticsRepository
                     .OrderByDescending(movie => movie.ReleaseYear)
                     .FirstOrDefault()
                 : null;
+    }
+
+    public MovieTitleWithReleaseYearDto? GetOldestWatchedMovie()
+    {
+        return _database.Movies
+            .Any(movie => movie.IsWatched == true)
+                ? _database.Movies
+                    .AsNoTracking()
+                    .Where(movie => movie.IsWatched == true)
+                    .MapMoviesToMovieTitleWithReleaseYearDto()
+                    .OrderBy(movie => movie.ReleaseYear)
+                    .FirstOrDefault()
+            : null;
     }
 
     public MovieTitleWithReleaseYearDto? GetOldestWatchedFilm()

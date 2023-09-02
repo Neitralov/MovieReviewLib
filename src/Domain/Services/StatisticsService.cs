@@ -25,7 +25,6 @@ public class StatisticsService
     public int GetNumberOfPostponedCartoonSeries() => _repository.GetNumberOfPostponedCartoonSeries();
     public int GetNumberOfPostponedAnime()         => _repository.GetNumberOfPostponedAnime();
     
-
     public double GetAverageMovieRating()         => _repository.GetAverageMovieRating();
     public double GetAverageFilmRating()          => _repository.GetAverageFilmRating();
     public double GetAverageSeriesRating()        => _repository.GetAverageSeriesRating();
@@ -34,10 +33,9 @@ public class StatisticsService
     public double GetAverageCartoonSeriesRating() => _repository.GetAverageCartoonSeriesRating();
     public double GetAverageAnimeRating()         => _repository.GetAverageAnimeRating();
     
-
     public MovieTitleWithScoreDto[] GetTop10MoviesByRaiting() => _repository.GetTop10MoviesByRaiting();
     
-
+    public MovieTitleWithReleaseYearDto? GetNewestWatchedMovie()         => _repository.GetNewestWatchedMovie();
     public MovieTitleWithReleaseYearDto? GetNewestWatchedFilm()          => _repository.GetNewestWatchedFilm();
     public MovieTitleWithReleaseYearDto? GetNewestWatchedSeries()        => _repository.GetNewestWatchedSeries();
     public MovieTitleWithReleaseYearDto? GetNewestWatchedShow()          => _repository.GetNewestWatchedShow();
@@ -45,6 +43,7 @@ public class StatisticsService
     public MovieTitleWithReleaseYearDto? GetNewestWatchedCartoonSeries() => _repository.GetNewestWatchedCartoonSeries();
     public MovieTitleWithReleaseYearDto? GetNewestWatchedAnime()         => _repository.GetNewestWatchedAnime();
     
+    public MovieTitleWithReleaseYearDto? GetOldestWatchedMovie()         => _repository.GetOldestWatchedMovie();
     public MovieTitleWithReleaseYearDto? GetOldestWatchedFilm()          => _repository.GetOldestWatchedFilm();
     public MovieTitleWithReleaseYearDto? GetOldestWatchedSeries()        => _repository.GetOldestWatchedSeries();
     public MovieTitleWithReleaseYearDto? GetOldestWatchedShow()          => _repository.GetOldestWatchedShow();

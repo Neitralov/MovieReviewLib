@@ -85,48 +85,34 @@
     }
 </Top10DataList>
 
-<div>
-    <DataWithLabel
-        Label="Самый современный просмотренный фильм"
-        Text="@(StatisticsService.GetNewestWatchedFilm() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedFilm()?.Title} ({StatisticsService.GetNewestWatchedFilm()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самый современный просмотренный сериал"
-        Text="@(StatisticsService.GetNewestWatchedSeries() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedSeries()?.Title} ({StatisticsService.GetNewestWatchedSeries()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самое современное просмотренное шоу"
-        Text="@(StatisticsService.GetNewestWatchedShow() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedShow()?.Title} ({StatisticsService.GetNewestWatchedShow()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самый современный просмотренный мультфильм"
-        Text="@(StatisticsService.GetNewestWatchedCartoon() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedCartoon()?.Title} ({StatisticsService.GetNewestWatchedCartoon()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самый современный просмотренный мультсериал"
-        Text="@(StatisticsService.GetNewestWatchedCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedCartoonSeries()?.Title} ({StatisticsService.GetNewestWatchedCartoonSeries()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самое современное просмотренное аниме"
-        Text="@(StatisticsService.GetNewestWatchedAnime() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedAnime()?.Title} ({StatisticsService.GetNewestWatchedAnime()?.ReleaseYear} год)")"/>
-</div>
+<DataWithLabelAndDetails
+    Label="Самое современное просмотренное произведение"
+    Text="@($"{StatisticsService.GetNewestWatchedMovie()?.Title} ({StatisticsService.GetNewestWatchedMovie()?.ReleaseYear} год)")"
+    SummaryLabel="Самые современные просмотренные произведения по типам"
+    Details="@(new[]
+    {
+        ("Фильм",       StatisticsService.GetNewestWatchedFilm() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedFilm()?.Title} ({StatisticsService.GetNewestWatchedFilm()?.ReleaseYear} год)"),
+        ("Сериал",      StatisticsService.GetNewestWatchedSeries() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedSeries()?.Title} ({StatisticsService.GetNewestWatchedSeries()?.ReleaseYear} год)"),
+        ("Шоу",         StatisticsService.GetNewestWatchedShow() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedShow()?.Title} ({StatisticsService.GetNewestWatchedShow()?.ReleaseYear} год)"),
+        ("Мультфильм",  StatisticsService.GetNewestWatchedCartoon() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedCartoon()?.Title} ({StatisticsService.GetNewestWatchedCartoon()?.ReleaseYear} год)"),
+        ("Мультсериал", StatisticsService.GetNewestWatchedCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedCartoonSeries()?.Title} ({StatisticsService.GetNewestWatchedCartoonSeries()?.ReleaseYear} год)"),
+        ("Аниме",       StatisticsService.GetNewestWatchedAnime() is null ? "N/A" : $"{StatisticsService.GetNewestWatchedAnime()?.Title} ({StatisticsService.GetNewestWatchedAnime()?.ReleaseYear} год)")
+    })"/>
 
-<div>
-    <DataWithLabel
-        Label="Самый старый просмотренный фильм"
-        Text="@(StatisticsService.GetOldestWatchedFilm() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedFilm()?.Title} ({StatisticsService.GetOldestWatchedFilm()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самый старый просмотренный сериал"
-        Text="@(StatisticsService.GetOldestWatchedSeries() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedSeries()?.Title} ({StatisticsService.GetOldestWatchedSeries()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самое старое просмотренное шоу"
-        Text="@(StatisticsService.GetOldestWatchedShow() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedShow()?.Title} ({StatisticsService.GetOldestWatchedShow()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самый старый просмотренный мультфильм"
-        Text="@(StatisticsService.GetOldestWatchedCartoon() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedCartoon()?.Title} ({StatisticsService.GetOldestWatchedCartoon()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самый старый просмотренный мультсериал"
-        Text="@(StatisticsService.GetOldestWatchedCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedCartoonSeries()?.Title} ({StatisticsService.GetOldestWatchedCartoonSeries()?.ReleaseYear} год)")"/>
-    <DataWithLabel
-        Label="Самое старое просмотренное аниме"
-        Text="@(StatisticsService.GetOldestWatchedAnime() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedAnime()?.Title} ({StatisticsService.GetOldestWatchedAnime()?.ReleaseYear} год)")"/>
-</div>
-
+<DataWithLabelAndDetails
+    Label="Самое старое просмотренное произведение"
+    Text="@($"{StatisticsService.GetOldestWatchedMovie()?.Title} ({StatisticsService.GetOldestWatchedMovie()?.ReleaseYear} год)")"
+    SummaryLabel="Самые старые просмотренные произведения по типам"
+    Details="@(new[]
+    {
+        ("Фильм",       StatisticsService.GetOldestWatchedFilm() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedFilm()?.Title} ({StatisticsService.GetOldestWatchedFilm()?.ReleaseYear} год)"),
+        ("Сериал",      StatisticsService.GetOldestWatchedSeries() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedSeries()?.Title} ({StatisticsService.GetOldestWatchedSeries()?.ReleaseYear} год)"),
+        ("Шоу",         StatisticsService.GetOldestWatchedShow() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedShow()?.Title} ({StatisticsService.GetOldestWatchedShow()?.ReleaseYear} год)"),
+        ("Мультфильм",  StatisticsService.GetOldestWatchedCartoon() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedCartoon()?.Title} ({StatisticsService.GetOldestWatchedCartoon()?.ReleaseYear} год)"),
+        ("Мультсериал", StatisticsService.GetOldestWatchedCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedCartoonSeries()?.Title} ({StatisticsService.GetOldestWatchedCartoonSeries()?.ReleaseYear} год)"),
+        ("Аниме",       StatisticsService.GetOldestWatchedAnime() is null ? "N/A" : $"{StatisticsService.GetOldestWatchedAnime()?.Title} ({StatisticsService.GetOldestWatchedAnime()?.ReleaseYear} год)")
+    })"/>
+    
 <DataWithLabelAndDetails
     Label="Суммарное количество часов просмотра"
     Text="@($"{StatisticsService.GetTotalViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalViewingHours())})")"

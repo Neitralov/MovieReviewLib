@@ -28,6 +28,7 @@ public interface IStatisticsRepository
     
     MovieTitleWithScoreDto[] GetTop10MoviesByRaiting();
 
+    MovieTitleWithReleaseYearDto? GetNewestWatchedMovie();
     MovieTitleWithReleaseYearDto? GetNewestWatchedFilm();
     MovieTitleWithReleaseYearDto? GetNewestWatchedSeries();
     MovieTitleWithReleaseYearDto? GetNewestWatchedShow();
@@ -35,6 +36,7 @@ public interface IStatisticsRepository
     MovieTitleWithReleaseYearDto? GetNewestWatchedCartoonSeries();
     MovieTitleWithReleaseYearDto? GetNewestWatchedAnime();
 
+    MovieTitleWithReleaseYearDto? GetOldestWatchedMovie();
     MovieTitleWithReleaseYearDto? GetOldestWatchedFilm();
     MovieTitleWithReleaseYearDto? GetOldestWatchedSeries();
     MovieTitleWithReleaseYearDto? GetOldestWatchedShow();
