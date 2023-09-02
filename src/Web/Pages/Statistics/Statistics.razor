@@ -127,47 +127,33 @@
         ("Из них аниме",         $"{StatisticsService.GetTotalAnimeViewingHours()} ({GetDaysFromHours(StatisticsService.GetTotalAnimeViewingHours())})")
     })"/>
 
-<div>
-    <DataWithLabel
-        Label="Самый длинный фильм"
-        Text="@(StatisticsService.GetLongestFilm() is null ? "N/A" : $"{StatisticsService.GetLongestFilm()?.Title} ({StatisticsService.GetLongestFilm()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самый длинный сериал"
-        Text="@(StatisticsService.GetLongestSeries() is null ? "N/A" : $"{StatisticsService.GetLongestSeries()?.Title} ({StatisticsService.GetLongestSeries()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самое длинное шоу"
-        Text="@(StatisticsService.GetLongestShow() is null ? "N/A" : $"{StatisticsService.GetLongestShow()?.Title} ({StatisticsService.GetLongestShow()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самый длинный мультфильм"
-        Text="@(StatisticsService.GetLongestCartoon() is null ? "N/A" : $"{StatisticsService.GetLongestCartoon()?.Title} ({StatisticsService.GetLongestCartoon()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самый длинный мультсериал"
-        Text="@(StatisticsService.GetLongestCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetLongestCartoonSeries()?.Title} ({StatisticsService.GetLongestCartoonSeries()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самое длинное аниме"
-        Text="@(StatisticsService.GetLongestAnime() is null ? "N/A" : $"{StatisticsService.GetLongestAnime()?.Title} ({StatisticsService.GetLongestAnime()?.Duration} минут)")"/>
-</div>
+<DataWithLabelAndDetails
+    Label="Самое длинное просмотренное произведение"
+    Text="@($"{StatisticsService.GetLongestMovie()?.Title} ({StatisticsService.GetLongestMovie()?.Duration} минут)")"
+    SummaryLabel="Самые длинные просмотренные произведения по типам"
+    Details="@(new[]
+    {
+        ("Фильм",       StatisticsService.GetLongestFilm() is null ? "N/A" : $"{StatisticsService.GetLongestFilm()?.Title} ({StatisticsService.GetLongestFilm()?.Duration} минут)"),
+        ("Сериал",      StatisticsService.GetLongestSeries() is null ? "N/A" : $"{StatisticsService.GetLongestSeries()?.Title} ({StatisticsService.GetLongestSeries()?.Duration} минут)"),
+        ("Шоу",         StatisticsService.GetLongestShow() is null ? "N/A" : $"{StatisticsService.GetLongestShow()?.Title} ({StatisticsService.GetLongestShow()?.Duration} минут)"),
+        ("Мультфильм",  StatisticsService.GetLongestCartoon() is null ? "N/A" : $"{StatisticsService.GetLongestCartoon()?.Title} ({StatisticsService.GetLongestCartoon()?.Duration} минут)"),
+        ("Мультсериал", StatisticsService.GetLongestCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetLongestCartoonSeries()?.Title} ({StatisticsService.GetLongestCartoonSeries()?.Duration} минут)"),
+        ("Аниме",       StatisticsService.GetLongestAnime() is null ? "N/A" : $"{StatisticsService.GetLongestAnime()?.Title} ({StatisticsService.GetLongestAnime()?.Duration} минут)")
+    })"/>
 
-<div>
-    <DataWithLabel
-        Label="Самый короткий фильм"
-        Text="@(StatisticsService.GetShortestFilm() is null ? "N/A" : $"{StatisticsService.GetShortestFilm()?.Title} ({StatisticsService.GetShortestFilm()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самый короткий сериал"
-        Text="@(StatisticsService.GetShortestSeries() is null ? "N/A" : $"{StatisticsService.GetShortestSeries()?.Title} ({StatisticsService.GetShortestSeries()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самое короткое шоу"
-        Text="@(StatisticsService.GetShortestShow() is null ? "N/A" : $"{StatisticsService.GetShortestShow()?.Title} ({StatisticsService.GetShortestShow()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самый короткий мультфильм"
-        Text="@(StatisticsService.GetShortestCartoon() is null ? "N/A" : $"{StatisticsService.GetShortestCartoon()?.Title} ({StatisticsService.GetShortestCartoon()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самый короткий мультсериал"
-        Text="@(StatisticsService.GetShortestCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetShortestCartoonSeries()?.Title} ({StatisticsService.GetShortestCartoonSeries()?.Duration} минут)")"/>
-    <DataWithLabel
-        Label="Самое короткое аниме"
-        Text="@(StatisticsService.GetShortestAnime() is null ? "N/A" : $"{StatisticsService.GetShortestAnime()?.Title} ({StatisticsService.GetShortestAnime()?.Duration} минут)")"/>
-</div>
+<DataWithLabelAndDetails
+    Label="Самое короткое просмотренное произведение"
+    Text="@($"{StatisticsService.GetShortestMovie()?.Title} ({StatisticsService.GetShortestMovie()?.Duration} минут)")"
+    SummaryLabel="Самые короткие просмотренные произведения по типам"
+    Details="@(new[]
+    {
+        ("Фильм",       StatisticsService.GetShortestFilm() is null ? "N/A" : $"{StatisticsService.GetShortestFilm()?.Title} ({StatisticsService.GetShortestFilm()?.Duration} минут)"),
+        ("Сериал",      StatisticsService.GetShortestSeries() is null ? "N/A" : $"{StatisticsService.GetShortestSeries()?.Title} ({StatisticsService.GetShortestSeries()?.Duration} минут)"),
+        ("Шоу",         StatisticsService.GetShortestShow() is null ? "N/A" : $"{StatisticsService.GetShortestShow()?.Title} ({StatisticsService.GetShortestShow()?.Duration} минут)"),
+        ("Мультфильм",  StatisticsService.GetShortestCartoon() is null ? "N/A" : $"{StatisticsService.GetShortestCartoon()?.Title} ({StatisticsService.GetShortestCartoon()?.Duration} минут)"),
+        ("Мультсериал", StatisticsService.GetShortestCartoonSeries() is null ? "N/A" : $"{StatisticsService.GetShortestCartoonSeries()?.Title} ({StatisticsService.GetShortestCartoonSeries()?.Duration} минут)"),
+        ("Аниме",       StatisticsService.GetShortestAnime() is null ? "N/A" : $"{StatisticsService.GetShortestAnime()?.Title} ({StatisticsService.GetShortestAnime()?.Duration} минут)")
+    })"/>    
 
 </div>
 

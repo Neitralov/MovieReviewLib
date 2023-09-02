@@ -412,6 +412,19 @@ public class StatisticsRepository : IStatisticsRepository
             .Sum() / MinutesInHour;
     }
 
+    public MovieTitleWithDurationDto? GetLongestMovie()
+    {
+        return _database.Movies
+            .Any(movie => movie.IsWatched == true)
+                ? _database.Movies
+                    .AsNoTracking()
+                    .Where(movie => movie.IsWatched == true)
+                    .MapMoviesToMovieTitleWithDurationDto()
+                    .OrderByDescending(movie => movie.Duration)
+                    .FirstOrDefault()
+            : null;
+    }
+
     public MovieTitleWithDurationDto? GetLongestFilm()
     {
         return _database.Movies
@@ -488,6 +501,19 @@ public class StatisticsRepository : IStatisticsRepository
                     .OrderByDescending(movie => movie.Duration)
                     .FirstOrDefault()
                 : null;
+    }
+
+    public MovieTitleWithDurationDto? GetShortestMovie()
+    {
+        return _database.Movies
+            .Any(movie => movie.IsWatched == true)
+                ? _database.Movies
+                    .AsNoTracking()
+                    .Where(movie => movie.IsWatched == true)
+                    .MapMoviesToMovieTitleWithDurationDto()
+                    .OrderBy(movie => movie.Duration)
+                    .FirstOrDefault()
+            : null;
     }
 
     public MovieTitleWithDurationDto? GetShortestFilm()

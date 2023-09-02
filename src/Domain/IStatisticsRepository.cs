@@ -52,6 +52,7 @@ public interface IStatisticsRepository
     int GetTotalCartoonSeriesViewingHours();
     int GetTotalAnimeViewingHours();
 
+    MovieTitleWithDurationDto? GetLongestMovie();
     MovieTitleWithDurationDto? GetLongestFilm();
     MovieTitleWithDurationDto? GetLongestSeries();
     MovieTitleWithDurationDto? GetLongestShow();
@@ -59,6 +60,7 @@ public interface IStatisticsRepository
     MovieTitleWithDurationDto? GetLongestCartoonSeries();
     MovieTitleWithDurationDto? GetLongestAnime();
 
+    MovieTitleWithDurationDto? GetShortestMovie();
     MovieTitleWithDurationDto? GetShortestFilm();
     MovieTitleWithDurationDto? GetShortestSeries();
     MovieTitleWithDurationDto? GetShortestShow();

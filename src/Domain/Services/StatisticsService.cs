@@ -51,7 +51,6 @@ public class StatisticsService
     public MovieTitleWithReleaseYearDto? GetOldestWatchedCartoonSeries() => _repository.GetOldestWatchedCartoonSeries();
     public MovieTitleWithReleaseYearDto? GetOldestWatchedAnime()         => _repository.GetOldestWatchedAnime();
     
-
     public int GetTotalViewingHours()              => _repository.GetTotalViewingHours();
     public int GetTotalFilmViewingHours()          => _repository.GetTotalFilmViewingHours();
     public int GetTotalSeriesViewingHours()        => _repository.GetTotalSeriesViewingHours();
@@ -60,7 +59,7 @@ public class StatisticsService
     public int GetTotalCartoonSeriesViewingHours() => _repository.GetTotalCartoonSeriesViewingHours();
     public int GetTotalAnimeViewingHours()         => _repository.GetTotalAnimeViewingHours();
     
-
+    public MovieTitleWithDurationDto? GetLongestMovie()         => _repository.GetLongestMovie();
     public MovieTitleWithDurationDto? GetLongestFilm()          => _repository.GetLongestFilm();
     public MovieTitleWithDurationDto? GetLongestSeries()        => _repository.GetLongestSeries();
     public MovieTitleWithDurationDto? GetLongestShow()          => _repository.GetLongestShow();
@@ -68,7 +67,7 @@ public class StatisticsService
     public MovieTitleWithDurationDto? GetLongestCartoonSeries() => _repository.GetLongestCartoonSeries();
     public MovieTitleWithDurationDto? GetLongestAnime()         => _repository.GetLongestAnime();
     
-
+    public MovieTitleWithDurationDto? GetShortestMovie()         => _repository.GetShortestMovie();
     public MovieTitleWithDurationDto? GetShortestFilm()          => _repository.GetShortestFilm();
     public MovieTitleWithDurationDto? GetShortestSeries()        => _repository.GetShortestSeries();
     public MovieTitleWithDurationDto? GetShortestShow()          => _repository.GetShortestShow();
