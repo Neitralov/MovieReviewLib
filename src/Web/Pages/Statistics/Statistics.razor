@@ -8,15 +8,15 @@
 <DataWithLabelAndDetails
     Label="Количество просмотренных произведений"
     Text="@StatisticsService.GetNumberOfWatchedMovies()"
-    SummaryLabel="Количества просмотренных произведений по типам"
+    SummaryLabel="Количество просмотренных произведений по типам"
     Details="@(new[] 
     {
-        ("Из них фильмов",       StatisticsService.GetNumberOfWatchedFilms()),
-        ("Из них сериалов",      StatisticsService.GetNumberOfWatchedSeries()),
-        ("Из них шоу",           StatisticsService.GetNumberOfWatchedShows()),
-        ("Из них мультфильмов",  StatisticsService.GetNumberOfWatchedCartoons()),
-        ("Из них мультсериалов", StatisticsService.GetNumberOfWatchedCartoonSeries()),
-        ("Из них аниме",         StatisticsService.GetNumberOfWatchedAnime())
+        ("Фильмы",       StatisticsService.GetNumberOfWatchedFilms()),
+        ("Сериалы",      StatisticsService.GetNumberOfWatchedSeries()),
+        ("Шоу",          StatisticsService.GetNumberOfWatchedShows()),
+        ("Мультфильмы",  StatisticsService.GetNumberOfWatchedCartoons()),
+        ("Мультсериалы", StatisticsService.GetNumberOfWatchedCartoonSeries()),
+        ("Аниме",        StatisticsService.GetNumberOfWatchedAnime())
     })"/>
              
 <DataWithLabelAndDetails
@@ -25,12 +25,12 @@
      SummaryLabel="Количество отложенных произведений по типам"
      Details="@(new[] 
      {
-        ("Из них фильмов",       StatisticsService.GetNumberOfPostponedFilms()),
-        ("Из них сериалов",      StatisticsService.GetNumberOfPostponedSeries()),
-        ("Из них шоу",           StatisticsService.GetNumberOfPostponedShows()),
-        ("Из них мультфильмов",  StatisticsService.GetNumberOfPostponedCartoons()),
-        ("Из них мультсериалов", StatisticsService.GetNumberOfPostponedCartoonSeries()),
-        ("Из них аниме",         StatisticsService.GetNumberOfPostponedAnime())
+        ("Фильмы",       StatisticsService.GetNumberOfPostponedFilms()),
+        ("Сериалы",      StatisticsService.GetNumberOfPostponedSeries()),
+        ("Шоу",          StatisticsService.GetNumberOfPostponedShows()),
+        ("Мультфильмы",  StatisticsService.GetNumberOfPostponedCartoons()),
+        ("Мультсериалы", StatisticsService.GetNumberOfPostponedCartoonSeries()),
+        ("Аниме",        StatisticsService.GetNumberOfPostponedAnime())
      })"/>
      
 <div>
@@ -104,12 +104,12 @@
     SummaryLabel="Суммарного количества часов просмотра по типам произведений"
     Details="@(new[] 
     {
-        ("Из них фильмов",       StatisticsService.GetTotalWatchedFilmViewingHours()),
-        ("Из них сериалов",      StatisticsService.GetTotalWatchedSeriesViewingHours()),
-        ("Из них шоу",           StatisticsService.GetTotalWatchedShowViewingHours()),
-        ("Из них мультфильмов",  StatisticsService.GetTotalWatchedCartoonViewingHours()),
-        ("Из них мультсериалов", StatisticsService.GetTotalWatchedCartoonSeriesViewingHours()),
-        ("Из них аниме",         StatisticsService.GetTotalWatchedAnimeViewingHours())
+        ("Фильмы",       StatisticsService.GetTotalWatchedFilmViewingHours()),
+        ("Сериалы",      StatisticsService.GetTotalWatchedSeriesViewingHours()),
+        ("Шоу",          StatisticsService.GetTotalWatchedShowViewingHours()),
+        ("Мультфильмы",  StatisticsService.GetTotalWatchedCartoonViewingHours()),
+        ("Мультсериалы", StatisticsService.GetTotalWatchedCartoonSeriesViewingHours()),
+        ("Аниме",        StatisticsService.GetTotalWatchedAnimeViewingHours())
     })"/>
 
 <DataWithLabelAndDetails
@@ -120,10 +120,10 @@
     {
         ("Фильм",       StatisticsService.GetLongestWatchedFilm()),
         ("Сериал",      StatisticsService.GetLongestWatchedSeries()),
-        ("Шоу",         StatisticsService.GetLongestWatchedShow()),
+        ("Шоу",          StatisticsService.GetLongestWatchedShow()),
         ("Мультфильм",  StatisticsService.GetLongestWatchedCartoon()),
         ("Мультсериал", StatisticsService.GetLongestWatchedCartoonSeries()),
-        ("Аниме",       StatisticsService.GetLongestWatchedAnime())
+        ("Аниме",        StatisticsService.GetLongestWatchedAnime())
     })"/>
 
 <DataWithLabelAndDetails
@@ -134,10 +134,10 @@
     {
         ("Фильм",       StatisticsService.GetShortestWatchedFilm()),
         ("Сериал",      StatisticsService.GetShortestWatchedSeries()),
-        ("Шоу",         StatisticsService.GetShortestWatchedShow()),
+        ("Шоу",          StatisticsService.GetShortestWatchedShow()),
         ("Мультфильм",  StatisticsService.GetShortestWatchedCartoon()),
         ("Мультсериал", StatisticsService.GetShortestWatchedCartoonSeries()),
-        ("Аниме",       StatisticsService.GetShortestWatchedAnime())
+        ("Аниме",        StatisticsService.GetShortestWatchedAnime())
     })"/>    
 
 </div>
