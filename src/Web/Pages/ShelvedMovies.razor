@@ -44,11 +44,15 @@ else
         Tag = await LocalStorage.GetItemAsync<string>("MovieTag") ?? "all";
     }
     
-    private void ResetSorting()
+    private async void ResetSorting()
     {
         SortType = SortType.None;
         MovieType = MovieType.All;
         Tag = "all";
+
+        await LocalStorage.RemoveItemAsync("SortType");
+        await LocalStorage.RemoveItemAsync("MovieType");
+        await LocalStorage.RemoveItemAsync("MovieTag");
     }
     
     public void Dispose()
