@@ -1,3 +1,4 @@
+@using SkiaSharp
 <aside class="sticky top-[25px] h-fit">
     <div class="flex flex-col gap-[10px]">
         @if (Movie.PosterPath != string.Empty)
@@ -38,15 +39,29 @@
 
     private async Task LoadPoster(InputFileChangeEventArgs inputFile)
     {
-        var fileName = Path.GetRandomFileName() + Path.GetExtension(inputFile.File.Name);
-        var filePath = "posters/" + fileName;
+        var fileName = Path.GetRandomFileName() + ".webp";
         var fileUploadPath = "/app/wwwroot/posters/" + fileName;
+        var filePath = "posters/" + fileName;
         const int maxAllowedFileSize = 1024 * 1024 * 5;
 
         try
         {
-            await using FileStream fileStream = new(fileUploadPath, FileMode.Create);
-            await inputFile.File.OpenReadStream(maxAllowedFileSize).CopyToAsync(fileStream);
+            SKData webp;
+
+            await using (var fileStream = File.Create(fileUploadPath))
+            {
+                await inputFile.File.OpenReadStream(maxAllowedFileSize).CopyToAsync(fileStream);
+            }
+
+            await using (var readStream = File.OpenRead(fileUploadPath))
+            {
+                webp = SKBitmap.Decode(readStream).Encode(SKEncodedImageFormat.Webp, 80);
+            }
+
+            await using (var writeStream = File.Create(fileUploadPath))
+            {
+                webp.SaveTo(writeStream);
+            }
         }
         catch (Exception ex)
         {
