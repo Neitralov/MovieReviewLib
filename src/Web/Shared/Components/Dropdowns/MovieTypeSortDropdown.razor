@@ -1,5 +1,5 @@
 <span class="text-[16px] font-bold text-neutral-600 dark:text-neutral-400">Тип: </span>
-<InputSelect class="text-[16px] font-bold text-neutral-950 dark:text-white bg-neutral-200 dark:bg-neutral-900 cursor-pointer py-[1px] px-[5px] ml-[5px] mr-[10px] rounded-[5px]" @bind-Value="MovieType" @onclick="() => MovieTypeChanged.InvokeAsync(MovieType)">
+<InputSelect class="text-[16px] font-bold text-neutral-950 dark:text-white bg-neutral-200 dark:bg-neutral-900 cursor-pointer py-[1px] px-[5px] ml-[5px] mr-[10px] rounded-[5px]" @bind-Value="MovieType" @onclick="UpdateCurrentSortType">
     <option value="@MovieType.All">любой</option>
     <option value="@MovieType.Film">фильм</option>
     <option value="@MovieType.Series">сериал</option>
@@ -15,4 +15,13 @@
 
     [Parameter]
     public EventCallback<MovieType> MovieTypeChanged { get; set; }
+
+    [Parameter]
+    public EventCallback OnMovieTypeUpdate { get; set; }
+
+    private async Task UpdateCurrentSortType()
+    {
+        await MovieTypeChanged.InvokeAsync(MovieType);
+        await OnMovieTypeUpdate.InvokeAsync();
+    }
 }

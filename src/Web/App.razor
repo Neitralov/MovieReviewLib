@@ -16,6 +16,13 @@
 </Router>
 
 @code {
+    protected override async Task OnInitializedAsync()
+    {
+        await LocalStorage.RemoveItemAsync("SortType");
+        await LocalStorage.RemoveItemAsync("MovieType");
+        await LocalStorage.RemoveItemAsync("MovieTag");
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

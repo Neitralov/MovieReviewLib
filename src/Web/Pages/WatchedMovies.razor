@@ -1,13 +1,14 @@
 ﻿@page "/"
 @inject MovieService MovieService
+@inject ILocalStorageService LocalStorage
 @implements IDisposable
 
 <PageTitle>Просмотренные</PageTitle>
 
 <div class="flex flex-wrap">
-    <SortDropdown @bind-SortType="@SortType"/>
-    <MovieTypeSortDropdown @bind-MovieType="@MovieType"/>
-    <TagSortDropdown @bind-Tag="@Tag"/>
+    <SortDropdown @bind-SortType="@SortType" OnSortTypeUpdate="@(() => LocalStorage.SetItemAsync("SortType", SortType))"/>
+    <MovieTypeSortDropdown @bind-MovieType="@MovieType" OnMovieTypeUpdate="@(() => LocalStorage.SetItemAsync("MovieType", MovieType))"/>
+    <TagSortDropdown @bind-Tag="@Tag" OnMovieTagUpdate="@(() => LocalStorage.SetItemAsync("MovieTag", Tag))"/>
     <ResetButton OnClick="ResetSorting"/>
 </div>
 
@@ -35,6 +36,13 @@ else
     private SortType SortType { get; set; }
     private MovieType MovieType { get; set; }
     private string Tag { get; set; } = "all";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        SortType = await LocalStorage.GetItemAsync<SortType>("SortType");
+        MovieType = await LocalStorage.GetItemAsync<MovieType>("MovieType");
+        Tag = await LocalStorage.GetItemAsync<string>("MovieTag") ?? "all";
+    }
 
     private void ResetSorting()
     {
