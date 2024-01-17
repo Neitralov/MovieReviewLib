@@ -7,7 +7,12 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.7" />
   </ItemGroup>
+
+ <Target Name="CopyFilesAfterPublish" AfterTargets="AfterPublish">
+    <Copy SourceFiles="$(TargetDir)runtimes/linux-x64/native/libSkiaSharp.so" DestinationFolder="$(TargetDir)/publish" />
+  </Target>
 
   <ItemGroup>
     <Folder Include="tmp\" />
